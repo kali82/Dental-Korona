@@ -10,6 +10,7 @@ out-tsc
 
 # dependencies
 node_modules
+.pnpm-store/
 
 # IDEs and editors
 /.idea
@@ -35,6 +36,7 @@ node_modules
 npm-debug.log
 yarn-error.log
 testem.log
+.vite-*.log
 /typings
 
 # System Files

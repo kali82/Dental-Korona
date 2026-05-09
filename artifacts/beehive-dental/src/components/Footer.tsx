@@ -1,10 +1,10 @@
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import beehiveLogo from "@assets/beehive-logo.png";
 
-export const FADE_UP = {
+export const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
