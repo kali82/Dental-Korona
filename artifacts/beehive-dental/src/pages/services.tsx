@@ -173,6 +173,15 @@ export default function Services() {
       <section className="py-24 bg-background relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={FADE_UP}
+            className="text-center max-w-2xl mx-auto mb-14"
+          >
+            <h2 className="text-3xl md:text-4xl font-semibold text-foreground">All-in-One Dental Solutions</h2>
+          </motion.div>
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -180,67 +189,100 @@ export default function Services() {
             variants={STAGGER}
             className="grid grid-cols-1 lg:grid-cols-3 gap-8"
           >
-            {/* Card 1 */}
-            <motion.div variants={FADE_UP} className="bg-card border border-border rounded-3xl p-8 shadow-sm flex flex-col h-full">
-              <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
-                <Stethoscope className="w-7 h-7" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-6">General Dentistry Services</h3>
-              <ul className="space-y-3 mb-8 flex-grow">
-                {[
-                  "Cleanings & Exams", "Emergency Dentistry", "Family Dentistry",
-                  "White Cavity Fillings", "Dental Crowns and Bridges", 
-                  "Partial and Complete Dentures", "Gum Disease Treatment",
-                  "TMJ Therapy", "Night Guards and Mouth Guards", "Teeth Whitening"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-foreground/80">
-                    <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Card 2 */}
-            <motion.div variants={FADE_UP} className="bg-card border border-border rounded-3xl p-8 shadow-sm flex flex-col h-full">
-              <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
-                <Activity className="w-7 h-7" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-6">Surgical Dental Care</h3>
-              <ul className="space-y-3 mb-8 flex-grow">
-                {[
-                  "Root Canal Treatment", "Wisdom Tooth Extractions", 
-                  "Extractions", "Dental Implants", 
-                  "Bone Grafts", "Sedation Dentistry"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-foreground/80">
-                    <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Card 3 */}
-            <motion.div variants={FADE_UP} className="bg-card border border-border rounded-3xl p-8 shadow-sm flex flex-col h-full relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent pointer-events-none" />
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center mb-6 text-secondary">
-                  <Smile className="w-7 h-7" />
+            {/* Card 1 — General Dentistry */}
+            <motion.div variants={FADE_UP} className="bg-card border border-border rounded-3xl shadow-sm flex flex-col h-full overflow-hidden group">
+              <div className="relative h-52 overflow-hidden">
+                <img
+                  src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-services-2.jpg"
+                  alt="General Dentistry"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute bottom-4 left-4 w-11 h-11 rounded-xl bg-white/90 flex items-center justify-center text-secondary shadow">
+                  <Stethoscope className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-6">Orthodontic Treatments</h3>
-                <ul className="space-y-3 mb-8 flex-grow">
+              </div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold mb-5">General Dentistry Services</h3>
+                <ul className="space-y-2.5 flex-grow">
                   {[
-                    "Invisalign", "Clear Braces", "Braces"
+                    "Cleanings & Exams", "Emergency Dentistry", "Family Dentistry",
+                    "White Cavity Fillings", "Dental Crowns and Bridges",
+                    "Partial and Complete Dentures", "Gum Disease Treatment",
+                    "TMJ Therapy", "Night Guards and Mouth Guards", "Teeth Whitening"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-foreground/80">
-                      <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0" />
+                    <li key={i} className="flex items-start gap-2.5 text-foreground/80 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="pt-6 border-t border-border/50 mt-auto">
-                  <p className="font-medium text-secondary text-center">Book a Complimentary Consult!</p>
+              </div>
+            </motion.div>
+
+            {/* Card 2 — Surgical */}
+            <motion.div variants={FADE_UP} className="bg-card border border-border rounded-3xl shadow-sm flex flex-col h-full overflow-hidden group">
+              <div className="relative h-52 overflow-hidden">
+                <img
+                  src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-dental-187272314.jpg"
+                  alt="Surgical Dental Care"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute bottom-4 left-4 w-11 h-11 rounded-xl bg-white/90 flex items-center justify-center text-secondary shadow">
+                  <Activity className="w-6 h-6" />
+                </div>
+              </div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold mb-5">Surgical Dental Care</h3>
+                <ul className="space-y-2.5 flex-grow">
+                  {[
+                    "Root Canal Treatment", "Wisdom Tooth Extractions",
+                    "Extractions", "Dental Implants",
+                    "Bone Grafts", "Sedation Dentistry"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-foreground/80 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Card 3 — Orthodontic */}
+            <motion.div variants={FADE_UP} className="bg-card border border-border rounded-3xl shadow-sm flex flex-col h-full overflow-hidden group">
+              <div className="relative h-52 overflow-hidden">
+                <img
+                  src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-services-3.jpg"
+                  alt="Orthodontic Treatments"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute bottom-4 left-4 w-11 h-11 rounded-xl bg-white/90 flex items-center justify-center text-secondary shadow">
+                  <Smile className="w-6 h-6" />
+                </div>
+              </div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold mb-5">Orthodontic Treatments</h3>
+                <ul className="space-y-2.5 mb-6 flex-grow">
+                  {["Invisalign", "Clear Braces", "Braces"].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-foreground/80 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-5 border-t border-border/50">
+                  <a
+                    href="https://app.nexhealth.com/appt/beehive-dental"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-secondary font-semibold text-sm hover:underline inline-flex items-center gap-1"
+                    data-testid="services-ortho-consult"
+                  >
+                    Book a Complimentary Consult <ChevronRight className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -468,61 +510,98 @@ export default function Services() {
       </section>
 
       {/* 10. Location */}
-      <section className="py-24 bg-card border-y border-border/50">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <motion.div 
+      <section className="py-24 bg-card border-y border-border/50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={FADE_UP}
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">Visit Our Beehive</h2>
-            <div className="flex justify-center mb-12">
-              <div className="h-1 w-20 bg-secondary rounded-full" />
-            </div>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Visit Our Beehive</h2>
+            <p className="text-foreground/60 text-lg max-w-xl mx-auto">
+              Conveniently book online or give us a call. Same-day appointments and ample free parking available.
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 text-left max-w-4xl mx-auto">
-            <motion.div 
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Hexagon photo cluster */}
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={FADE_UP}
+              className="relative flex justify-center items-center"
             >
-              <div className="flex items-start gap-4 mb-8">
-                <MapPin className="w-6 h-6 text-secondary shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Location</h3>
-                  <p className="text-foreground/70 mb-4">
-                    1075 North Service Road West<br/>
-                    Suite 23<br/>
-                    Oakville, Ontario
-                  </p>
-                  <a href="https://maps.app.goo.gl/vLrG9yct1S2qZwzW8" target="_blank" rel="noreferrer" className="text-secondary font-medium hover:underline inline-flex items-center gap-1" data-testid="services-directions">
-                    Get Directions <ChevronRight className="w-4 h-4" />
-                  </a>
+              <div className="relative w-[340px] h-[360px]">
+                {/* Centre hex */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] overflow-hidden shadow-xl"
+                  style={{ clipPath: "polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)" }}>
+                  <img src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-dental-tour4.jpg"
+                    alt="Beehive Dental Office" className="w-full h-full object-cover" />
+                </div>
+                {/* Top-left hex */}
+                <div className="absolute top-0 left-4 w-[150px] h-[150px] overflow-hidden shadow-lg"
+                  style={{ clipPath: "polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)" }}>
+                  <img src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-dental-tour0.jpg"
+                    alt="Beehive Dental Lounge" className="w-full h-full object-cover" />
+                </div>
+                {/* Top-right hex */}
+                <div className="absolute top-0 right-4 w-[150px] h-[150px] overflow-hidden shadow-lg"
+                  style={{ clipPath: "polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)" }}>
+                  <img src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-dental-tour3.jpg"
+                    alt="Beehive Dental Suite" className="w-full h-full object-cover" />
+                </div>
+                {/* Bottom hex */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150px] h-[150px] overflow-hidden shadow-lg"
+                  style={{ clipPath: "polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)" }}>
+                  <img src="https://beehivedental.com/wp-content/uploads/2025/01/beehive-dental-tour6.jpg"
+                    alt="Beehive Dental Treatment" className="w-full h-full object-cover" />
                 </div>
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            {/* Info */}
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              variants={FADE_UP}
+              variants={STAGGER}
+              className="space-y-8"
             >
-              <div className="flex items-start gap-4">
-                <Clock className="w-6 h-6 text-secondary shrink-0 mt-1" />
+              <motion.div variants={FADE_UP} className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-secondary">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">Our Location</h3>
+                  <p className="text-foreground/70 leading-relaxed">
+                    1075 North Service Road West<br />
+                    Suite 23, Oakville, Ontario
+                  </p>
+                  <a href="https://maps.app.goo.gl/vLrG9yct1S2qZwzW8" target="_blank" rel="noreferrer"
+                    className="text-secondary font-medium hover:underline inline-flex items-center gap-1 mt-2"
+                    data-testid="services-directions">
+                    Get Directions <ChevronRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.div variants={FADE_UP} className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-secondary">
+                  <Clock className="w-5 h-5" />
+                </div>
                 <div className="w-full">
-                  <h3 className="font-semibold text-lg mb-4">Hours</h3>
-                  <div className="space-y-2">
-                    <div className="flex justify-between border-b border-border/50 pb-2">
+                  <h3 className="font-semibold text-lg mb-3">Office Hours</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between border-b border-border/40 pb-2">
                       <span className="text-foreground/70">Mon, Thu, Sat</span>
-                      <span className="font-medium">9:00 AM - 5:00 PM</span>
+                      <span className="font-medium">9:00 AM – 5:00 PM</span>
                     </div>
-                    <div className="flex justify-between border-b border-border/50 pb-2">
+                    <div className="flex justify-between border-b border-border/40 pb-2">
                       <span className="text-foreground/70">Tue, Wed, Fri</span>
-                      <span className="font-medium">9:00 AM - 7:00 PM</span>
+                      <span className="font-medium">9:00 AM – 7:00 PM</span>
                     </div>
                     <div className="flex justify-between pb-2">
                       <span className="text-foreground/70">Sunday</span>
@@ -530,7 +609,19 @@ export default function Services() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
+
+              <motion.div variants={FADE_UP} className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-secondary">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">Phone</h3>
+                  <a href="tel:9057885555" className="text-foreground/70 hover:text-secondary transition-colors" data-testid="services-phone">
+                    (905) 788-5555
+                  </a>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
