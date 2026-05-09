@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Beehive Dental – New Patients"
+version = "1.0.0"
+id = "artifacts/beehive-dental"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22536
+
+[services.development]
+run = "pnpm --filter @workspace/beehive-dental run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/beehive-dental", "run", "build" ]
+publicDir = "artifacts/beehive-dental/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22536"
+BASE_PATH = "/"
