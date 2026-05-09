@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, CheckCircle, Clock, FileText, Mail, MapPin, Phone
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
+import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
 import heroImage from "@assets/screenshot-1778319667950.png";
@@ -17,55 +18,48 @@ export default function NewPatients() {
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
       <Navigation />
 
-      <section className="relative w-full h-[80vh] min-h-[560px] flex items-center pt-20">
-        <div className="absolute inset-0 z-0">
-          <img src={heroImage} alt="Dla pacjenta Przychodni Korona" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/75 to-transparent" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-          <motion.div initial="hidden" animate="visible" variants={STAGGER} className="max-w-2xl">
-            <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
-              Dla pacjenta
-            </motion.div>
-            <motion.h1 variants={FADE_UP} className="text-5xl md:text-7xl font-semibold text-foreground leading-[1.1] mb-6">
-              Umów wizytę w Przychodni Korona
-            </motion.h1>
-            <motion.p variants={FADE_UP} className="text-lg md:text-xl text-foreground/70 mb-10 max-w-lg leading-relaxed">
-              Skontaktuj się z rejestracją, aby ustalić dogodny termin i przygotować się do wizyty.
-            </motion.p>
-            <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row items-center gap-4">
-              <Button asChild size="lg" className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white rounded-full px-8 h-14 text-base shadow-xl group" data-testid="newpatients-hero-book-online">
-                <a href={PRACTICE.bookingUrl}>
-                  Kontakt i rejestracja
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-white/50 backdrop-blur-sm border-border/50 hover:bg-white/80 rounded-full px-8 h-14 text-base transition-all" data-testid="newpatients-hero-call">
-                <a href={PRACTICE.phoneHref}>
-                  <Phone className="w-4 h-4 mr-2 text-secondary" />
-                  {PRACTICE.phoneDisplay}
-                </a>
-              </Button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Dla pacjenta"
+        title="Umów wizytę w Przychodni Korona"
+        description="Skontaktuj się z rejestracją, aby ustalić dogodny termin i przygotować się do wizyty."
+        image={heroImage}
+        alt="Dla pacjenta Przychodni Korona"
+        height="large"
+        titleSize="large"
+        mobileObjectPosition="50% center"
+        desktopObjectPosition="center center"
+        actions={[
+          {
+            label: "Kontakt i rejestracja",
+            href: PRACTICE.bookingUrl,
+            trailingIcon: <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />,
+            testId: "newpatients-hero-book-online",
+          },
+          {
+            label: PRACTICE.phoneDisplay,
+            href: PRACTICE.phoneHref,
+            variant: "secondary",
+            icon: <Phone className="w-4 h-4 mr-2 text-secondary" />,
+            testId: "newpatients-hero-call",
+          },
+        ]}
+      />
 
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={FADE_UP} className="text-center max-w-3xl mx-auto mb-16">
+      <section className="py-16 md:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={FADE_UP} className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">Jak umówić wizytę</h2>
-            <p className="text-foreground/60 text-lg">Najprościej skontaktować się telefonicznie albo przez dane kontaktowe na oficjalnej stronie przychodni.</p>
+            <p className="text-foreground/60 text-base md:text-lg">Najprościej skontaktować się telefonicznie albo przez dane kontaktowe na oficjalnej stronie przychodni.</p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={STAGGER} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={STAGGER} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               { icon: Phone, title: "Zadzwoń", desc: `Telefon: ${PRACTICE.phoneDisplay}. Dodatkowo dostępny jest GSM: ${PRACTICE.mobileDisplay}.` },
               { icon: Mail, title: "Napisz", desc: `E-mail rejestracji: ${PRACTICE.email}.` },
               { icon: Calendar, title: "Ustal termin", desc: "Rejestracja pomoże dobrać dogodną datę, godzinę i rodzaj wizyty." },
               { icon: FileText, title: "Przygotuj informacje", desc: "Przygotuj dane pacjenta, cel wizyty i informację o dotychczasowym leczeniu." },
             ].map((feature) => (
-              <motion.div key={feature.title} variants={FADE_UP} className="bg-muted/30 border border-border/50 p-8 rounded-3xl hover:bg-muted/50 transition-colors">
+              <motion.div key={feature.title} variants={FADE_UP} className="bg-muted/30 border border-border/50 p-6 md:p-8 rounded-2xl md:rounded-3xl hover:bg-muted/50 transition-colors">
                 <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
                   <feature.icon className="w-6 h-6" />
                 </div>
@@ -77,9 +71,9 @@ export default function NewPatients() {
         </div>
       </section>
 
-      <section className="py-24 bg-card border-y border-border/50">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-background border border-border rounded-3xl p-10">
+      <section className="py-16 md:py-24 bg-card border-y border-border/50">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 grid lg:grid-cols-2 gap-5 md:gap-12">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-background border border-border rounded-2xl md:rounded-3xl p-6 md:p-10">
             <Stethoscope className="w-10 h-10 text-secondary mb-5" />
             <h2 className="text-3xl font-semibold mb-6">Pierwsza wizyta</h2>
             <p className="text-foreground/70 mb-8 leading-relaxed">
@@ -95,7 +89,7 @@ export default function NewPatients() {
             </ul>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-background border border-border rounded-3xl p-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-background border border-border rounded-2xl md:rounded-3xl p-6 md:p-10">
             <Shield className="w-10 h-10 text-secondary mb-5" />
             <h2 className="text-3xl font-semibold mb-6">Wizyty pilne</h2>
             <p className="text-foreground/70 mb-8 leading-relaxed">
@@ -108,16 +102,16 @@ export default function NewPatients() {
         </div>
       </section>
 
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center mb-16">
+      <section className="py-16 md:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold mb-6">Lokalizacja i godziny</h2>
             <div className="flex justify-center">
               <div className="h-1 w-20 bg-secondary rounded-full" />
             </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 text-left max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 text-left max-w-4xl mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="flex items-start gap-4">
               <MapPin className="w-6 h-6 text-secondary shrink-0 mt-1" />
               <div>
@@ -139,9 +133,9 @@ export default function NewPatients() {
                 <h3 className="font-semibold text-lg mb-4">Godziny otwarcia</h3>
                 <div className="space-y-2">
                   {PRACTICE.hours.map((row) => (
-                    <div key={row.days} className="flex justify-between border-b border-border/50 pb-2">
+                    <div key={row.days} className="flex justify-between gap-4 border-b border-border/50 pb-2">
                       <span className="text-foreground/70">{row.days}</span>
-                      <span className="font-medium">{row.time}</span>
+                      <span className="font-medium text-right">{row.time}</span>
                     </div>
                   ))}
                 </div>

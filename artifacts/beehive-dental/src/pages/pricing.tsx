@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Footer, FADE_UP } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
+import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
 import heroPhoto from "@assets/beehive-services-1.jpg";
@@ -18,11 +19,6 @@ type PriceSection = {
   title: string;
   description: string;
   items: PriceItem[];
-};
-
-const STAGGER = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
 const priceSections: PriceSection[] = [
@@ -171,65 +167,71 @@ export default function Pricing() {
       <Navigation />
 
       <main className="flex-grow">
-        <section className="relative w-full h-[70vh] min-h-[500px] flex items-center pt-20">
-          <div className="absolute inset-0 z-0">
-            <img src={heroPhoto} alt="Cennik Przychodni Korona" className="w-full h-full object-cover object-center" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent md:to-background/20" />
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-            <motion.div initial="hidden" animate="visible" variants={STAGGER} className="max-w-2xl">
-              <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
-                Cennik
-              </motion.div>
-              <motion.h1 variants={FADE_UP} className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
-                Usługi i ceny
-              </motion.h1>
-              <motion.p variants={FADE_UP} className="text-lg md:text-xl text-foreground/70 mb-10 max-w-xl leading-relaxed">
-                Cennik usług stomatologicznych i kosmetologicznych przygotowany na podstawie zakresu oferty Przychodni Korona.
-              </motion.p>
-              <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row items-center gap-4">
-                <Button asChild size="lg" className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white rounded-full px-8 h-14 text-base shadow-xl group" data-testid="pricing-hero-contact">
-                  <Link href={PRACTICE.bookingUrl}>
-                    Kontakt i rejestracja
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-white/50 backdrop-blur-sm border-border/50 hover:bg-white/80 rounded-full px-8 h-14 text-base transition-all" data-testid="pricing-hero-call">
-                  <a href={PRACTICE.phoneHref}>
-                    <Phone className="w-4 h-4 mr-2 text-secondary" />
-                    {PRACTICE.phoneDisplay}
-                  </a>
-                </Button>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Cennik"
+          title="Usługi i ceny"
+          description="Cennik usług stomatologicznych i kosmetologicznych przygotowany na podstawie zakresu oferty Przychodni Korona."
+          image={heroPhoto}
+          alt="Cennik Przychodni Korona"
+          mobileObjectPosition="34% center"
+          desktopObjectPosition="center center"
+          actions={[
+            {
+              label: "Kontakt i rejestracja",
+              href: PRACTICE.bookingUrl,
+              trailingIcon: <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />,
+              testId: "pricing-hero-contact",
+            },
+            {
+              label: PRACTICE.phoneDisplay,
+              href: PRACTICE.phoneHref,
+              variant: "secondary",
+              icon: <Phone className="w-4 h-4 mr-2 text-secondary" />,
+              testId: "pricing-hero-call",
+            },
+          ]}
+        />
 
-        <section className="py-24 bg-background">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="space-y-8">
-              {priceSections.map((section) => (
+        <section className="py-16 md:py-24 bg-background">
+          <div className="max-w-7xl mx-auto px-5 sm:px-6">
+            <div className="md:hidden -mx-5 mb-6 overflow-x-auto px-5 pb-2">
+              <div className="flex w-max gap-2">
+                {priceSections.map((section, index) => (
+                  <a
+                    key={section.title}
+                    href={`#pricing-section-${index}`}
+                    className="inline-flex h-10 items-center rounded-full border border-border bg-card px-4 text-sm font-semibold text-foreground/75 shadow-sm"
+                  >
+                    {section.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-5 md:space-y-8">
+              {priceSections.map((section, index) => (
                 <motion.section
                   key={section.title}
+                  id={`pricing-section-${index}`}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: "-80px" }}
                   variants={FADE_UP}
-                  className="bg-card border border-border rounded-3xl overflow-hidden shadow-sm"
+                  className="scroll-mt-24 bg-card border border-border rounded-2xl md:rounded-3xl overflow-hidden shadow-sm"
                 >
-                  <div className="p-6 md:p-8 border-b border-border/70">
-                    <h2 className="text-2xl font-semibold text-foreground mb-2">{section.title}</h2>
-                    <p className="text-foreground/60 leading-relaxed">{section.description}</p>
+                  <div className="p-5 md:p-8 border-b border-border/70">
+                    <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-2">{section.title}</h2>
+                    <p className="text-sm md:text-base text-foreground/60 leading-relaxed">{section.description}</p>
                   </div>
 
                   <div className="divide-y divide-border/70">
                     {section.items.map((item) => (
-                      <div key={`${section.title}-${item.name}`} className="grid md:grid-cols-[1fr_220px] gap-3 px-6 md:px-8 py-4">
+                      <div key={`${section.title}-${item.name}`} className="grid gap-2 px-5 py-4 md:grid-cols-[1fr_220px] md:gap-3 md:px-8">
                         <div>
                           <p className="font-medium text-foreground">{item.name}</p>
                           {item.note && <p className="text-sm text-foreground/50 mt-1">{item.note}</p>}
                         </div>
-                        <p className="md:text-right font-semibold text-secondary">{item.price}</p>
+                        <p className="inline-flex w-fit rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold text-secondary md:ml-auto md:bg-transparent md:px-0 md:py-0 md:text-base md:text-right">{item.price}</p>
                       </div>
                     ))}
                   </div>
@@ -239,10 +241,10 @@ export default function Pricing() {
           </div>
         </section>
 
-        <section className="py-20 bg-card border-y border-border/50">
-          <div className="max-w-5xl mx-auto px-6 grid lg:grid-cols-[1fr_auto] gap-8 items-center">
+        <section className="py-16 md:py-20 bg-card border-y border-border/50">
+          <div className="max-w-5xl mx-auto px-5 sm:px-6 grid lg:grid-cols-[1fr_auto] gap-8 items-center">
             <div>
-              <h2 className="text-3xl font-semibold text-foreground mb-4">Umów wizytę lub zapytaj o szczegóły</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">Umów wizytę lub zapytaj o szczegóły</h2>
               <p className="text-foreground/65 leading-relaxed">
                 Rejestracja pomoże dobrać termin, zakres wizyty oraz właściwego specjalistę.
               </p>

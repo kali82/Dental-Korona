@@ -5,6 +5,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Footer, FADE_UP } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
+import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
 import heroPhoto from "@assets/screenshot-1778320007102.png";
@@ -160,7 +161,7 @@ function InitialsPortrait({ person, large = false }: { person: Person; large?: b
   return (
     <div
       className={`relative overflow-hidden bg-[#f4e5d4] ${
-        large ? "h-full min-h-[330px] rounded-3xl" : "w-28 h-28 rounded-full border-4 border-white shadow-md"
+        large ? "h-full min-h-[280px] sm:min-h-[330px] rounded-3xl" : "w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md"
       }`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.28),transparent_38%)]" />
@@ -180,10 +181,10 @@ function PersonCard({ person, onClick }: { person: Person; onClick: () => void }
     <motion.button
       variants={FADE_UP}
       onClick={onClick}
-      className="group bg-background border border-border p-6 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left cursor-pointer w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+      className="group bg-background border border-border p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left cursor-pointer w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
       data-testid={`team-card-${person.initials.toLowerCase()}`}
     >
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-5 sm:mb-6">
         <InitialsPortrait person={person} />
       </div>
       <h3 className="text-lg font-semibold mb-1 text-foreground">{person.name}</h3>
@@ -197,13 +198,13 @@ function ProfileDetails({ person }: { person: Person }) {
   const isDoctor = doctors.some((doctor) => doctor.name === person.name);
 
   return (
-    <div className="grid lg:grid-cols-[320px_1fr] gap-10 lg:gap-14 items-start">
-      <div className="relative max-w-sm w-full mx-auto pb-16">
+    <div className="grid lg:grid-cols-[320px_1fr] gap-8 lg:gap-14 items-start">
+      <div className="relative max-w-xs sm:max-w-sm w-full mx-auto pb-16">
         <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-secondary/10 relative z-10">
           <InitialsPortrait person={person} large />
         </div>
-        <div className="absolute bottom-0 -right-2 -left-2 sm:-right-5 sm:-left-5 bg-card border border-border p-6 rounded-2xl shadow-lg z-20 text-center">
-          <h2 className="text-2xl font-bold text-foreground">{person.name}</h2>
+        <div className="absolute bottom-0 -right-2 -left-2 sm:-right-5 sm:-left-5 bg-card border border-border p-5 sm:p-6 rounded-2xl shadow-lg z-20 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground">{person.name}</h2>
           <p className="text-foreground/70 mb-3">{person.role}</p>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-semibold">
             <Star className="w-4 h-4 fill-secondary" />
@@ -214,7 +215,7 @@ function ProfileDetails({ person }: { person: Person }) {
 
       <div className="pt-2 lg:pt-4">
         <h2 className="text-2xl font-semibold mb-4 text-foreground">Zakres pracy</h2>
-        <p className="text-lg text-foreground/75 leading-relaxed mb-10">{person.bio}</p>
+        <p className="text-base sm:text-lg text-foreground/75 leading-relaxed mb-8 sm:mb-10">{person.bio}</p>
 
         <div className="grid md:grid-cols-2 gap-8 mb-10">
           <div>
@@ -277,42 +278,33 @@ export default function Team() {
       <Navigation />
 
       <main className="flex-grow">
-        <section className="relative w-full h-[70vh] min-h-[500px] flex items-center pt-20">
-          <div className="absolute inset-0 z-0">
-            <img src={heroPhoto} alt="Zespół Przychodni Korona" className="w-full h-full object-cover object-center" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent md:to-background/20" />
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-            <motion.div initial="hidden" animate="visible" variants={STAGGER} className="max-w-2xl">
-              <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
-                Zespół
-              </motion.div>
-              <motion.h1 variants={FADE_UP} className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
-                Lekarze i zespół Przychodni Korona
-              </motion.h1>
-              <motion.p variants={FADE_UP} className="text-lg md:text-xl text-foreground/70 mb-10 max-w-xl leading-relaxed">
-                Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil.
-              </motion.p>
-              <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row items-center gap-4">
-                <Button asChild size="lg" className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white rounded-full px-8 h-14 text-base shadow-xl group" data-testid="team-hero-contact">
-                  <Link href={PRACTICE.bookingUrl}>
-                    Kontakt i rejestracja
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-white/50 backdrop-blur-sm border-border/50 hover:bg-white/80 rounded-full px-8 h-14 text-base transition-all" data-testid="team-hero-call">
-                  <a href={PRACTICE.phoneHref}>
-                    <Phone className="w-4 h-4 mr-2 text-secondary" />
-                    {PRACTICE.phoneDisplay}
-                  </a>
-                </Button>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Zespół"
+          title="Lekarze i zespół Przychodni Korona"
+          description="Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil."
+          image={heroPhoto}
+          alt="Zespół Przychodni Korona"
+          mobileObjectPosition="62% center"
+          desktopObjectPosition="center center"
+          actions={[
+            {
+              label: "Kontakt i rejestracja",
+              href: PRACTICE.bookingUrl,
+              trailingIcon: <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />,
+              testId: "team-hero-contact",
+            },
+            {
+              label: PRACTICE.phoneDisplay,
+              href: PRACTICE.phoneHref,
+              variant: "secondary",
+              icon: <Phone className="w-4 h-4 mr-2 text-secondary" />,
+              testId: "team-hero-call",
+            },
+          ]}
+        />
 
-        <section className="py-16 bg-background">
-          <div className="max-w-6xl mx-auto px-6">
+        <section className="py-14 md:py-16 bg-background">
+          <div className="max-w-6xl mx-auto px-5 sm:px-6">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="mb-8">
               <h2 className="text-3xl font-semibold text-foreground mb-2">Lekarze</h2>
               <p className="text-foreground/60">Kliknij kafelek, aby zobaczyć szczegółowy profil.</p>
@@ -323,7 +315,7 @@ export default function Team() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={STAGGER}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
             >
               {doctors.map((doctor) => (
                 <PersonCard key={doctor.name} person={doctor} onClick={() => setSelectedPerson(doctor)} />
@@ -332,11 +324,11 @@ export default function Team() {
           </div>
         </section>
 
-        <section className="py-24 bg-card border-y border-border/50">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center mb-16">
+        <section className="py-16 md:py-24 bg-card border-y border-border/50">
+          <div className="max-w-6xl mx-auto px-5 sm:px-6">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center mb-10 md:mb-16">
               <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">Our Team</h2>
-              <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-foreground/60 max-w-2xl mx-auto">
                 Zespół administracyjny, higienistki, asystentki i technicy wspierający codzienną pracę gabinetów.
               </p>
             </motion.div>
@@ -346,7 +338,7 @@ export default function Team() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={STAGGER}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             >
               {team.map((person) => (
                 <PersonCard key={person.name} person={person} onClick={() => setSelectedPerson(person)} />
@@ -373,18 +365,19 @@ export default function Team() {
 
             <motion.div
               key="team-panel"
-              initial={{ opacity: 0, y: 40, scale: 0.98 }}
+              initial={{ opacity: 0, y: 48, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.98 }}
+              exit={{ opacity: 0, y: 36, scale: 0.98 }}
               transition={{ type: "spring", stiffness: 320, damping: 30 }}
-              className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none p-3 sm:p-6"
+              className="fixed inset-0 z-50 flex items-end sm:items-center justify-center pointer-events-none p-0 sm:p-6"
             >
               <div
-                className="pointer-events-auto relative w-full max-w-6xl max-h-[calc(100vh-2rem)] overflow-y-auto bg-background rounded-[1.75rem] shadow-2xl border border-border p-6 sm:p-8 lg:p-10"
+                className="pointer-events-auto relative w-full max-w-6xl max-h-[92svh] overflow-y-auto bg-background rounded-t-[1.75rem] sm:rounded-[1.75rem] shadow-2xl border border-border p-5 pt-7 sm:p-8 lg:p-10"
                 role="dialog"
                 aria-modal="true"
                 aria-label={`Profil: ${selectedPerson.name}`}
               >
+                <div className="absolute left-1/2 top-3 h-1 w-12 -translate-x-1/2 rounded-full bg-border sm:hidden" />
                 <button
                   type="button"
                   onClick={() => setSelectedPerson(null)}

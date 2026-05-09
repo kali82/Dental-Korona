@@ -3,6 +3,7 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { MobileStickyActions } from "@/components/MobileStickyActions";
 
 import Home from "@/pages/home";
 import NewPatients from "@/pages/new-patients";
@@ -50,6 +51,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <ScrollToTop />
           <Router />
+          <MobileStickyActions />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>
