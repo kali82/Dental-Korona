@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
-import { Phone, ArrowRight, Star, Sparkles, MapPin, Clock, GraduationCap, Heart, Shield, Hexagon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, ArrowRight, Star, Sparkles, MapPin, Clock, GraduationCap, Heart, Shield, Hexagon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
@@ -17,17 +18,69 @@ const STAGGER = {
   }
 };
 
-const teamMembers = [
-  { name: "Margaret", role: "Office Manager", img: "https://beehivedental.com/wp-content/uploads/2025/01/margaret-office-manager.jpg" },
-  { name: "Deirdre", role: "Lead Hygienist", img: "https://beehivedental.com/wp-content/uploads/2025/01/deirdre-lead-hyg.jpg" },
-  { name: "Sila", role: "Dental Hygienist", img: "https://beehivedental.com/wp-content/uploads/2025/01/sila-dental-hyg.jpg" },
-  { name: "Carly", role: "Dental Hygienist", img: "https://beehivedental.com/wp-content/uploads/2026/03/image1-4.jpeg" },
-  { name: "Lisa", role: "Patient Experience Officer", img: "https://beehivedental.com/wp-content/uploads/2025/01/lisa-patient-experience-officer.jpg" },
-  { name: "Sierra", role: "Administrative", img: "https://beehivedental.com/wp-content/uploads/2025/01/sierra-admin.jpg" },
-  { name: "Alisha", role: "Administrative", img: "https://beehivedental.com/wp-content/uploads/2026/03/alisha.png" },
+interface TeamMember {
+  name: string;
+  role: string;
+  img: string;
+  bio: string;
+  highlights: string[];
+}
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Margaret",
+    role: "Office Manager",
+    img: "https://beehivedental.com/wp-content/uploads/2025/01/margaret-office-manager.jpg",
+    bio: "Margaret is the heart of our practice operations. With years of experience managing dental offices, she ensures every aspect of your visit runs smoothly — from scheduling to billing. Her warm, organized approach makes Beehive Dental the welcoming place it is.",
+    highlights: ["Practice operations & scheduling", "Insurance coordination", "Patient satisfaction", "Team leadership"],
+  },
+  {
+    name: "Deirdre",
+    role: "Lead Hygienist",
+    img: "https://beehivedental.com/wp-content/uploads/2025/01/deirdre-lead-hyg.jpg",
+    bio: "Deirdre brings exceptional skill and a gentle touch to every cleaning and hygiene appointment. As our Lead Hygienist, she also mentors the hygiene team and stays at the forefront of preventive dental care techniques to ensure the best outcomes for our patients.",
+    highlights: ["Comprehensive cleanings & exams", "Periodontal therapy", "Oral health education", "Hygiene team lead"],
+  },
+  {
+    name: "Sila",
+    role: "Dental Hygienist",
+    img: "https://beehivedental.com/wp-content/uploads/2025/01/sila-dental-hyg.jpg",
+    bio: "Sila is passionate about helping patients achieve and maintain optimal oral health. Known for her thoroughness and caring demeanor, she takes the time to educate each patient on personalized home care routines, turning cleanings into empowering experiences.",
+    highlights: ["Preventive care", "Scaling & root planing", "Patient education", "Digital charting"],
+  },
+  {
+    name: "Carly",
+    role: "Dental Hygienist",
+    img: "https://beehivedental.com/wp-content/uploads/2026/03/image1-4.jpeg",
+    bio: "Carly's approachable personality puts even the most nervous patients at ease. She is dedicated to providing thorough, comfortable hygiene care and takes pride in building long-term relationships with her patients to support their ongoing oral wellness.",
+    highlights: ["Preventive care", "Comfortable cleanings", "Anxiety-friendly approach", "Oral cancer screening"],
+  },
+  {
+    name: "Lisa",
+    role: "Patient Experience Officer",
+    img: "https://beehivedental.com/wp-content/uploads/2025/01/lisa-patient-experience-officer.jpg",
+    bio: "Lisa is dedicated to making every patient feel like a valued guest. She oversees the in-office experience from arrival to departure — coordinating amenities, gathering feedback, and ensuring the Beehive Dental standard of care is felt at every touchpoint.",
+    highlights: ["Patient journey management", "Amenities coordination", "Feedback & quality care", "Comfort-first approach"],
+  },
+  {
+    name: "Sierra",
+    role: "Administrative",
+    img: "https://beehivedental.com/wp-content/uploads/2025/01/sierra-admin.jpg",
+    bio: "Sierra keeps the front desk running with efficiency and a bright smile. She handles appointments, patient inquiries, and insurance billing with professionalism, ensuring your administrative experience is as smooth and stress-free as your clinical one.",
+    highlights: ["Appointment scheduling", "Insurance billing", "New patient intake", "Front desk coordination"],
+  },
+  {
+    name: "Alisha",
+    role: "Administrative",
+    img: "https://beehivedental.com/wp-content/uploads/2026/03/alisha.png",
+    bio: "Alisha brings energy and dedication to our administrative team. Whether answering questions, confirming appointments, or welcoming you at the door, she ensures every interaction with Beehive Dental feels personal, efficient, and genuinely warm.",
+    highlights: ["Patient communications", "Appointment management", "Records & documentation", "Welcoming atmosphere"],
+  },
 ];
 
 export default function About() {
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+
   return (
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
       <Navigation />
@@ -279,17 +332,29 @@ export default function About() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
           >
             {teamMembers.map((member, i) => (
-              <motion.div key={i} variants={FADE_UP} className="group bg-background border border-border p-6 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
-                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-white shadow-md bg-secondary/10">
-                  <img 
-                    src={member.img} 
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
+              <motion.button
+                key={i}
+                variants={FADE_UP}
+                onClick={() => setSelectedMember(member)}
+                className="group bg-background border border-border p-6 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center cursor-pointer w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+                data-testid={`team-card-${member.name.toLowerCase()}`}
+              >
+                <div className="relative w-32 h-32 mx-auto mb-6">
+                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-md bg-secondary/10">
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <span className="absolute bottom-1 right-1 w-7 h-7 rounded-full bg-secondary flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
+                  </span>
                 </div>
                 <h3 className="text-xl font-semibold mb-1 text-foreground">{member.name}</h3>
-                <p className="text-secondary font-medium">{member.role}</p>
-              </motion.div>
+                <p className="text-secondary font-medium text-sm">{member.role}</p>
+                <p className="text-xs text-foreground/40 mt-2 group-hover:text-secondary/70 transition-colors">View profile →</p>
+              </motion.button>
             ))}
           </motion.div>
         </div>
@@ -472,6 +537,84 @@ export default function About() {
       </section>
 
       <Footer />
+
+      {/* Team Member Modal */}
+      <AnimatePresence>
+        {selectedMember && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+              onClick={() => setSelectedMember(null)}
+            />
+
+            {/* Panel */}
+            <motion.div
+              key="panel"
+              initial={{ opacity: 0, y: 60, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 40, scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 320, damping: 30 }}
+              className="fixed bottom-0 left-0 right-0 md:inset-0 md:flex md:items-center md:justify-center z-50 pointer-events-none"
+            >
+              <div className="pointer-events-auto w-full md:w-auto md:max-w-xl bg-background rounded-t-[2rem] md:rounded-[2rem] shadow-2xl border border-border overflow-hidden mx-0 md:mx-4">
+                {/* Top photo banner */}
+                <div className="relative h-48 md:h-56 overflow-hidden bg-secondary/10">
+                  <img
+                    src={selectedMember.img}
+                    alt={selectedMember.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  {/* Close button */}
+                  <button
+                    onClick={() => setSelectedMember(null)}
+                    className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors"
+                    data-testid="team-modal-close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                  {/* Name badge over photo */}
+                  <div className="absolute bottom-4 left-6">
+                    <h2 className="text-2xl font-semibold text-white drop-shadow">{selectedMember.name}</h2>
+                    <span className="inline-block mt-1 px-3 py-0.5 rounded-full bg-secondary/90 text-white text-sm font-medium">
+                      {selectedMember.role}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="p-6 md:p-8">
+                  <p className="text-foreground/75 leading-relaxed mb-6">{selectedMember.bio}</p>
+
+                  <div className="mb-6">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-foreground/40 mb-3">Specialties</p>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedMember.highlights.map((h, i) => (
+                        <span key={i} className="px-3 py-1 rounded-full bg-primary/20 text-secondary text-sm font-medium border border-primary/30">
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button asChild size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-full h-12" data-testid="team-modal-book">
+                    <a href="https://app.nexhealth.com/appt/beehive-dental" target="_blank" rel="noreferrer">
+                      Book an Appointment
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
