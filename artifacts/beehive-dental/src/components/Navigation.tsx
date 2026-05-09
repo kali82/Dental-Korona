@@ -14,7 +14,7 @@ export function Navigation() {
           <Link href="/services" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-services">Services</Link>
           <Link href="/about" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-about">About</Link>
           <Link href="/new-patients" className="text-secondary font-semibold" data-testid="nav-new-patients">New Patients</Link>
-          <a href="#resources" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-resources">Resources</a>
+          <Link href="/gallery" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-gallery">Gallery</Link>
         </nav>
         <div className="hidden md:flex items-center gap-4">
           <a href="tel:9057885555" className="text-sm font-medium text-foreground/80 hover:text-foreground flex items-center gap-2 transition-colors" data-testid="nav-phone">
