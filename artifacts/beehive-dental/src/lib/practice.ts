@@ -1,0 +1,28 @@
+export const PRACTICE = {
+  name: "Przychodnia Korona",
+  fullName: "Przychodnia Korona Stomatologia i Kosmetologia",
+  specialty: "Stomatologia i Kosmetologia",
+  city: "Nowa Sól",
+  cityDisplay: "Nowa Sól",
+  region: "woj. lubuskie",
+  addressLines: ["ul. Krasińskiego 15", "67-100 Nowa Sól", "woj. lubuskie"],
+  phoneDisplay: "68 38 759 41",
+  phoneHref: "tel:+48683875941",
+  mobileDisplay: "507 130 845",
+  mobileHref: "tel:+48507130845",
+  email: "przychodniakorona@interia.pl",
+  emailHref: "mailto:przychodniakorona@interia.pl",
+  website: "https://przychodniakorona.pl",
+  bookingUrl: "/contact",
+  facebookName: 'Przychodnia "Korona"',
+  facebookUrl: "https://www.facebook.com/294751547331645",
+  instagramName: "przychodnia_korona",
+  instagramUrl: "https://www.instagram.com/przychodnia_korona/",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=ul.%20Krasi%C5%84skiego%2015%2C%2067-100%20Nowa%20S%C3%B3l",
+  hours: [
+    { days: "Poniedziałek - piątek", time: "8:00 - 19:00" },
+    { days: "Sobota", time: "9:00 - 13:00" },
+    { days: "Niedziela", time: "Nieczynne" },
+  ],
+} as const;
