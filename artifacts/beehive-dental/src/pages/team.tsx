@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, GraduationCap, Heart, Shield, Star, X } from "lucide-react";
+import { ArrowRight, GraduationCap, Heart, Phone, Shield, Star, X } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Footer, FADE_UP } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 import { PRACTICE } from "@/lib/practice";
+
+import heroPhoto from "@assets/screenshot-1778320007102.png";
 
 type Person = {
   name: string;
@@ -275,18 +277,38 @@ export default function Team() {
       <Navigation />
 
       <main className="flex-grow">
-        <section className="pt-32 pb-16 bg-background">
-          <motion.div initial="hidden" animate="visible" variants={FADE_UP} className="max-w-4xl mx-auto px-6 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
-              Zespół
-            </div>
-            <h1 className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
-              Lekarze i zespół Przychodni Korona
-            </h1>
-            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-              Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć profil.
-            </p>
-          </motion.div>
+        <section className="relative w-full h-[70vh] min-h-[500px] flex items-center pt-20">
+          <div className="absolute inset-0 z-0">
+            <img src={heroPhoto} alt="Zespół Przychodni Korona" className="w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent md:to-background/20" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <motion.div initial="hidden" animate="visible" variants={STAGGER} className="max-w-2xl">
+              <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
+                Zespół
+              </motion.div>
+              <motion.h1 variants={FADE_UP} className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
+                Lekarze i zespół Przychodni Korona
+              </motion.h1>
+              <motion.p variants={FADE_UP} className="text-lg md:text-xl text-foreground/70 mb-10 max-w-xl leading-relaxed">
+                Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil.
+              </motion.p>
+              <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row items-center gap-4">
+                <Button asChild size="lg" className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white rounded-full px-8 h-14 text-base shadow-xl group" data-testid="team-hero-contact">
+                  <Link href={PRACTICE.bookingUrl}>
+                    Kontakt i rejestracja
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-white/50 backdrop-blur-sm border-border/50 hover:bg-white/80 rounded-full px-8 h-14 text-base transition-all" data-testid="team-hero-call">
+                  <a href={PRACTICE.phoneHref}>
+                    <Phone className="w-4 h-4 mr-2 text-secondary" />
+                    {PRACTICE.phoneDisplay}
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
         </section>
 
         <section className="py-16 bg-background">

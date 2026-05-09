@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { href: "/services", label: "Usługi", testId: "nav-services" },
   { href: "/about", label: "O nas", testId: "nav-about" },
   { href: "/team", label: "Zespół", testId: "nav-team" },
+  { href: "/pricing", label: "Cennik", testId: "nav-pricing" },
   { href: "/new-patients", label: "Dla pacjenta", testId: "nav-new-patients" },
   { href: "/gallery", label: "Galeria", testId: "nav-gallery" },
   { href: "/contact", label: "Kontakt", testId: "nav-contact" },

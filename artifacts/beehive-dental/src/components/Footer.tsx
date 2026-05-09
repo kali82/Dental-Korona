@@ -72,6 +72,7 @@ export function Footer() {
                   { label: "O nas", href: "/about" },
                   { label: "Zespół", href: "/team" },
                   { label: "Usługi", href: "/services" },
+                  { label: "Cennik", href: "/pricing" },
                   { label: "Dla pacjenta", href: "/new-patients" },
                   { label: "Galeria", href: "/gallery" },
                   { label: "Kontakt", href: "/contact" },

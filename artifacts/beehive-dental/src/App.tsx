@@ -11,6 +11,7 @@ import About from "@/pages/about";
 import Galeria from "@/pages/gallery";
 import Contact from "@/pages/contact";
 import Team from "@/pages/team";
+import Pricing from "@/pages/pricing";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,8 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/about" component={About} />
       <Route path="/team" component={Team} />
+      <Route path="/pricing" component={Pricing} />
+      <Route path="/cennik" component={Pricing} />
       <Route path="/gallery" component={Galeria} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />

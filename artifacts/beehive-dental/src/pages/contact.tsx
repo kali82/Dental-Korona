@@ -1,8 +1,16 @@
 import { motion } from "framer-motion";
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
 import { PRACTICE } from "@/lib/practice";
+
+import heroPhoto from "@assets/beehive-tour-1.jpg";
+
+const STAGGER = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
 
 const contactCards = [
   {
@@ -37,26 +45,41 @@ export default function Contact() {
       <Navigation />
 
       <main className="flex-grow">
-        <section className="pt-32 pb-20 bg-background">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={FADE_UP}
-            className="max-w-4xl mx-auto px-6 text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
-              Kontakt
-            </div>
-            <h1 className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
-              Przychodnia Korona
-            </h1>
-            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-              Dane kontaktowe, godziny otwarcia i oficjalne profile społecznościowe przychodni.
-            </p>
-          </motion.div>
+        <section className="relative w-full h-[70vh] min-h-[500px] flex items-center pt-20">
+          <div className="absolute inset-0 z-0">
+            <img src={heroPhoto} alt="Kontakt z Przychodnią Korona" className="w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent md:to-background/20" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <motion.div initial="hidden" animate="visible" variants={STAGGER} className="max-w-2xl">
+              <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
+                Kontakt
+              </motion.div>
+              <motion.h1 variants={FADE_UP} className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
+                Przychodnia Korona
+              </motion.h1>
+              <motion.p variants={FADE_UP} className="text-lg md:text-xl text-foreground/70 mb-10 max-w-xl leading-relaxed">
+                Dane kontaktowe, godziny otwarcia i oficjalne profile społecznościowe przychodni.
+              </motion.p>
+              <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row items-center gap-4">
+                <Button asChild size="lg" className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white rounded-full px-8 h-14 text-base shadow-xl group" data-testid="contact-hero-call">
+                  <a href={PRACTICE.phoneHref}>
+                    <Phone className="w-4 h-4 mr-2" />
+                    {PRACTICE.phoneDisplay}
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-white/50 backdrop-blur-sm border-border/50 hover:bg-white/80 rounded-full px-8 h-14 text-base transition-all" data-testid="contact-hero-map">
+                  <a href={PRACTICE.mapsUrl} target="_blank" rel="noreferrer">
+                    Dojazd
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
         </section>
 
-        <section className="pb-24 bg-background">
+        <section className="py-24 bg-background">
           <div className="max-w-5xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-6 mb-10">
               {contactCards.map((card) => (
