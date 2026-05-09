@@ -12,7 +12,7 @@ export function Navigation() {
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link href="/services" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-services">Services</Link>
-          <a href="#about" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-about">About</a>
+          <Link href="/about" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-about">About</Link>
           <Link href="/new-patients" className="text-secondary font-semibold" data-testid="nav-new-patients">New Patients</Link>
           <a href="#resources" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-resources">Resources</a>
         </nav>
