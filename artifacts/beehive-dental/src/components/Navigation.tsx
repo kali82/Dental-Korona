@@ -11,7 +11,7 @@ export function Navigation() {
           <img src={beehiveLogo} alt="Beehive Dental" className="h-10 w-auto group-hover:opacity-90 transition-opacity" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#services" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-services">Services</a>
+          <Link href="/services" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-services">Services</Link>
           <a href="#about" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-about">About</a>
           <Link href="/new-patients" className="text-secondary font-semibold" data-testid="nav-new-patients">New Patients</Link>
           <a href="#resources" className="text-foreground/80 hover:text-secondary transition-colors" data-testid="nav-resources">Resources</a>
