@@ -18,7 +18,7 @@ export default function About() {
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
       <Navigation />
 
-      <section className="relative w-full h-[70vh] min-h-[500px] flex items-center pt-20">
+      <section className="relative w-full min-h-[720px] md:h-[70vh] md:min-h-[500px] flex items-center pt-24 pb-16 md:pt-20 md:pb-0">
         <div className="absolute inset-0 z-0">
           <img src={heroPhoto} alt="O Przychodni Korona" className="w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent md:to-background/20" />
@@ -28,7 +28,7 @@ export default function About() {
             <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-6">
               O Przychodni Korona
             </motion.div>
-            <motion.h1 variants={FADE_UP} className="text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
+            <motion.h1 variants={FADE_UP} className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6">
               Doświadczenie i kompleksowa opieka w Nowej Soli
             </motion.h1>
             <motion.p variants={FADE_UP} className="text-lg md:text-xl text-foreground/70 mb-10 max-w-xl leading-relaxed">
