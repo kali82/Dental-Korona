@@ -8,12 +8,23 @@ import { Navigation } from "@/components/Navigation";
 import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/screenshot-1778320007102.png";
+import heroPhoto from "@assets/DSC_3503.jpg";
+import aniaPhoto from "@assets/Ania.jpg";
+import bartekPhoto from "@assets/Bartek.jpg";
+import danutaPhoto from "@assets/Danuta.jpg";
+import dorotaPhoto from "@assets/Dorota.jpg";
+import ewaKPhoto from "@assets/Ewa K..jpg";
+import ilonaPhoto from "@assets/Ilona.jpg";
+import kamilaPhoto from "@assets/Kamila.jpg";
+import magdaDoctorPhoto from "@assets/Magda 2.jpg";
+import magdaTeamPhoto from "@assets/Magda.jpg";
+import sylwiaPhoto from "@assets/Sylwia.jpg";
 
 type Person = {
   name: string;
   role: string;
   initials: string;
+  photo?: string;
   bio: string;
   education: string[];
   focus: string[];
@@ -39,6 +50,7 @@ const doctors: Person[] = [
     name: "Ewa Kołodziej",
     role: "lek. dent.",
     initials: "EK",
+    photo: ewaKPhoto,
     bio: "Zajmuje się stomatologią zachowawczą, dziecięcą, endodoncją mikroskopową oraz zabiegami chirurgicznymi.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
     focus: ["Stomatologia dziecięca", "Endodoncja mikroskopowa", "Chirurgia stomatologiczna"],
@@ -57,6 +69,7 @@ const doctors: Person[] = [
     name: "Magdalena Szewczyk-Tuczyńska",
     role: "lek. dent.",
     initials: "MS",
+    photo: magdaDoctorPhoto,
     bio: "Zajmuje się leczeniem zachowawczym dzieci i dorosłych, dbając o spokojny przebieg wizyty.",
     education: ["Pomorski Uniwersytet Medyczny w Szczecinie"],
     focus: ["Stomatologia zachowawcza", "Leczenie dzieci", "Leczenie dorosłych"],
@@ -66,6 +79,7 @@ const doctors: Person[] = [
     name: "Bartosz Królikowski",
     role: "lek. dent.",
     initials: "BK",
+    photo: bartekPhoto,
     bio: "W pracy koncentruje się na stomatologii zachowawczej, endodoncji mikroskopowej, chirurgii stomatologicznej i implantologii.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
     focus: ["Endodoncja mikroskopowa", "Chirurgia", "Implantologia", "Stomatologia zachowawcza"],
@@ -75,6 +89,7 @@ const doctors: Person[] = [
     name: "Sylwia Ogrodniczak",
     role: "lek. dent.",
     initials: "SO",
+    photo: sylwiaPhoto,
     bio: "Prowadzi leczenie zachowawcze dzieci i dorosłych.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
     focus: ["Stomatologia zachowawcza", "Leczenie dzieci", "Leczenie dorosłych"],
@@ -87,6 +102,7 @@ const team: Person[] = [
     name: "Magdalena Rewers",
     role: "Koordynator medyczny",
     initials: "MR",
+    photo: magdaTeamPhoto,
     bio: "Koordynuje pracę administracyjno-biurową przychodni i wspiera sprawny przebieg obsługi pacjentów.",
     education: ["Uniwersytet Zielonogórski"],
     focus: ["Koordynacja pracy", "Administracja", "Obsługa pacjenta"],
@@ -96,6 +112,7 @@ const team: Person[] = [
     name: "Danuta Uchal",
     role: "dypl. hig. stom.",
     initials: "DU",
+    photo: danutaPhoto,
     bio: "Asystuje przy leczeniu zachowawczym i ortodoncji, a także wykonuje zabiegi higienizacji.",
     education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
     focus: ["Higienizacja", "Asysta stomatologiczna", "Ortodoncja"],
@@ -105,6 +122,7 @@ const team: Person[] = [
     name: "Dorota Bartkowiak",
     role: "dypl. hig. stom.",
     initials: "DB",
+    photo: dorotaPhoto,
     bio: "Asystuje podczas leczenia zachowawczego, endodoncji i implantologii.",
     education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
     focus: ["Asysta przy endodoncji", "Implantologia", "Stomatologia zachowawcza"],
@@ -114,6 +132,7 @@ const team: Person[] = [
     name: "Ilona Radecka",
     role: "Higienistka / technik sterylizacji",
     initials: "IR",
+    photo: ilonaPhoto,
     bio: "Pracuje przy zabiegach z zakresu stomatologii zachowawczej, chirurgii i implantologii oraz wykonuje higienizację.",
     education: ["Medyczna Szkoła Policealna w Głogowie", "Technik sterylizacji medycznej"],
     focus: ["Higienizacja", "Sterylizacja", "Chirurgia", "Implantologia"],
@@ -123,6 +142,7 @@ const team: Person[] = [
     name: "Kamila Bieńkowska-Kaśków",
     role: "mgr, higiena stomatologiczna",
     initials: "KB",
+    photo: kamilaPhoto,
     bio: "Asystuje lekarzom oraz samodzielnie wykonuje zabiegi profilaktyki stomatologicznej.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
     focus: ["Profilaktyka", "Ortodoncja", "Endodoncja", "Implantologia"],
@@ -141,6 +161,7 @@ const team: Person[] = [
     name: "Anna Stoparczyk",
     role: "tech. dent.",
     initials: "AS",
+    photo: aniaPhoto,
     bio: "Technik dentystyczny stale rozwijający kwalifikacje w zakresie protetyki stomatologicznej.",
     education: ["Policealna Szkoła Techniki Dentystycznej w Zielonej Górze"],
     focus: ["Protetyka", "Technika dentystyczna", "Prace laboratoryjne"],
@@ -157,12 +178,22 @@ const team: Person[] = [
   },
 ];
 
-function InitialsPortrait({ person, large = false }: { person: Person; large?: boolean }) {
+function PersonPortrait({ person, large = false }: { person: Person; large?: boolean }) {
+  const frameClass = large
+    ? "h-full min-h-[280px] sm:min-h-[330px] rounded-3xl"
+    : "w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md";
+
+  if (person.photo) {
+    return (
+      <div className={`relative overflow-hidden bg-muted ${frameClass}`}>
+        <img src={person.photo} alt={person.name} className="h-full w-full object-cover object-top" loading="lazy" />
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`relative overflow-hidden bg-[#f4e5d4] ${
-        large ? "h-full min-h-[280px] sm:min-h-[330px] rounded-3xl" : "w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md"
-      }`}
+      className={`relative overflow-hidden bg-[#f4e5d4] ${frameClass}`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.28),transparent_38%)]" />
       <span
@@ -185,7 +216,7 @@ function PersonCard({ person, onClick }: { person: Person; onClick: () => void }
       data-testid={`team-card-${person.initials.toLowerCase()}`}
     >
       <div className="flex justify-center mb-5 sm:mb-6">
-        <InitialsPortrait person={person} />
+        <PersonPortrait person={person} />
       </div>
       <h3 className="text-lg font-semibold mb-1 text-foreground">{person.name}</h3>
       <p className="text-secondary font-medium text-sm">{person.role}</p>
@@ -201,7 +232,7 @@ function ProfileDetails({ person }: { person: Person }) {
     <div className="grid lg:grid-cols-[320px_1fr] gap-8 lg:gap-14 items-start">
       <div className="relative max-w-xs sm:max-w-sm w-full mx-auto pb-16">
         <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-secondary/10 relative z-10">
-          <InitialsPortrait person={person} large />
+          <PersonPortrait person={person} large />
         </div>
         <div className="absolute bottom-0 -right-2 -left-2 sm:-right-5 sm:-left-5 bg-card border border-border p-5 sm:p-6 rounded-2xl shadow-lg z-20 text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-foreground">{person.name}</h2>
@@ -223,7 +254,7 @@ function ProfileDetails({ person }: { person: Person }) {
               <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center text-secondary">
                 <GraduationCap className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-semibold">Education</h3>
+              <h3 className="text-xl font-semibold">Wykształcenie</h3>
             </div>
             <ul className="space-y-3">
               {person.education.map((item) => (

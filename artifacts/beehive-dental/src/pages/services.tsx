@@ -6,10 +6,10 @@ import { Footer, FADE_UP } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/screenshot-1778326512876.png";
-import servicePhoto from "@assets/beehive-services-2.jpg";
-import orthoPhoto from "@assets/beehive-services-3.jpg";
-import clinicPhoto from "@assets/beehive-tour-4.jpg";
+import heroPhoto from "@assets/DSC00546.jpg";
+import servicePhoto from "@assets/DSC00550.jpg";
+import orthoPhoto from "@assets/DSC00556.jpg";
+import clinicPhoto from "@assets/DSC00543.jpg";
 
 const STAGGER = {
   hidden: { opacity: 0 },

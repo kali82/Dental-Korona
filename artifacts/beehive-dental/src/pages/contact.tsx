@@ -5,7 +5,7 @@ import { Footer, FADE_UP } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/beehive-tour-1.jpg";
+import heroPhoto from "@assets/DJI_0308-HDR-scaled.jpg";
 
 const contactCards = [
   {

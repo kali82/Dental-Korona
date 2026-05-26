@@ -6,7 +6,7 @@ import { Footer, FADE_UP } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
-import heroImage from "@assets/screenshot-1778319667950.png";
+import heroImage from "@assets/DSC00462.jpg";
 
 const STAGGER = {
   hidden: { opacity: 0 },

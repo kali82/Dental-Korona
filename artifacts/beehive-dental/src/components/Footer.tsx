@@ -4,6 +4,8 @@ import { ArrowRight, Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PRACTICE } from "@/lib/practice";
 
+import logo from "@assets/logo przychodnia bez tła mniejsza linia.png";
+
 export const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -36,7 +38,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div>
               <div className="mb-6">
-                <p className="text-2xl font-semibold text-white">Przychodnia Korona</p>
+                <img src={logo} alt="Przychodnia Korona" className="h-24 w-auto max-w-[230px] object-contain" />
                 <p className="text-sm uppercase tracking-widest text-white/50 mt-1">{PRACTICE.specialty}</p>
               </div>
               <p className="text-sm font-semibold text-white/90 uppercase tracking-widest mb-4">Adres</p>

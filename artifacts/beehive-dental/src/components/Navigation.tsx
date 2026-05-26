@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { PRACTICE } from "@/lib/practice";
 import { cn } from "@/lib/utils";
 
+import logo from "@assets/logo przychodnia bez tła mniejsza linia.png";
+
 const NAV_ITEMS = [
   { href: "/services", label: "Usługi", testId: "nav-services" },
   { href: "/about", label: "O nas", testId: "nav-about" },
@@ -45,16 +47,11 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between">
         <Link
           href="/"
-          className="flex items-center gap-3 group"
+          className="flex items-center shrink-0 group"
           data-testid="nav-logo"
           onClick={closeMobileMenu}
         >
-          <div className="flex flex-col leading-tight">
-            <span className="text-lg md:text-xl font-semibold text-foreground group-hover:text-secondary transition-colors">
-              Przychodnia Korona
-            </span>
-            <span className="text-xs uppercase tracking-widest text-foreground/50">Nowa Sól</span>
-          </div>
+          <img src={logo} alt="Przychodnia Korona" className="h-11 w-auto max-w-[170px] object-contain md:h-14 md:max-w-[210px]" />
         </Link>
 
         <nav className="hidden xl:flex items-center gap-5 text-sm font-medium">

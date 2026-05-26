@@ -7,7 +7,7 @@ import { Navigation } from "@/components/Navigation";
 import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/beehive-services-1.jpg";
+import heroPhoto from "@assets/DSC00543.jpg";
 
 type PriceItem = {
   name: string;
