@@ -10,7 +10,7 @@ import { PRACTICE } from "@/lib/practice";
 import heroPhoto from "@assets/DSC00546.jpg";
 import servicePhoto from "@assets/DSC00550.jpg";
 import orthoPhoto from "@assets/DSC00556.jpg";
-import clinicPhoto from "@assets/DSC00543.jpg";
+import clinicPhoto from "@assets/DSC00541-scaled.jpg";
 
 type ServiceGroup = {
   icon: LucideIcon;
@@ -18,8 +18,6 @@ type ServiceGroup = {
   desc: string;
   items: string[];
   image: string;
-  imageFrameClassName?: string;
-  imageClassName?: string;
 };
 
 const serviceGroups: ServiceGroup[] = [
@@ -36,8 +34,6 @@ const serviceGroups: ServiceGroup[] = [
     desc: "Leczenie kanałowe, zabiegi chirurgiczne, implanty oraz diagnostyka radiologiczna wspierająca plan leczenia.",
     items: ["Leczenie kanałowe", "Chirurgia stomatologiczna", "Implantologia", "Zdjęcia RTG i tomografia"],
     image: clinicPhoto,
-    imageFrameClassName: "bg-muted p-4 md:p-6",
-    imageClassName: "object-contain rounded-xl",
   },
   {
     icon: Smile,
@@ -95,12 +91,12 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 variants={FADE_UP}
-                className="grid lg:grid-cols-[1fr_1.2fr] gap-0 bg-card border border-border rounded-2xl md:rounded-3xl overflow-hidden shadow-sm"
+                className="grid lg:grid-cols-[1fr_1.2fr] gap-0 bg-card border border-border rounded-2xl md:rounded-3xl overflow-hidden shadow-sm lg:h-[360px]"
               >
-                <div className={`${index % 2 === 1 ? "lg:order-2" : ""} h-[220px] md:h-[280px] lg:h-auto lg:min-h-[280px] overflow-hidden ${group.imageFrameClassName ?? ""}`}>
-                  <img src={group.image} alt={group.title} className={`w-full h-full ${group.imageClassName ?? "object-cover"}`} />
+                <div className={`${index % 2 === 1 ? "lg:order-2" : ""} h-[220px] md:h-[280px] lg:h-full lg:min-h-0 overflow-hidden`}>
+                  <img src={group.image} alt={group.title} className="w-full h-full object-cover" />
                 </div>
-                <div className="p-6 md:p-10 flex flex-col justify-center">
+                <div className="p-6 md:p-10 lg:py-8 flex flex-col justify-center">
                   <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
                     <group.icon className="w-6 h-6" />
                   </div>

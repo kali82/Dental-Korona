@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState, type TouchEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,21 +40,57 @@ import teamCabinet from "@assets/DSC_3882.jpg";
 import teamChair from "@assets/DSC_3902.jpg";
 import teamCabinetTwo from "@assets/DSC_3913.jpg";
 
-const STAGGER = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
-};
-
 type Category = "Wszystkie" | "Przychodnia" | "Zabiegi" | "Zespół";
 
 interface GalleryItem {
   src: string;
+  thumb: string;
   alt: string;
   category: Exclude<Category, "Wszystkie">;
   span?: "wide" | "tall" | "normal";
+  thumbPosition?: string;
 }
 
-const photos: GalleryItem[] = [
+type GallerySourceItem = Omit<GalleryItem, "thumb">;
+
+const photoThumbs = [
+  "cropped-DJI_0300-HDR-scaled-1.jpg",
+  "DJI_0308-HDR-scaled.jpg",
+  "DSC00462.jpg",
+  "DSC00526-scaled.jpg",
+  "DSC00528-1-scaled.jpg",
+  "DSC00564.jpg",
+  "DSC00546.jpg",
+  "DSC00529-scaled.jpg",
+  "DSC00544.jpg",
+  "DSC00549.jpg",
+  "DSC00550.jpg",
+  "DSC00541-scaled.jpg",
+  "DSC00543 (1).jpg",
+  "DSC00543.jpg",
+  "DSC00556.jpg",
+  "DSC00559.jpg",
+  "DSC00739.jpg",
+  "DSC02139.jpg",
+  "DSC_3503.jpg",
+  "DSC_3556.jpg",
+  "DSC_3587.jpg",
+  "DSC_3602.jpg",
+  "DSC_3469.jpg",
+  "DSC_3620.jpg",
+  "DSC_3634.jpg",
+  "DSC_3678.jpg",
+  "DSC_3799.jpg",
+  "DSC_3863.jpg",
+  "DSC_3882.jpg",
+  "DSC_3902.jpg",
+  "DSC_3913.jpg",
+  "DSC00585.jpg",
+] as const;
+
+const galleryThumb = (fileName: string) => `${import.meta.env.BASE_URL}gallery-thumbs/${fileName}`;
+
+const photoSources: GallerySourceItem[] = [
   { src: aerialExterior, alt: "Budynek Przychodni Korona z lotu ptaka", category: "Przychodnia", span: "wide" },
   { src: aerialStreet, alt: "Przychodnia Korona przy ulicy Krasińskiego", category: "Przychodnia", span: "wide" },
   { src: receptionHall, alt: "Recepcja i poczekalnia Przychodni Korona", category: "Przychodnia", span: "wide" },
@@ -86,21 +122,59 @@ const photos: GalleryItem[] = [
   { src: teamCabinet, alt: "Zespół przy stanowisku zabiegowym", category: "Zespół", span: "wide" },
   { src: teamChair, alt: "Zespół przy unicie stomatologicznym", category: "Zespół" },
   { src: teamCabinetTwo, alt: "Zespół w gabinecie stomatologicznym", category: "Zespół" },
-  { src: staffGroupBlue, alt: "Zespół higienistek i asystentek", category: "Zespół", span: "wide" },
+  { src: staffGroupBlue, alt: "Zespół higienistek i asystentek", category: "Zespół", span: "wide", thumbPosition: "center 28%" },
 ];
 
 const CATEGORIES: Category[] = ["Wszystkie", "Przychodnia", "Zabiegi", "Zespół"];
 
+const photos: GalleryItem[] = photoSources.map((photo, index) => ({
+  ...photo,
+  thumb: galleryThumb(photoThumbs[index] ?? photoThumbs[0]),
+}));
+
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState<Category>("Wszystkie");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
-  const filtered = activeCategory === "Wszystkie" ? photos : photos.filter((p) => p.category === activeCategory);
+  const filtered = useMemo(
+    () => (activeCategory === "Wszystkie" ? photos : photos.filter((p) => p.category === activeCategory)),
+    [activeCategory],
+  );
 
   const openLightbox = (idx: number) => setLightboxIndex(idx);
   const closeLightbox = () => setLightboxIndex(null);
   const prev = () => setLightboxIndex((i) => (i === null ? null : (i - 1 + filtered.length) % filtered.length));
   const next = () => setLightboxIndex((i) => (i === null ? null : (i + 1) % filtered.length));
+  const handleLightboxTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+  };
+  const handleLightboxTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const startX = touchStartX.current;
+    const startY = touchStartY.current;
+    const touch = event.changedTouches[0];
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    if (startX === null || startY === null || !touch) return;
+
+    const deltaX = touch.clientX - startX;
+    const deltaY = touch.clientY - startY;
+
+    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+
+    if (deltaX > 0) {
+      prev();
+    } else {
+      next();
+    }
+  };
 
   return (
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
@@ -110,7 +184,7 @@ export default function Gallery() {
         eyebrow="Galeria"
         title="Zobacz przestrzeń Przychodni Korona"
         description="Wybrane zdjęcia gabinetów, recepcji, zespołu i przestrzeni przeznaczonej do opieki nad pacjentami."
-        image={receptionHall}
+        image={galleryThumb("DSC00462.jpg")}
         alt="Galeria Przychodni Korona"
         mobileObjectPosition="30% center"
         desktopObjectPosition="center center"
@@ -139,40 +213,34 @@ export default function Gallery() {
 
       <section className="py-12 bg-background flex-grow">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial="hidden"
-              animate="visible"
-              exit={{ opacity: 0, transition: { duration: 0.15 } }}
-              variants={STAGGER}
-              className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
-            >
-              {filtered.map((photo, i) => (
-                <motion.div
-                  key={`${photo.src}-${i}`}
-                  variants={FADE_UP}
-                  onClick={() => openLightbox(i)}
-                  className="break-inside-avoid cursor-pointer group relative rounded-2xl overflow-hidden border border-border/50 shadow-sm hover:shadow-xl transition-all duration-300 bg-muted"
-                  data-testid={`gallery-item-${i}`}
-                >
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    className={`w-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                      photo.span === "wide" ? "aspect-video" : photo.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
-                    }`}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-3 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                    <p className="text-white text-sm font-medium drop-shadow truncate">{photo.alt}</p>
-                    <span className="inline-block mt-1 px-2 py-0.5 rounded-full bg-secondary/80 text-white text-xs">{photo.category}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+            {filtered.map((photo, i) => (
+              <button
+                key={`${photo.src}-${i}`}
+                type="button"
+                onClick={() => openLightbox(i)}
+                className="group relative mb-4 block w-full break-inside-avoid cursor-pointer overflow-hidden rounded-2xl border border-border/50 bg-muted text-left shadow-sm transition-shadow duration-150 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary [contain-intrinsic-size:360px] [content-visibility:auto]"
+                data-testid={`gallery-item-${i}`}
+              >
+                <img
+                  src={photo.thumb}
+                  alt={photo.alt}
+                  className={`w-full transform-gpu object-cover transition-transform duration-200 ease-out group-hover:scale-[1.03] ${
+                    photo.span === "wide" ? "aspect-video" : photo.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
+                  }`}
+                  loading={i < 6 ? "eager" : "lazy"}
+                  decoding="async"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  style={{ objectPosition: photo.thumbPosition ?? "center" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100" />
+                <div className="absolute bottom-3 left-4 right-4 opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100">
+                  <p className="truncate text-sm font-medium text-white drop-shadow">{photo.alt}</p>
+                  <span className="mt-1 inline-block rounded-full bg-secondary/85 px-2 py-0.5 text-xs text-white">{photo.category}</span>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -209,7 +277,11 @@ export default function Gallery() {
               transition={{ type: "spring", stiffness: 340, damping: 30 }}
               className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none px-4"
             >
-              <div className="pointer-events-auto relative max-w-4xl w-full">
+              <div
+                className="pointer-events-auto relative w-full max-w-4xl touch-pan-y select-none"
+                onTouchStart={handleLightboxTouchStart}
+                onTouchEnd={handleLightboxTouchEnd}
+              >
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`${filtered[lightboxIndex].src}-${lightboxIndex}`}
@@ -219,6 +291,8 @@ export default function Gallery() {
                     transition={{ duration: 0.2 }}
                     src={filtered[lightboxIndex].src}
                     alt={filtered[lightboxIndex].alt}
+                    loading="eager"
+                    decoding="async"
                     className="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
                   />
                 </AnimatePresence>
@@ -228,13 +302,13 @@ export default function Gallery() {
                   <p className="text-white/40 text-xs mt-0.5">{lightboxIndex + 1} / {filtered.length}</p>
                 </div>
 
-                <button onClick={closeLightbox} className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" data-testid="lightbox-close">
+                <button onClick={closeLightbox} className="absolute right-2 top-2 sm:-top-12 sm:right-0 w-10 h-10 rounded-full bg-black/45 sm:bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" data-testid="lightbox-close" aria-label="Zamknij zdjęcie">
                   <X className="w-5 h-5" />
                 </button>
-                <button onClick={(e) => { e.stopPropagation(); prev(); }} className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" data-testid="lightbox-prev">
+                <button onClick={(e) => { e.stopPropagation(); prev(); }} className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/45 text-white transition-colors hover:bg-black/60 sm:left-0 sm:h-10 sm:w-10 sm:-translate-x-14 sm:bg-white/10 sm:hover:bg-white/20" data-testid="lightbox-prev" aria-label="Poprzednie zdjęcie">
                   <ChevronLeft className="w-5 h-5" />
                 </button>
-                <button onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" data-testid="lightbox-next">
+                <button onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/45 text-white transition-colors hover:bg-black/60 sm:right-0 sm:h-10 sm:w-10 sm:translate-x-14 sm:bg-white/10 sm:hover:bg-white/20" data-testid="lightbox-next" aria-label="Następne zdjęcie">
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
