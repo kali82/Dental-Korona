@@ -151,14 +151,6 @@ const priceSections: PriceSection[] = [
       { name: "Zdjęcia wewnątrz- i zewnątrzustne", price: "200-300 zł" },
     ],
   },
-  {
-    title: "Kosmetologia",
-    description: "Podstawowe pozycje dla zabiegów kosmetologicznych.",
-    items: [
-      { name: "Konsultacja kosmetologiczna", price: "150 zł" },
-      { name: "Zabieg kosmetologiczny", price: "od 250 zł", note: "cena zależna od rodzaju zabiegu" },
-    ],
-  },
 ];
 
 export default function Pricing() {
@@ -170,7 +162,7 @@ export default function Pricing() {
         <PageHero
           eyebrow="Cennik"
           title="Usługi i ceny"
-          description="Cennik usług stomatologicznych i kosmetologicznych przygotowany na podstawie zakresu oferty Przychodni Korona."
+          description="Cennik usług stomatologicznych przygotowany na podstawie zakresu oferty Przychodni Korona."
           image={heroPhoto}
           alt="Cennik Przychodni Korona"
           mobileObjectPosition="34% center"

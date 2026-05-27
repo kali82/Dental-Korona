@@ -9,6 +9,7 @@ import { PageHero } from "@/components/PageHero";
 import { PRACTICE } from "@/lib/practice";
 
 import heroPhoto from "@assets/DSC_3503.jpg";
+import agnieszkaPhoto from "@assets/Agniszka_Kasperska_Grzechowiak.jpg";
 import aniaPhoto from "@assets/Ania.jpg";
 import bartekPhoto from "@assets/Bartek.jpg";
 import danutaPhoto from "@assets/Danuta.jpg";
@@ -19,6 +20,7 @@ import kamilaPhoto from "@assets/Kamila.jpg";
 import magdaDoctorPhoto from "@assets/Magda 2.jpg";
 import magdaTeamPhoto from "@assets/Magda.jpg";
 import sylwiaPhoto from "@assets/Sylwia.jpg";
+import tomaszPhoto from "@assets/Tomasz_Rewers.jpg";
 
 type Person = {
   name: string;
@@ -41,6 +43,7 @@ const doctors: Person[] = [
     name: "Tomasz Rewers",
     role: "lek. dent.",
     initials: "TR",
+    photo: tomaszPhoto,
     bio: "W Przychodni Korona zajmuje się przede wszystkim leczeniem endodontycznym pod mikroskopiem, protetyką, chirurgią oraz implantologią.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
     focus: ["Endodoncja mikroskopowa", "Protetyka", "Chirurgia", "Implantologia"],
@@ -60,6 +63,7 @@ const doctors: Person[] = [
     name: "Agnieszka Kasperska-Grzechowiak",
     role: "lek. dent.",
     initials: "AK",
+    photo: agnieszkaPhoto,
     bio: "Prowadzi leczenie zachowawcze dzieci i dorosłych oraz zajmuje się protetyką ruchomą.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
     focus: ["Stomatologia zachowawcza", "Stomatologia dziecięca", "Protetyka ruchoma"],

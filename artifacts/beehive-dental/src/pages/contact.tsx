@@ -16,15 +16,15 @@ const contactCards = [
   },
   {
     icon: Phone,
-    label: "Telefon",
+    label: "Telefon komórkowy",
     value: PRACTICE.phoneDisplay,
     href: PRACTICE.phoneHref,
   },
   {
     icon: Phone,
-    label: "GSM",
-    value: PRACTICE.mobileDisplay,
-    href: PRACTICE.mobileHref,
+    label: "Telefon stacjonarny",
+    value: PRACTICE.landlineDisplay,
+    href: PRACTICE.landlineHref,
   },
   {
     icon: Mail,

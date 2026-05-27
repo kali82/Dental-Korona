@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Activity, ArrowRight, CheckCircle, HeartPulse, MapPin, Phone, Shield, Smile, Sparkles, Stethoscope, Syringe, Zap } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Activity, ArrowRight, CheckCircle, MapPin, Phone, Shield, Smile, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
@@ -11,12 +12,17 @@ import servicePhoto from "@assets/DSC00550.jpg";
 import orthoPhoto from "@assets/DSC00556.jpg";
 import clinicPhoto from "@assets/DSC00543.jpg";
 
-const STAGGER = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+type ServiceGroup = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  items: string[];
+  image: string;
+  imageFrameClassName?: string;
+  imageClassName?: string;
 };
 
-const serviceGroups = [
+const serviceGroups: ServiceGroup[] = [
   {
     icon: Stethoscope,
     title: "Stomatologia zachowawcza i profilaktyka",
@@ -30,12 +36,14 @@ const serviceGroups = [
     desc: "Leczenie kanałowe, zabiegi chirurgiczne, implanty oraz diagnostyka radiologiczna wspierająca plan leczenia.",
     items: ["Leczenie kanałowe", "Chirurgia stomatologiczna", "Implantologia", "Zdjęcia RTG i tomografia"],
     image: clinicPhoto,
+    imageFrameClassName: "bg-muted p-4 md:p-6",
+    imageClassName: "object-contain rounded-xl",
   },
   {
     icon: Smile,
     title: "Protetyka, ortodoncja i estetyka",
-    desc: "Uzupełnienia protetyczne, leczenie ortodontyczne, stomatologia estetyczna oraz kosmetologia.",
-    items: ["Protetyka jednego dnia", "Ortodoncja", "Stomatologia estetyczna", "Kosmetologia"],
+    desc: "Uzupełnienia protetyczne, leczenie ortodontyczne oraz stomatologia estetyczna.",
+    items: ["Protetyka jednego dnia", "Ortodoncja", "Stomatologia estetyczna"],
     image: orthoPhoto,
   },
 ];
@@ -47,7 +55,7 @@ export default function Services() {
 
       <PageHero
         eyebrow="Usługi w Nowej Soli"
-        title="Kompleksowa stomatologia i kosmetologia"
+        title="Kompleksowa stomatologia"
         description="Pełna oferta zabiegów stomatologicznych: od profilaktyki i leczenia zachowawczego po implantologię, protetykę i ortodoncję."
         image={heroPhoto}
         alt="Usługi Przychodni Korona"
@@ -75,7 +83,7 @@ export default function Services() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">Zakres leczenia</h2>
             <p className="text-base md:text-lg text-foreground/60">
-              Oferta została oparta o informacje z oficjalnej strony Przychodni Korona i obejmuje najważniejsze działy stomatologii oraz kosmetologii.
+              Najważniejsze obszary leczenia dostępne w Przychodni Korona.
             </p>
           </motion.div>
 
@@ -89,8 +97,8 @@ export default function Services() {
                 variants={FADE_UP}
                 className="grid lg:grid-cols-[1fr_1.2fr] gap-0 bg-card border border-border rounded-2xl md:rounded-3xl overflow-hidden shadow-sm"
               >
-                <div className={`${index % 2 === 1 ? "lg:order-2" : ""} min-h-[220px] md:min-h-[280px]`}>
-                  <img src={group.image} alt={group.title} className="w-full h-full object-cover" />
+                <div className={`${index % 2 === 1 ? "lg:order-2" : ""} h-[220px] md:h-[280px] lg:h-auto lg:min-h-[280px] overflow-hidden ${group.imageFrameClassName ?? ""}`}>
+                  <img src={group.image} alt={group.title} className={`w-full h-full ${group.imageClassName ?? "object-cover"}`} />
                 </div>
                 <div className="p-6 md:p-10 flex flex-col justify-center">
                   <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
@@ -110,38 +118,6 @@ export default function Services() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-card border-y border-border/50">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={STAGGER} className="grid md:grid-cols-3 gap-4 md:gap-8">
-            {[
-              {
-                icon: Zap,
-                title: "Diagnostyka cyfrowa",
-                desc: "W ofercie znajdują się cyfrowe zdjęcia panoramiczne, cefalometryczne oraz tomografia.",
-              },
-              {
-                icon: Syringe,
-                title: "Komfort leczenia",
-                desc: "Nowoczesne metody znieczulenia pomagają ograniczyć stres związany z wizytą.",
-              },
-              {
-                icon: HeartPulse,
-                title: "Pacjenci w każdym wieku",
-                desc: "Przychodnia prowadzi leczenie dzieci, dorosłych i pacjentów wymagających kompleksowej odbudowy.",
-              },
-            ].map((item) => (
-              <motion.div key={item.title} variants={FADE_UP} className="bg-background border border-border p-6 md:p-8 rounded-2xl md:rounded-3xl">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
-                  <item.icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-foreground/70 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 

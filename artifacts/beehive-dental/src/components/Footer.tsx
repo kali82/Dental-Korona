@@ -57,12 +57,6 @@ export function Footer() {
                     {PRACTICE.phoneDisplay}
                   </a>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                  <a href={PRACTICE.mobileHref} className="text-white/70 hover:text-white transition-colors" data-testid="footer-mobile">
-                    {PRACTICE.mobileDisplay}
-                  </a>
-                </div>
               </div>
             </div>
 
@@ -98,7 +92,6 @@ export function Footer() {
                   "Chirurgia stomatologiczna",
                   "Protetyka",
                   "Ortodoncja",
-                  "Kosmetologia",
                 ].map((item) => (
                   <li key={item}>
                     <Link href="/services" className="text-white/60 hover:text-white transition-colors">

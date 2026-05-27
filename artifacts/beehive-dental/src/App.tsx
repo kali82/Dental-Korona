@@ -73,7 +73,7 @@ const SEO_BY_PATH: Record<string, typeof DEFAULT_SEO> = {
   "/contact": {
     title: "Kontakt | Przychodnia Korona Nowa Sól",
     description:
-      "Kontakt z Przychodnią Korona w Nowej Soli: ul. Krasińskiego 15, telefon 68 38 759 41. Gabinet stomatologiczny, ortodoncja, protetyka i implantologia.",
+      "Kontakt z Przychodnią Korona w Nowej Soli: ul. Krasińskiego 15, telefon komórkowy 507 130 845, telefon stacjonarny 68 38 759 41.",
     keywords:
       "Przychodnia Korona kontakt, dentysta Nowa Sól telefon, stomatolog Nowa Sól kontakt, ul. Krasińskiego 15 Nowa Sól",
   },

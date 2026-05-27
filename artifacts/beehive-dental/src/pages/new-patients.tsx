@@ -54,7 +54,7 @@ export default function NewPatients() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={STAGGER} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
-              { icon: Phone, title: "Zadzwoń", desc: `Telefon: ${PRACTICE.phoneDisplay}. Dodatkowo dostępny jest GSM: ${PRACTICE.mobileDisplay}.` },
+              { icon: Phone, title: "Zadzwoń", desc: `Telefon komórkowy: ${PRACTICE.phoneDisplay}.` },
               { icon: Mail, title: "Napisz", desc: `E-mail rejestracji: ${PRACTICE.email}.` },
               { icon: Calendar, title: "Ustal termin", desc: "Rejestracja pomoże dobrać dogodną datę, godzinę i rodzaj wizyty." },
               { icon: FileText, title: "Przygotuj informacje", desc: "Przygotuj dane pacjenta, cel wizyty i informację o dotychczasowym leczeniu." },

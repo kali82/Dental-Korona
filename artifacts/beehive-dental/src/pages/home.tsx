@@ -24,17 +24,32 @@ const serviceCards = [
   {
     icon: Stethoscope,
     title: "Stomatologia zachowawcza",
-    desc: "Leczenie próchnicy, odbudowy zębów, profilaktyka i regularne wizyty kontrolne dla dorosłych i dzieci.",
+    desc: 'Leczenie próchnicy i odbudowy zębów dorosłych i dzieci z możliwością wykorzystania gazu "rozweselającego".',
   },
   {
     icon: Activity,
-    title: "Endodoncja, protetyka i implantologia",
-    desc: "Leczenie kanałowe, uzupełnienia protetyczne, implanty oraz kompleksowa odbudowa braków zębowych.",
+    title: "Endodoncja",
+    desc: "Pierwotne i wtórne leczenie kanałowe z wykorzystaniem nowoczesnej technologii.",
   },
   {
     icon: Smile,
-    title: "Ortodoncja i kosmetologia",
-    desc: "Leczenie ortodontyczne, stomatologia estetyczna oraz zabiegi kosmetologiczne w jednym miejscu.",
+    title: "Protetyka i implantologia",
+    desc: "Uzupełnienia protetyczne oparte na zębach pacjentów i na implantach. Własne zaplecze techniczne daje możliwość nowego uśmiechu nawet w 1 dzień.",
+  },
+  {
+    icon: Sparkles,
+    title: "Ortodoncja",
+    desc: "Leczenie ortodontyczne przy użyciu aparatów stałych, nakładkowych oraz ruchomych. Profilaktyka ortodontyczna już od najmłodszych lat życia pacjenta.",
+  },
+  {
+    icon: Shield,
+    title: "Profilaktyka",
+    desc: "Wizyty kontrolne połączone z dokładnymi zabiegami higienizacyjnymi u wykwalifikowanych higienistek.",
+  },
+  {
+    icon: Clock,
+    title: "Nowoczesna diagnostyka i planowanie",
+    desc: "Nowoczesny sprzęt diagnostyczny, w tym tomografia komputerowa z możliwością skanu twarzy, własne studio zdjęciowe i skaner cyfrowy w celu najlepszego wyboru opcji leczenia.",
   },
 ];
 
@@ -44,9 +59,8 @@ export default function Home() {
       <Navigation />
 
       <PageHero
-        eyebrow={`${PRACTICE.cityDisplay}, ${PRACTICE.region}`}
-        title="Stomatologia i kosmetologia w Przychodni Korona"
-        description="Kompleksowa opieka stomatologiczna dla pacjentów w każdym wieku, prowadzona w kameralnej i komfortowej atmosferze."
+        title="Przychodnia Korona"
+        description="Kompleksowa opieka stomatologiczna dla pacjentów w każdym wieku w Nowej Soli, prowadzona w kameralnej i komfortowej atmosferze."
         image={heroPhoto}
         alt="Przychodnia Korona w Nowej Soli"
         height="home"
@@ -88,8 +102,8 @@ export default function Home() {
               <motion.ul variants={FADE_UP} className="mt-8 space-y-4">
                 {[
                   "Opieka stomatologiczna dla dorosłych i dzieci",
-                  "Diagnostyka RTG, leczenie kanałowe i protetyka",
-                  "Adres: ul. Krasińskiego 15, 67-100 Nowa Sól",
+                  "Pełen zakres usług stomatologicznych",
+                  "Najlepszy zespół profesjonalistów",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-foreground/80 font-medium">
                     <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-0.5" />
@@ -130,20 +144,12 @@ export default function Home() {
       </section>
 
       <section className="py-16 md:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 grid md:grid-cols-2 gap-5 md:gap-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-primary/20 border border-primary/30 p-6 md:p-10 rounded-2xl md:rounded-3xl">
             <Shield className="w-10 h-10 text-secondary mb-5" />
             <h3 className="text-2xl font-semibold mb-4 text-foreground">Komfort i bezpieczeństwo</h3>
             <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-              Przychodnia stawia na spokojną atmosferę wizyty, nowoczesną diagnostykę i rzetelne omówienie planu leczenia.
-            </p>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-secondary/20 border border-secondary/30 p-6 md:p-10 rounded-2xl md:rounded-3xl">
-            <Sparkles className="w-10 h-10 text-secondary mb-5" />
-            <h3 className="text-2xl font-semibold mb-4 text-foreground">Stomatologia i kosmetologia</h3>
-            <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-              Oferta łączy leczenie stomatologiczne z zabiegami estetycznymi, dzięki czemu pacjent może korzystać z wielu usług w jednej lokalizacji.
+              Stawiamy na spokojną atmosferę wizyty, nowoczesną diagnostykę i rzetelne omówienie planu leczenia. Na swoją kolej pacjenci czekają w dużej poczekalni zapewniającej wygodę i odpoczynek. Dla pacjentów przyjezdnych mamy zapewnione liczne miejsca parkingowe na terenie Przychodni.
             </p>
           </motion.div>
         </div>

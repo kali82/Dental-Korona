@@ -16,7 +16,7 @@ type PageHeroAction = {
 };
 
 type PageHeroProps = {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description: string;
   image: string;
@@ -106,9 +106,11 @@ export function PageHero({
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 w-full">
         <motion.div initial="hidden" animate="visible" variants={STAGGER} className="max-w-2xl">
-          <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-5 md:mb-6">
-            {eyebrow}
-          </motion.div>
+          {eyebrow && (
+            <motion.div variants={FADE_UP} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-secondary border border-primary/30 text-sm font-medium mb-5 md:mb-6">
+              {eyebrow}
+            </motion.div>
+          )}
           <motion.h1 variants={FADE_UP} className={cn(titleSizes[titleSize], "font-semibold text-foreground leading-[1.08] mb-5 md:mb-6")}>
             {title}
           </motion.h1>
