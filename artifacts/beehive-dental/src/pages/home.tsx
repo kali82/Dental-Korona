@@ -24,7 +24,7 @@ const serviceCards = [
   {
     icon: Stethoscope,
     title: "Stomatologia zachowawcza",
-    desc: 'Leczenie próchnicy i odbudowy zębów dorosłych i dzieci z możliwością wykorzystania gazu "rozweselającego".',
+    desc: "Leczenie próchnicy i odbudowy zębów dorosłych oraz dzieci z naciskiem na spokojny, dokładny przebieg wizyty.",
   },
   {
     icon: Activity,
@@ -33,8 +33,23 @@ const serviceCards = [
   },
   {
     icon: Smile,
-    title: "Protetyka i implantologia",
-    desc: "Uzupełnienia protetyczne oparte na zębach pacjentów i na implantach. Własne zaplecze techniczne daje możliwość nowego uśmiechu nawet w 1 dzień.",
+    title: "Protetyka",
+    desc: "Protetyka stała i ruchoma wykonywana we współpracy z własną pracownią, z dbałością o estetykę i precyzyjne dopasowanie.",
+  },
+  {
+    icon: Activity,
+    title: "Implantologia",
+    desc: "Planowanie i leczenie implantologiczne z wykorzystaniem nowoczesnej diagnostyki oraz sprawdzonych rozwiązań terapeutycznych.",
+  },
+  {
+    icon: Shield,
+    title: "Chirurgia stomatologiczna",
+    desc: "Zabiegi chirurgiczne prowadzone z troską o bezpieczeństwo, komfort pacjenta i właściwą opiekę pozabiegową.",
+  },
+  {
+    icon: Clock,
+    title: "Leczenie w sedacji wziewnej",
+    desc: 'Leczenie z możliwością wykorzystania gazu "rozweselającego", szczególnie przydatne u dzieci i pacjentów obawiających się wizyty.',
   },
   {
     icon: Sparkles,
@@ -103,7 +118,7 @@ export default function Home() {
                 {[
                   "Opieka stomatologiczna dla dorosłych i dzieci",
                   "Pełen zakres usług stomatologicznych",
-                  "Najlepszy zespół profesjonalistów",
+                  "Zespół profesjonalistów",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-foreground/80 font-medium">
                     <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-0.5" />

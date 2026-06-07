@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, GraduationCap, Heart, Phone, Shield, Star, X } from "lucide-react";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, GraduationCap, Heart, Phone, Star, X } from "lucide-react";
 import { Footer, FADE_UP } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 import { PageHero } from "@/components/PageHero";
@@ -10,17 +8,20 @@ import { PRACTICE } from "@/lib/practice";
 
 import heroPhoto from "@assets/DSC_3503.jpg";
 import agnieszkaPhoto from "@assets/Agniszka_Kasperska_Grzechowiak.jpg";
-import aniaPhoto from "@assets/Ania.jpg";
+import annaStoparczykPhoto from "@assets/team-compressed/anna-stoparczyk.jpg";
 import bartekPhoto from "@assets/Bartek.jpg";
 import danutaPhoto from "@assets/Danuta.jpg";
-import dorotaPhoto from "@assets/Dorota.jpg";
+import dorotaPhoto from "@assets/team-compressed/dorota-bartkowiak.jpg";
 import ewaKPhoto from "@assets/Ewa K..jpg";
+import ewaPolakPhoto from "@assets/team-compressed/ewa-polak.jpg";
 import ilonaPhoto from "@assets/Ilona.jpg";
 import kamilaPhoto from "@assets/Kamila.jpg";
+import karolinaPhoto from "@assets/team-compressed/karolina-toda.jpg";
 import magdaDoctorPhoto from "@assets/Magda 2.jpg";
 import magdaTeamPhoto from "@assets/Magda.jpg";
+import paulinaPhoto from "@assets/team-compressed/paulina-gorna.jpg";
 import sylwiaPhoto from "@assets/Sylwia.jpg";
-import tomaszPhoto from "@assets/Tomasz_Rewers.jpg";
+import tomaszPhoto from "@assets/team-compressed/tomasz-rewers.jpg";
 
 type Person = {
   name: string;
@@ -30,7 +31,6 @@ type Person = {
   bio: string;
   education: string[];
   focus: string[];
-  note: string;
 };
 
 const STAGGER = {
@@ -44,141 +44,164 @@ const doctors: Person[] = [
     role: "lek. dent.",
     initials: "TR",
     photo: tomaszPhoto,
-    bio: "W Przychodni Korona zajmuje się przede wszystkim leczeniem endodontycznym pod mikroskopiem, protetyką, chirurgią oraz implantologią.",
+    bio: "W Przychodni Korona zajmuje się głównie implantologią, chirurgią stomatologiczną oraz protetyką stałą. W leczeniu wykorzystuje zaawansowane metody diagnostyczne oraz sprawdzone rozwiązania terapeutyczne, dbając o najwyższą jakość wykonywanych zabiegów oraz komfort na każdym etapie leczenia.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
-    focus: ["Endodoncja mikroskopowa", "Protetyka", "Chirurgia", "Implantologia"],
-    note: "Prywatnie pasjonuje się grami komputerowymi i animacją. Jest tatą dwóch córek.",
+    focus: ["Implantologia", "Chirurgia", "Protetyka"],
   },
   {
     name: "Ewa Kołodziej",
     role: "lek. dent.",
     initials: "EK",
     photo: ewaKPhoto,
-    bio: "Zajmuje się stomatologią zachowawczą, dziecięcą, endodoncją mikroskopową oraz zabiegami chirurgicznymi.",
+    bio: "Specjalizuje się głównie w leczeniu ortodontycznym dzieci i dorosłych, nowoczesnym leczeniu endodontycznym pod mikroskopem oraz stomatologią zachowawczą, zapewniając kompleksową opiekę i indywidualne podejście do każdego pacjenta.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
-    focus: ["Stomatologia dziecięca", "Endodoncja mikroskopowa", "Chirurgia stomatologiczna"],
-    note: "Chętnie rozwija wiedzę na kursach i szkoleniach.",
+    focus: ["Ortodoncja", "Endodoncja mikroskopowa", "Stomatologia zachowawcza"],
   },
   {
     name: "Agnieszka Kasperska-Grzechowiak",
     role: "lek. dent.",
     initials: "AK",
     photo: agnieszkaPhoto,
-    bio: "Prowadzi leczenie zachowawcze dzieci i dorosłych oraz zajmuje się protetyką ruchomą.",
+    bio: "Specjalizuje się w leczeniu zachowawczym dzieci i dorosłych oraz protetyce ruchomej. Z powodzeniem przeprowadza leczenie dzieci z wykorzystaniem sedacji wziewnej, dbając o komfort, poczucie bezpieczeństwa i spokojną atmosferę podczas każdej wizyty.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
-    focus: ["Stomatologia zachowawcza", "Stomatologia dziecięca", "Protetyka ruchoma"],
-    note: "Czas wolny najchętniej spędza z rodziną, w podróży i przy grillu.",
+    focus: ["Stomatologia zachowawcza", "Leczenie w sedacji", "Protetyka ruchoma"],
   },
   {
     name: "Magdalena Szewczyk-Tuczyńska",
     role: "lek. dent.",
     initials: "MS",
     photo: magdaDoctorPhoto,
-    bio: "Zajmuje się leczeniem zachowawczym dzieci i dorosłych, dbając o spokojny przebieg wizyty.",
+    bio: "Prowadzi leczenie zachowawcze oraz endodontyczne, dbając o spokojny i komfortowy przebieg wizyty. W pracy z najmłodszymi pacjentami wykorzystuje sedację, co pozwala na bezpieczne i bezstresowe przeprowadzenie leczenia.",
     education: ["Pomorski Uniwersytet Medyczny w Szczecinie"],
-    focus: ["Stomatologia zachowawcza", "Leczenie dzieci", "Leczenie dorosłych"],
-    note: "Fanka dobrej muzyki i mama dwóch synów.",
+    focus: ["Stomatologia zachowawcza", "Endodoncja", "Leczenie w sedacji"],
   },
   {
     name: "Bartosz Królikowski",
     role: "lek. dent.",
     initials: "BK",
     photo: bartekPhoto,
-    bio: "W pracy koncentruje się na stomatologii zachowawczej, endodoncji mikroskopowej, chirurgii stomatologicznej i implantologii.",
+    bio: "Specjalizuje się w implantologii, mikrochirurgii oraz endodoncji mikroskopowej, prowadząc leczenie z wykorzystaniem nowoczesnych, precyzyjnych technik. Znany z wyjątkowej delikatności oraz dbałości o każdy detal, co przekłada się na komfort pacjentów i wysoką jakość wykonywanych zabiegów.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
-    focus: ["Endodoncja mikroskopowa", "Chirurgia", "Implantologia", "Stomatologia zachowawcza"],
-    note: "Regularnie poszerza kwalifikacje na kursach i szkoleniach.",
+    focus: ["Implantologia", "Mikrochirurgia stomatologiczna", "Endodoncja mikroskopowa", "Protetyka"],
   },
   {
     name: "Sylwia Ogrodniczak",
     role: "lek. dent.",
     initials: "SO",
     photo: sylwiaPhoto,
-    bio: "Prowadzi leczenie zachowawcze dzieci i dorosłych.",
+    bio: "Specjalizuje się w stomatologii zachowawczej, endodoncji pod mikroskopem oraz protetyce ruchomej. W swojej praktyce skupia się na precyzyjnej diagnostyce i starannym leczeniu, dbając o komfort pacjenta oraz wysoką jakość i trwałość.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
-    focus: ["Stomatologia zachowawcza", "Leczenie dzieci", "Leczenie dorosłych"],
-    note: "Prywatnie lubi gotować i spędzać czas z rodziną.",
+    focus: ["Stomatologia zachowawcza", "Endodoncja mikroskopowa", "Protetyka ruchoma"],
   },
 ];
 
-const team: Person[] = [
-  {
-    name: "Magdalena Rewers",
-    role: "Koordynator medyczny",
-    initials: "MR",
-    photo: magdaTeamPhoto,
-    bio: "Koordynuje pracę administracyjno-biurową przychodni i wspiera sprawny przebieg obsługi pacjentów.",
-    education: ["Uniwersytet Zielonogórski"],
-    focus: ["Koordynacja pracy", "Administracja", "Obsługa pacjenta"],
-    note: "Chętnie angażuje się w pomoc innym i akcje charytatywne.",
-  },
+const assistants: Person[] = [
   {
     name: "Danuta Uchal",
     role: "dypl. hig. stom.",
     initials: "DU",
     photo: danutaPhoto,
-    bio: "Asystuje przy leczeniu zachowawczym i ortodoncji, a także wykonuje zabiegi higienizacji.",
+    bio: "Wykonuje profesjonalną higienizację jamy ustnej, pomagając pacjentom utrzymać zdrowie zębów i dziąseł. Edukuje pacjentów z zakresu prawidłowej higieny jamy. Asystuje lekarzowi podczas zabiegów stomatologicznych, dbając o ich sprawny, bezpieczny i komfortowy przebieg zarówno dla pacjenta, jak i zespołu.",
     education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
-    focus: ["Higienizacja", "Asysta stomatologiczna", "Ortodoncja"],
-    note: "Prywatnie lubi rajdy rowerowe i podróże.",
+    focus: ["Profesjonalna higienizacja", "Profilaktyka i promocja zdrowia", "Asysta stomatologiczna"],
   },
   {
     name: "Dorota Bartkowiak",
     role: "dypl. hig. stom.",
     initials: "DB",
     photo: dorotaPhoto,
-    bio: "Asystuje podczas leczenia zachowawczego, endodoncji i implantologii.",
+    bio: "Asystuje lekarzowi podczas zabiegów z zakresu implantologii i protetyki, dbając o sprawny przebieg procedur oraz komfort pacjenta. Wspiera cały proces leczenia również po zabiegu, pomagając pacjentom w prawidłowej rekonwalescencji i dbając o właściwy przebieg gojenia.",
     education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
-    focus: ["Asysta przy endodoncji", "Implantologia", "Stomatologia zachowawcza"],
-    note: "W zespole ceniona za pozytywną energię.",
+    focus: ["Profilaktyka i promocja zdrowia", "Asysta stomatologiczna", "Opieka pozabiegowa"],
   },
   {
     name: "Ilona Radecka",
-    role: "Higienistka / technik sterylizacji",
+    role: "dypl. hig. stom. / tech. sterylizacji med.",
     initials: "IR",
     photo: ilonaPhoto,
-    bio: "Pracuje przy zabiegach z zakresu stomatologii zachowawczej, chirurgii i implantologii oraz wykonuje higienizację.",
-    education: ["Medyczna Szkoła Policealna w Głogowie", "Technik sterylizacji medycznej"],
-    focus: ["Higienizacja", "Sterylizacja", "Chirurgia", "Implantologia"],
-    note: "Wolny czas spędza aktywnie.",
+    bio: "Zajmuje się profilaktyką i promocją zdrowia jamy ustnej. Wykonuje zabiegi profesjonalnej higienizacji oraz wybielania zębów, które wspierają zdrowie i estetykę uśmiechu pacjentów. Wspiera pracę gabinetu podczas zabiegów z zakresu chirurgii i implantologii. Odpowiada również za dekontaminację i sterylizację narzędzi, zapewniając najwyższe standardy bezpieczeństwa i higieny pracy.",
+    education: [
+      "Uniwersytet Zielonogórski",
+      "Medyczna Szkoła Policealna w Głogowie",
+      "Medyczna Szkoła Policealna w Zielonej Górze",
+    ],
+    focus: ["Profesjonalna higienizacja", "Wybielanie zębów", "Asysta stomatologiczna", "Dekontaminacja i sterylizacja"],
   },
   {
     name: "Kamila Bieńkowska-Kaśków",
     role: "mgr, higiena stomatologiczna",
     initials: "KB",
     photo: kamilaPhoto,
-    bio: "Asystuje lekarzom oraz samodzielnie wykonuje zabiegi profilaktyki stomatologicznej.",
+    bio: "Edukuje pacjentów w zakresie prawidłowej higieny jamy ustnej i codziennej profilaktyki dopasowanej do indywidualnych potrzeb, pomagając w budowaniu zdrowych nawyków i utrzymaniu długotrwałych efektów leczenia. Wykonuje profesjonalną higienizację, dbając o zdrowie i estetykę uśmiechu pacjentów, a także wspiera pracę gabinetu podczas zabiegów stomatologicznych.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
-    focus: ["Profilaktyka", "Ortodoncja", "Endodoncja", "Implantologia"],
-    note: "Dobrze zorganizowana i zaangażowana w codzienną pracę gabinetu.",
+    focus: ["Profilaktyka i promocja zdrowia", "Profesjonalna higienizacja", "Asysta stomatologiczna"],
   },
   {
     name: "Marta Sznajder",
-    role: "Pomoc stomatologiczna",
-    initials: "MS",
-    bio: "Wspiera pracę gabinetu przede wszystkim przy zabiegach stomatologii zachowawczej.",
-    education: ["Asystentka / higienistka stomatologiczna - w trakcie nauki"],
-    focus: ["Asysta stomatologiczna", "Stomatologia zachowawcza", "Organizacja gabinetu"],
-    note: "Poza pracą rozwija własne pasje i zainteresowania.",
+    role: "dypl. hig. stom. / tech. sterylizacji med.",
+    initials: "MSZ",
+    bio: "Asystuje przy zabiegach stomatologii zachowawczej, ortodoncji oraz endodoncji, dbając o sprawny i komfortowy przebieg leczenia. Jest odpowiedzialna za proces dekontaminacji i sterylizacji narzędzi, zapewniając najwyższe standardy bezpieczeństwa i higieny pracy w gabinecie.",
+    education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
+    focus: ["Asysta stomatologiczna", "Profilaktyka i promocja zdrowia", "Dekontaminacja i sterylizacja"],
   },
+  {
+    name: "Karolina Toda",
+    role: "pomoc stomatologiczna",
+    initials: "KT",
+    photo: karolinaPhoto,
+    bio: "Wspiera pracę gabinetu przy zabiegach z zakresu stomatologii. Aktywnie uczestniczy w codziennych procedurach stomatologicznych. Angażuje się w pracę zespołu, dbając o sprawny przebieg wizyt i komfort pacjentów, a także o ich dobre samopoczucie oraz poczucie bezpieczeństwa na każdym etapie leczenia.",
+    education: ["Medyczne Studium Zawodowe w Zielonej Górze - w trakcie nauki"],
+    focus: ["Organizacja gabinetu", "Pomoc przy zabiegach", "Dbanie o komfort pacjenta"],
+  },
+];
+
+const technicians: Person[] = [
   {
     name: "Anna Stoparczyk",
     role: "tech. dent.",
     initials: "AS",
-    photo: aniaPhoto,
-    bio: "Technik dentystyczny stale rozwijający kwalifikacje w zakresie protetyki stomatologicznej.",
+    photo: annaStoparczykPhoto,
+    bio: "Specjalizuje się w cyfrowym projektowaniu uzupełnień protetycznych oraz wykonywaniu prac stałych na zębach i implantach, dbając o precyzję, estetykę i każdy najmniejszy detal wykonania. Stale rozwija swoje kwalifikacje w zakresie protetyki stomatologicznej.",
     education: ["Policealna Szkoła Techniki Dentystycznej w Zielonej Górze"],
-    focus: ["Protetyka", "Technika dentystyczna", "Prace laboratoryjne"],
-    note: "W zespole ceniona za precyzję i zaangażowanie.",
+    focus: ["Protetyka cyfrowa", "Protetyka stała", "Prace laboratoryjne"],
   },
   {
     name: "Joanna Bodzianny",
     role: "tech. dent.",
     initials: "JB",
-    bio: "Technik dentystyczny podnoszący kwalifikacje w zakresie protetyki stomatologicznej.",
+    bio: "Zajmuje się cyfrowym projektowaniem uzupełnień protetycznych oraz wykonywaniem prac stałych i ruchomych z naciskiem na najwyższą precyzję, estetykę oraz dopracowanie każdego szczegółu. Stale śledzi nowoczesne rozwiązania i technologie w branży.",
     education: ["Szkoła Techniki Dentystycznej im. Marii Curie-Skłodowskiej we Wrocławiu"],
-    focus: ["Protetyka", "Technika dentystyczna", "Prace laboratoryjne"],
-    note: "Prywatnie interesuje się rękodziełem.",
+    focus: ["Protetyka cyfrowa", "Protetyka stała", "Protetyka laboratoryjna"],
+  },
+  {
+    name: "Ewa Polak",
+    role: "tech. dent. / asyst. stom.",
+    initials: "EP",
+    photo: ewaPolakPhoto,
+    bio: "Specjalizuje się w wykonywaniu prac z zakresu protetyki stałej i ruchomej. W swojej pracy wykorzystuje nowoczesne technologie oraz rozwiązania cyfrowe, dbając o wysoką precyzję, estetykę i dopasowanie wykonywanych uzupełnień protetycznych.",
+    education: ["Policealna Szkoła Techniki Dentystycznej w Zielonej Górze", "Medyczne Studium Zawodowe w Zielonej Górze"],
+    focus: ["Protetyka cyfrowa", "Protetyka stała", "Protetyka ruchoma"],
+  },
+];
+
+const administration: Person[] = [
+  {
+    name: "Magdalena Rewers",
+    role: "koordynator medyczny",
+    initials: "MR",
+    photo: magdaTeamPhoto,
+    bio: "Koordynuje pracę administracyjno-biurową przychodni, dbając o sprawną organizację codziennego funkcjonowania placówki. Wspiera zespół w zakresie obsługi pacjentów, nadzoruje przepływ informacji oraz dba o porządek w dokumentacji, dzięki czemu wizyty przebiegają płynnie i bez zakłóceń.",
+    education: ["Uniwersytet Zielonogórski"],
+    focus: ["Koordynacja pracy", "Administracja", "Obsługa pacjenta"],
+  },
+  {
+    name: "Paulina Górna",
+    role: "sekretarka medyczna / asyst. stom.",
+    initials: "PG",
+    photo: paulinaPhoto,
+    bio: "Odpowiada za bieżącą obsługę pacjentów oraz sprawny przebieg pracy rejestracji. Dba o komfort i dobrą organizację wizyt, udziela pacjentom niezbędnych informacji oraz wspiera codzienne funkcjonowanie przychodni, zapewniając profesjonalną i życzliwą obsługę.",
+    education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
+    focus: ["Rejestracja medyczna", "Opieka nad pacjentem", "Obsługa dokumentacji medycznej"],
   },
 ];
 
@@ -196,9 +219,7 @@ function PersonPortrait({ person, large = false }: { person: Person; large?: boo
   }
 
   return (
-    <div
-      className={`relative overflow-hidden bg-[#f4e5d4] ${frameClass}`}
-    >
+    <div className={`relative overflow-hidden bg-[#f4e5d4] ${frameClass}`}>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.28),transparent_38%)]" />
       <span
         className={`${
@@ -230,8 +251,6 @@ function PersonCard({ person, onClick }: { person: Person; onClick: () => void }
 }
 
 function ProfileDetails({ person }: { person: Person }) {
-  const isDoctor = doctors.some((doctor) => doctor.name === person.name);
-
   return (
     <div className="grid lg:grid-cols-[320px_1fr] gap-8 lg:gap-14 items-start">
       <div className="relative max-w-xs sm:max-w-sm w-full mx-auto pb-16">
@@ -252,7 +271,7 @@ function ProfileDetails({ person }: { person: Person }) {
         <h2 className="text-2xl font-semibold mb-4 text-foreground">Zakres pracy</h2>
         <p className="text-base sm:text-lg text-foreground/75 leading-relaxed mb-8 sm:mb-10">{person.bio}</p>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-10">
+        <div className="grid md:grid-cols-2 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center text-secondary">
@@ -287,19 +306,6 @@ function ProfileDetails({ person }: { person: Person }) {
             </ul>
           </div>
         </div>
-
-        <div className="bg-primary/10 border border-primary/30 rounded-2xl p-6 sm:p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Shield className="w-6 h-6 text-secondary" />
-            <h3 className="text-xl font-semibold">{isDoctor ? "O lekarzu" : "O członku zespołu"}</h3>
-          </div>
-          <p className="text-foreground/80 leading-relaxed mb-6">{person.note}</p>
-          <Button asChild variant="outline" className="bg-white/50 border-secondary/30 text-foreground hover:bg-white transition-colors">
-            <Link href={PRACTICE.bookingUrl}>
-              Umów wizytę <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-        </div>
       </div>
     </div>
   );
@@ -307,6 +313,34 @@ function ProfileDetails({ person }: { person: Person }) {
 
 export default function Team() {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
+
+  const renderSection = (
+    title: string,
+    description: string,
+    people: Person[],
+    options?: { columns?: string; surface?: "background" | "card" },
+  ) => (
+    <section className={`py-14 md:py-16 ${options?.surface === "card" ? "bg-card border-y border-border/50" : "bg-background"}`}>
+      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="mb-8">
+          <h2 className="text-3xl font-semibold text-foreground mb-2">{title}</h2>
+          <p className="text-foreground/60">{description}</p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={STAGGER}
+          className={`grid grid-cols-1 sm:grid-cols-2 ${options?.columns ?? "lg:grid-cols-4"} gap-4 sm:gap-6`}
+        >
+          {people.map((person) => (
+            <PersonCard key={person.name} person={person} onClick={() => setSelectedPerson(person)} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 
   return (
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
@@ -338,49 +372,25 @@ export default function Team() {
           ]}
         />
 
-        <section className="py-14 md:py-16 bg-background">
-          <div className="max-w-6xl mx-auto px-5 sm:px-6">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="mb-8">
-              <h2 className="text-3xl font-semibold text-foreground mb-2">Lekarze</h2>
-              <p className="text-foreground/60">Kliknij kafelek, aby zobaczyć szczegółowy profil.</p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={STAGGER}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-            >
-              {doctors.map((doctor) => (
-                <PersonCard key={doctor.name} person={doctor} onClick={() => setSelectedPerson(doctor)} />
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="py-16 md:py-24 bg-card border-y border-border/50">
-          <div className="max-w-6xl mx-auto px-5 sm:px-6">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center mb-10 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">Nasz Zespół</h2>
-              <p className="text-base md:text-lg text-foreground/60 max-w-2xl mx-auto">
-                Zespół administracyjny, higienistki, asystentki i technicy wspierający codzienną pracę gabinetów.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={STAGGER}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
-            >
-              {team.map((person) => (
-                <PersonCard key={person.name} person={person} onClick={() => setSelectedPerson(person)} />
-              ))}
-            </motion.div>
-          </div>
-        </section>
+        {renderSection("Lekarze", "Kliknij kafelek, aby zobaczyć szczegółowy profil.", doctors, { columns: "lg:grid-cols-3" })}
+        {renderSection(
+          "Higienistki i asystentki",
+          "Zespół wspierający lekarzy, profilaktykę, higienizację oraz bezpieczeństwo pracy gabinetów.",
+          assistants,
+          { surface: "card" },
+        )}
+        {renderSection(
+          "Technicy dentystyczni",
+          "Specjaliści pracowni protetycznej przygotowujący precyzyjne uzupełnienia dla pacjentów.",
+          technicians,
+          { columns: "lg:grid-cols-3" },
+        )}
+        {renderSection(
+          "Administracja",
+          "Osoby dbające o sprawną organizację wizyt, obsługę pacjentów i codzienną pracę przychodni.",
+          administration,
+          { columns: "lg:grid-cols-2", surface: "card" },
+        )}
       </main>
 
       <Footer />

@@ -22,7 +22,6 @@ import chairCorner from "@assets/DSC00549.jpg";
 import chairDetail from "@assets/DSC00550.jpg";
 import lampDetail from "@assets/DSC00556.jpg";
 import instrumentDetail from "@assets/DSC00559.jpg";
-import clinicCorridor from "@assets/DSC00564.jpg";
 import staffGroupBlue from "@assets/DSC00585.jpg";
 import scannerDetail from "@assets/DSC00739.jpg";
 import dentalConsole from "@assets/DSC02139.jpg";
@@ -51,90 +50,55 @@ interface GalleryItem {
   thumbPosition?: string;
 }
 
-type GallerySourceItem = Omit<GalleryItem, "thumb">;
-
-const photoThumbs = [
-  "cropped-DJI_0300-HDR-scaled-1.jpg",
-  "DJI_0308-HDR-scaled.jpg",
-  "DSC00462.jpg",
-  "DSC00526-scaled.jpg",
-  "DSC00528-1-scaled.jpg",
-  "DSC00564.jpg",
-  "DSC00546.jpg",
-  "DSC00529-scaled.jpg",
-  "DSC00544.jpg",
-  "DSC00549.jpg",
-  "DSC00550.jpg",
-  "DSC00541-scaled.jpg",
-  "DSC00543 (1).jpg",
-  "DSC00543.jpg",
-  "DSC00556.jpg",
-  "DSC00559.jpg",
-  "DSC00739.jpg",
-  "DSC02139.jpg",
-  "DSC_3503.jpg",
-  "DSC_3556.jpg",
-  "DSC_3587.jpg",
-  "DSC_3602.jpg",
-  "DSC_3469.jpg",
-  "DSC_3620.jpg",
-  "DSC_3634.jpg",
-  "DSC_3678.jpg",
-  "DSC_3799.jpg",
-  "DSC_3863.jpg",
-  "DSC_3882.jpg",
-  "DSC_3902.jpg",
-  "DSC_3913.jpg",
-  "DSC00585.jpg",
-] as const;
+type GallerySourceItem = Omit<GalleryItem, "thumb"> & { thumbFile: string };
 
 const galleryThumb = (fileName: string) => `${import.meta.env.BASE_URL}gallery-thumbs/${fileName}`;
 
 const photoSources: GallerySourceItem[] = [
-  { src: aerialExterior, alt: "Budynek Przychodni Korona z lotu ptaka", category: "Przychodnia", span: "wide" },
-  { src: aerialStreet, alt: "Przychodnia Korona przy ulicy Krasińskiego", category: "Przychodnia", span: "wide" },
-  { src: receptionHall, alt: "Recepcja i poczekalnia Przychodni Korona", category: "Przychodnia", span: "wide" },
-  { src: waitingRoom, alt: "Poczekalnia dla pacjentów", category: "Przychodnia", span: "tall" },
-  { src: cabinetDetail, alt: "Wnętrze przychodni", category: "Przychodnia" },
-  { src: clinicCorridor, alt: "Korytarz przy gabinetach", category: "Przychodnia", span: "tall" },
-  { src: treatmentRoomWide, alt: "Nowoczesny gabinet stomatologiczny", category: "Zabiegi", span: "wide" },
-  { src: treatmentRoomPortrait, alt: "Stanowisko zabiegowe", category: "Zabiegi", span: "tall" },
-  { src: treatmentUnit, alt: "Unit stomatologiczny i diagnostyka", category: "Zabiegi", span: "wide" },
-  { src: chairCorner, alt: "Gabinet zabiegowy", category: "Zabiegi", span: "tall" },
-  { src: chairDetail, alt: "Wyposażenie gabinetu", category: "Zabiegi", span: "wide" },
-  { src: dentalTools, alt: "Narzędzia stomatologiczne", category: "Zabiegi" },
-  { src: microscopeSide, alt: "Mikroskop stomatologiczny", category: "Zabiegi", span: "tall" },
-  { src: microscopeFront, alt: "Mikroskop do leczenia endodontycznego", category: "Zabiegi" },
-  { src: lampDetail, alt: "Oświetlenie zabiegowe", category: "Zabiegi", span: "wide" },
-  { src: instrumentDetail, alt: "Sprzęt stomatologiczny", category: "Zabiegi", span: "wide" },
-  { src: scannerDetail, alt: "Diagnostyka cyfrowa", category: "Zabiegi" },
-  { src: dentalConsole, alt: "Panel sterowania unitów stomatologicznych", category: "Zabiegi", span: "tall" },
-  { src: teamExterior, alt: "Zespół Przychodni Korona", category: "Zespół", span: "wide" },
-  { src: teamSignWide, alt: "Zespół przed wejściem do przychodni", category: "Zespół", span: "wide" },
-  { src: teamExteriorSmall, alt: "Część zespołu przed Przychodnią Korona", category: "Zespół" },
-  { src: teamClose, alt: "Zespół przy tablicy rejestracji", category: "Zespół", span: "wide" },
-  { src: teamConsult, alt: "Zespół w gabinecie", category: "Zespół" },
-  { src: teamDuoBlack, alt: "Personel Przychodni Korona", category: "Zespół", span: "tall" },
-  { src: teamDuoSign, alt: "Zespół przy tablicy Przychodni Korona", category: "Zespół", span: "tall" },
-  { src: teamWindow, alt: "Zespół przed wejściem", category: "Zespół" },
-  { src: teamDuoBlue, alt: "Zespół gabinetu stomatologicznego", category: "Zespół", span: "tall" },
-  { src: teamTreatment, alt: "Lekarze w gabinecie", category: "Zespół" },
-  { src: teamCabinet, alt: "Zespół przy stanowisku zabiegowym", category: "Zespół", span: "wide" },
-  { src: teamChair, alt: "Zespół przy unicie stomatologicznym", category: "Zespół" },
-  { src: teamCabinetTwo, alt: "Zespół w gabinecie stomatologicznym", category: "Zespół" },
-  { src: staffGroupBlue, alt: "Zespół higienistek i asystentek", category: "Zespół", span: "wide", thumbPosition: "center 28%" },
+  { src: aerialExterior, thumbFile: "cropped-DJI_0300-HDR-scaled-1.jpg", alt: "Budynek Przychodni Korona z lotu ptaka", category: "Przychodnia" },
+  { src: teamExterior, thumbFile: "DSC_3503.jpg", alt: "Zespół Przychodni Korona", category: "Zespół" },
+  { src: teamDuoBlack, thumbFile: "DSC_3620.jpg", alt: "Personel Przychodni Korona", category: "Zespół" },
+  { src: aerialStreet, thumbFile: "DJI_0308-HDR-scaled.jpg", alt: "Przychodnia Korona przy ulicy Krasińskiego", category: "Przychodnia", span: "wide" },
+  { src: teamSignWide, thumbFile: "DSC_3556.jpg", alt: "Zespół przed wejściem do przychodni", category: "Zespół", span: "wide" },
+  { src: teamDuoSign, thumbFile: "DSC_3634.jpg", alt: "Zespół przy tablicy Przychodni Korona", category: "Zespół", span: "tall" },
+  { src: receptionHall, thumbFile: "DSC00462.jpg", alt: "Recepcja i poczekalnia Przychodni Korona", category: "Przychodnia", span: "wide" },
+  { src: teamExteriorSmall, thumbFile: "DSC_3587.jpg", alt: "Część zespołu przed Przychodnią Korona", category: "Zespół" },
+  { src: teamDuoBlue, thumbFile: "DSC_3799.jpg", alt: "Zespół gabinetu stomatologicznego", category: "Zespół", span: "tall" },
+  { src: waitingRoom, thumbFile: "DSC00526-scaled.jpg", alt: "Poczekalnia dla pacjentów", category: "Przychodnia", span: "tall" },
+  { src: treatmentRoomWide, thumbFile: "DSC00546.jpg", alt: "Nowoczesny gabinet stomatologiczny", category: "Zabiegi", span: "wide" },
+  { src: teamClose, thumbFile: "DSC_3602.jpg", alt: "Zespół przy tablicy rejestracji", category: "Zespół", span: "wide" },
+  { src: cabinetDetail, thumbFile: "DSC00528-1-scaled.jpg", alt: "Wnętrze przychodni", category: "Przychodnia" },
+  { src: treatmentRoomPortrait, thumbFile: "DSC00529-scaled.jpg", alt: "Stanowisko zabiegowe", category: "Zabiegi", span: "tall" },
+  { src: treatmentUnit, thumbFile: "DSC00544.jpg", alt: "Unit stomatologiczny i diagnostyka", category: "Zabiegi", span: "wide" },
+  { src: teamConsult, thumbFile: "DSC_3469.jpg", alt: "Zespół w gabinecie", category: "Zespół" },
+  { src: chairCorner, thumbFile: "DSC00549.jpg", alt: "Gabinet zabiegowy", category: "Zabiegi", span: "tall" },
+  { src: chairDetail, thumbFile: "DSC00550.jpg", alt: "Wyposażenie gabinetu", category: "Zabiegi", span: "wide" },
+  { src: dentalTools, thumbFile: "DSC00541-scaled.jpg", alt: "Narzędzia stomatologiczne", category: "Zabiegi" },
+  { src: microscopeSide, thumbFile: "DSC00543 (1).jpg", alt: "Mikroskop stomatologiczny", category: "Zabiegi", span: "tall" },
+  { src: microscopeFront, thumbFile: "DSC00543.jpg", alt: "Mikroskop do leczenia endodontycznego", category: "Zabiegi" },
+  { src: lampDetail, thumbFile: "DSC00556.jpg", alt: "Oświetlenie zabiegowe", category: "Zabiegi", span: "wide" },
+  { src: teamWindow, thumbFile: "DSC_3678.jpg", alt: "Zespół przed wejściem", category: "Zespół" },
+  { src: instrumentDetail, thumbFile: "DSC00559.jpg", alt: "Sprzęt stomatologiczny", category: "Zabiegi", span: "wide" },
+  { src: scannerDetail, thumbFile: "DSC00739.jpg", alt: "Diagnostyka cyfrowa", category: "Zabiegi" },
+  { src: dentalConsole, thumbFile: "DSC02139.jpg", alt: "Panel sterowania unitów stomatologicznych", category: "Zabiegi", span: "tall" },
+  { src: teamTreatment, thumbFile: "DSC_3863.jpg", alt: "Lekarze w gabinecie", category: "Zespół" },
+  { src: teamCabinet, thumbFile: "DSC_3882.jpg", alt: "Zespół przy stanowisku zabiegowym", category: "Zespół", span: "wide" },
+  { src: teamChair, thumbFile: "DSC_3902.jpg", alt: "Zespół przy unicie stomatologicznym", category: "Zespół" },
+  { src: teamCabinetTwo, thumbFile: "DSC_3913.jpg", alt: "Zespół w gabinecie stomatologicznym", category: "Zespół" },
+  { src: staffGroupBlue, thumbFile: "DSC00585.jpg", alt: "Zespół higienistek i asystentek", category: "Zespół", span: "wide", thumbPosition: "center 28%" },
 ];
 
 const CATEGORIES: Category[] = ["Wszystkie", "Przychodnia", "Zabiegi", "Zespół"];
 
-const photos: GalleryItem[] = photoSources.map((photo, index) => ({
+const photos: GalleryItem[] = photoSources.map(({ thumbFile, ...photo }) => ({
   ...photo,
-  thumb: galleryThumb(photoThumbs[index] ?? photoThumbs[0]),
+  thumb: galleryThumb(thumbFile),
 }));
 
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState<Category>("Wszystkie");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const galleryStartRef = useRef<HTMLElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
 
@@ -147,6 +111,12 @@ export default function Gallery() {
   const closeLightbox = () => setLightboxIndex(null);
   const prev = () => setLightboxIndex((i) => (i === null ? null : (i - 1 + filtered.length) % filtered.length));
   const next = () => setLightboxIndex((i) => (i === null ? null : (i + 1) % filtered.length));
+  const handleCategoryChange = (category: Category) => {
+    setActiveCategory(category);
+    requestAnimationFrame(() => {
+      galleryStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
   const handleLightboxTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
     if (!touch) return;
@@ -190,13 +160,13 @@ export default function Gallery() {
         desktopObjectPosition="center center"
       />
 
-      <section className="pb-4 bg-background sticky top-20 z-30 border-b border-border/50 backdrop-blur-md bg-background/90">
+      <section className="pt-4 md:pt-5 pb-4 bg-background sticky top-20 z-30 border-b border-border/50 backdrop-blur-md bg-background/90">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 overflow-x-auto pb-3 scrollbar-none">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => handleCategoryChange(cat)}
                 data-testid={`gallery-filter-${cat.toLowerCase()}`}
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-medium transition-all ${
                   activeCategory === cat
@@ -211,15 +181,17 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section className="py-12 bg-background flex-grow">
+      <section ref={galleryStartRef} className="scroll-mt-36 py-12 bg-background flex-grow">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((photo, i) => (
               <button
                 key={`${photo.src}-${i}`}
                 type="button"
                 onClick={() => openLightbox(i)}
-                className="group relative mb-4 block w-full break-inside-avoid cursor-pointer overflow-hidden rounded-2xl border border-border/50 bg-muted text-left shadow-sm transition-shadow duration-150 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary [contain-intrinsic-size:360px] [content-visibility:auto]"
+                className={`group relative block w-full cursor-pointer overflow-hidden rounded-2xl border border-border/50 bg-muted text-left shadow-sm transition-shadow duration-150 ease-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary [contain-intrinsic-size:360px] [content-visibility:auto] ${
+                  photo.span === "wide" ? "sm:col-span-2" : ""
+                }`}
                 data-testid={`gallery-item-${i}`}
               >
                 <img
@@ -233,11 +205,6 @@ export default function Gallery() {
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   style={{ objectPosition: photo.thumbPosition ?? "center" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100" />
-                <div className="absolute bottom-3 left-4 right-4 opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100">
-                  <p className="truncate text-sm font-medium text-white drop-shadow">{photo.alt}</p>
-                  <span className="mt-1 inline-block rounded-full bg-secondary/85 px-2 py-0.5 text-xs text-white">{photo.category}</span>
-                </div>
               </button>
             ))}
           </div>
@@ -297,10 +264,7 @@ export default function Gallery() {
                   />
                 </AnimatePresence>
 
-                <div className="mt-3 text-center">
-                  <p className="text-white/80 text-sm">{filtered[lightboxIndex].alt}</p>
-                  <p className="text-white/40 text-xs mt-0.5">{lightboxIndex + 1} / {filtered.length}</p>
-                </div>
+                <p className="mt-3 text-center text-white/40 text-xs">{lightboxIndex + 1} / {filtered.length}</p>
 
                 <button onClick={closeLightbox} className="absolute right-2 top-2 sm:-top-12 sm:right-0 w-10 h-10 rounded-full bg-black/45 sm:bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" data-testid="lightbox-close" aria-label="Zamknij zdjęcie">
                   <X className="w-5 h-5" />
