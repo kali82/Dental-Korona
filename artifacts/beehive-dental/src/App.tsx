@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { MobileStickyActions } from "@/components/MobileStickyActions";
+import { LanguageProvider, PageTranslationSync, translateText, useLanguage } from "@/lib/i18n";
 
 import Home from "@/pages/home";
 import NewPatients from "@/pages/new-patients";
@@ -92,37 +93,41 @@ function upsertMeta(selector: string, create: () => HTMLMetaElement, content: st
 
 function SeoMetadata() {
   const [location] = useLocation();
+  const { language } = useLanguage();
 
   useEffect(() => {
     const normalizedPath = location === "/cennik" ? "/pricing" : location;
     const seo = SEO_BY_PATH[normalizedPath] ?? DEFAULT_SEO;
     const canonicalUrl = `${SITE_URL}${normalizedPath === "/" ? "/" : normalizedPath}`;
+    const title = translateText(seo.title, language);
+    const description = translateText(seo.description, language);
+    const keywords = translateText(seo.keywords, language);
 
-    document.title = seo.title;
+    document.title = title;
 
     upsertMeta('meta[name="description"]', () => {
       const meta = document.createElement("meta");
       meta.setAttribute("name", "description");
       return meta;
-    }, seo.description);
+    }, description);
 
     upsertMeta('meta[name="keywords"]', () => {
       const meta = document.createElement("meta");
       meta.setAttribute("name", "keywords");
       return meta;
-    }, seo.keywords);
+    }, keywords);
 
     upsertMeta('meta[property="og:title"]', () => {
       const meta = document.createElement("meta");
       meta.setAttribute("property", "og:title");
       return meta;
-    }, seo.title);
+    }, title);
 
     upsertMeta('meta[property="og:description"]', () => {
       const meta = document.createElement("meta");
       meta.setAttribute("property", "og:description");
       return meta;
-    }, seo.description);
+    }, description);
 
     upsertMeta('meta[property="og:url"]', () => {
       const meta = document.createElement("meta");
@@ -134,13 +139,13 @@ function SeoMetadata() {
       const meta = document.createElement("meta");
       meta.setAttribute("name", "twitter:title");
       return meta;
-    }, seo.title);
+    }, title);
 
     upsertMeta('meta[name="twitter:description"]', () => {
       const meta = document.createElement("meta");
       meta.setAttribute("name", "twitter:description");
       return meta;
-    }, seo.description);
+    }, description);
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
 
@@ -151,7 +156,7 @@ function SeoMetadata() {
     }
 
     canonical.setAttribute("href", canonicalUrl);
-  }, [location]);
+  }, [language, location]);
 
   return null;
 }
@@ -185,17 +190,20 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <SeoMetadata />
-          <ScrollToTop />
-          <Router />
-          <MobileStickyActions />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <LanguageProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <SeoMetadata />
+            <ScrollToTop />
+            <Router />
+            <MobileStickyActions />
+            <PageTranslationSync />
+          </WouterRouter>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </LanguageProvider>
   );
 }
 

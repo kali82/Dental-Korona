@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Facebook, Instagram, MapPin, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LANGUAGES, useLanguage } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,40 @@ const MOBILE_NAV_ITEMS = [
   { href: "/", label: "Start", testId: "nav-home" },
   ...NAV_ITEMS,
 ] as const;
+
+function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
+  const { language, setLanguage } = useLanguage();
+
+  return (
+    <div
+      className={cn(
+        "inline-flex items-center rounded-full border border-border/70 bg-white/70 p-1 shadow-sm",
+        compact ? "w-fit" : "",
+      )}
+      data-testid="language-switcher"
+      data-no-translate
+      aria-label="Wybierz język"
+    >
+      {LANGUAGES.map((item) => (
+        <button
+          key={item.code}
+          type="button"
+          onClick={() => setLanguage(item.code)}
+          className={cn(
+            "inline-flex h-8 min-w-9 items-center justify-center rounded-full px-2 text-xs font-semibold transition-colors",
+            language === item.code
+              ? "bg-secondary text-white shadow-sm"
+              : "text-foreground/65 hover:bg-secondary/10 hover:text-secondary",
+          )}
+          aria-pressed={language === item.code}
+          aria-label={item.name}
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export function Navigation() {
   const [location] = useLocation();
@@ -69,6 +104,7 @@ export function Navigation() {
         </nav>
 
         <div className="hidden xl:flex items-center gap-3">
+          <LanguageSwitcher />
           <a
             href={PRACTICE.facebookUrl}
             target="_blank"
@@ -141,6 +177,8 @@ export function Navigation() {
                   <X className="w-5 h-5" />
                 </button>
               </div>
+
+              <LanguageSwitcher compact />
 
               <nav className="grid grid-cols-2 gap-2 text-sm font-semibold">
                 {MOBILE_NAV_ITEMS.map((item) => (
