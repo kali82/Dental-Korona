@@ -1,14 +1,15 @@
 import { useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { MobileStickyActions } from "@/components/MobileStickyActions";
-import { LanguageProvider, PageTranslationSync, translateText, useLanguage } from "@/lib/i18n";
+import { LanguageProvider, translateText, useLanguage } from "@/lib/i18n";
+import { PRACTICE } from "@/lib/practice";
 
 import Home from "@/pages/home";
 import NewPatients from "@/pages/new-patients";
-import Services from "@/pages/services";
 import About from "@/pages/about";
 import Galeria from "@/pages/gallery";
 import Contact from "@/pages/contact";
@@ -29,13 +30,6 @@ const DEFAULT_SEO = {
 
 const SEO_BY_PATH: Record<string, typeof DEFAULT_SEO> = {
   "/": DEFAULT_SEO,
-  "/services": {
-    title: "Stomatologia, ortodoncja i implantologia | Przychodnia Korona Nowa Sól",
-    description:
-      "Usługi Przychodni Korona w Nowej Soli: stomatologia zachowawcza, endodoncja, chirurgia, ortodoncja, protetyka, implantologia i diagnostyka.",
-    keywords:
-      "stomatologia Nowa Sól, ortodoncja Nowa Sól, implantologia Nowa Sól, protetyka Nowa Sól, leczenie kanałowe Nowa Sól, chirurgia stomatologiczna",
-  },
   "/about": {
     title: "O przychodni | Przychodnia Korona Nowa Sól",
     description:
@@ -80,6 +74,16 @@ const SEO_BY_PATH: Record<string, typeof DEFAULT_SEO> = {
   },
 };
 
+const BREADCRUMB_LABELS: Record<string, string> = {
+  "/": "Start",
+  "/about": "O nas",
+  "/team": "Zespół",
+  "/pricing": "Cennik",
+  "/new-patients": "Dla pacjenta",
+  "/gallery": "Galeria",
+  "/contact": "Kontakt",
+};
+
 function upsertMeta(selector: string, create: () => HTMLMetaElement, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
 
@@ -89,6 +93,94 @@ function upsertMeta(selector: string, create: () => HTMLMetaElement, content: st
   }
 
   element.setAttribute("content", content);
+}
+
+function upsertJsonLd(id: string, data: unknown) {
+  let element = document.head.querySelector<HTMLScriptElement>(`script#${id}`);
+
+  if (!element) {
+    element = document.createElement("script");
+    element.id = id;
+    element.type = "application/ld+json";
+    document.head.appendChild(element);
+  }
+
+  element.textContent = JSON.stringify(data);
+}
+
+function buildDentistSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "@id": `${SITE_URL}/#dentist`,
+    name: PRACTICE.name,
+    alternateName: PRACTICE.fullName,
+    url: SITE_URL,
+    image: `${SITE_URL}/opengraph.jpg`,
+    email: PRACTICE.email,
+    telephone: `+48 ${PRACTICE.phoneDisplay}`,
+    priceRange: "$$",
+    medicalSpecialty: ["Dentistry", "Orthodontics", "Implantology", "Prosthodontics"],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ul. Krasińskiego 15",
+      postalCode: "67-100",
+      addressLocality: PRACTICE.cityDisplay,
+      addressRegion: PRACTICE.region,
+      addressCountry: "PL",
+    },
+    openingHours: "Mo-Fr 08:00-19:00",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "19:00",
+      },
+    ],
+    hasMap: PRACTICE.mapsUrl,
+    sameAs: [PRACTICE.facebookUrl, PRACTICE.instagramUrl],
+    areaServed: [
+      {
+        "@type": "City",
+        name: PRACTICE.cityDisplay,
+      },
+    ],
+  };
+}
+
+function buildWebsiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: PRACTICE.name,
+    url: SITE_URL,
+    publisher: {
+      "@id": `${SITE_URL}/#dentist`,
+    },
+    inLanguage: ["pl-PL", "en", "de"],
+  };
+}
+
+function buildBreadcrumbSchema(path: string, language: "pl" | "en" | "de") {
+  const normalizedPath = path === "/cennik" ? "/pricing" : path;
+  const currentLabel = BREADCRUMB_LABELS[normalizedPath] ?? "Start";
+  const items = normalizedPath === "/" ? [{ path: "/", label: "Start" }] : [
+    { path: "/", label: "Start" },
+    { path: normalizedPath, label: currentLabel },
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: translateText(item.label, language),
+      item: `${SITE_URL}${item.path === "/" ? "/" : item.path}`,
+    })),
+  };
 }
 
 function SeoMetadata() {
@@ -156,6 +248,10 @@ function SeoMetadata() {
     }
 
     canonical.setAttribute("href", canonicalUrl);
+
+    upsertJsonLd("korona-dentist-jsonld", buildDentistSchema());
+    upsertJsonLd("korona-website-jsonld", buildWebsiteSchema());
+    upsertJsonLd("korona-breadcrumb-jsonld", buildBreadcrumbSchema(normalizedPath, language));
   }, [language, location]);
 
   return null;
@@ -176,7 +272,6 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/new-patients" component={NewPatients} />
-      <Route path="/services" component={Services} />
       <Route path="/about" component={About} />
       <Route path="/team" component={Team} />
       <Route path="/pricing" component={Pricing} />
@@ -193,13 +288,14 @@ function App() {
     <LanguageProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <SeoMetadata />
-            <ScrollToTop />
-            <Router />
-            <MobileStickyActions />
-            <PageTranslationSync />
-          </WouterRouter>
+          <MotionConfig reducedMotion="user">
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <SeoMetadata />
+              <ScrollToTop />
+              <Router />
+              <MobileStickyActions />
+            </WouterRouter>
+          </MotionConfig>
           <Toaster />
         </TooltipProvider>
       </QueryClientProvider>

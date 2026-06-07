@@ -4,11 +4,13 @@ import { Activity, ArrowRight, CheckCircle, Clock, MapPin, Phone, Shield, Smile,
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
+import { OpeningHoursTime } from "@/components/OpeningHoursTime";
 import { PageHero } from "@/components/PageHero";
+import { useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/cropped-DJI_0300-HDR-scaled-1.jpg";
-import officePhoto from "@assets/DSC00462.jpg";
+import heroPhoto from "@assets/optimized-jpg/cropped-DJI_0300-HDR-scaled-1.jpg";
+import officePhoto from "@assets/optimized-jpg/DSC00462.jpg";
 
 const STAGGER = {
   hidden: { opacity: 0 },
@@ -69,22 +71,24 @@ const serviceCards = [
 ];
 
 export default function Home() {
+  const { t } = useT();
+
   return (
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
       <Navigation />
 
       <PageHero
         title="Przychodnia Korona"
-        description="Kompleksowa opieka stomatologiczna dla pacjentów w każdym wieku w Nowej Soli, prowadzona w kameralnej i komfortowej atmosferze."
+        description={t("Kompleksowa opieka stomatologiczna dla pacjentów w każdym wieku w Nowej Soli, prowadzona w kameralnej i komfortowej atmosferze.")}
         image={heroPhoto}
-        alt="Przychodnia Korona w Nowej Soli"
+        alt={t("Przychodnia Korona w Nowej Soli")}
         height="home"
         titleSize="large"
         mobileObjectPosition="58% center"
         desktopObjectPosition="center center"
         actions={[
           {
-            label: "Umów wizytę",
+            label: t("Umów wizytę"),
             href: PRACTICE.bookingUrl,
             trailingIcon: <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />,
             testId: "home-hero-book-online",
@@ -104,14 +108,14 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={STAGGER}>
               <motion.h2 variants={FADE_UP} className="text-3xl md:text-4xl font-semibold mb-6 text-foreground">
-                Przychodnia z doświadczeniem od 1982 roku
+                {t("Przychodnia z doświadczeniem od 1982 roku")}
               </motion.h2>
               <motion.div variants={FADE_UP} className="space-y-5 text-base md:text-lg text-foreground/70 leading-relaxed">
                 <p>
-                  NZOZ Korona działa na rynku usług stomatologicznych od wielu lat, oferując leczenie zachowawcze, endodoncję, protetykę, implantologię, ortodoncję i profilaktykę.
+                  {t("NZOZ Korona działa na rynku usług stomatologicznych od wielu lat, oferując leczenie zachowawcze, endodoncję, protetykę, implantologię, ortodoncję i profilaktykę.")}
                 </p>
                 <p>
-                  Priorytetem zespołu jest leczenie w spokojnej atmosferze, z wykorzystaniem nowoczesnych metod diagnostyki i znieczulenia.
+                  {t("Priorytetem zespołu jest leczenie w spokojnej atmosferze, z wykorzystaniem nowoczesnych metod diagnostyki i znieczulenia.")}
                 </p>
               </motion.div>
               <motion.ul variants={FADE_UP} className="mt-8 space-y-4">
@@ -122,13 +126,13 @@ export default function Home() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-foreground/80 font-medium">
                     <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-0.5" />
-                    <span className="text-base md:text-lg">{item}</span>
+                    <span className="text-base md:text-lg">{t(item)}</span>
                   </li>
                 ))}
               </motion.ul>
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="relative rounded-3xl overflow-hidden shadow-2xl border border-border">
-              <img src={officePhoto} alt="Gabinet Przychodni Korona" className="w-full h-full object-cover aspect-[4/3]" />
+              <img src={officePhoto} alt={t("Gabinet Przychodni Korona")} className="w-full h-full object-cover aspect-[4/3]" />
             </motion.div>
           </div>
         </div>
@@ -137,8 +141,8 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-card border-y border-border/50">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">Zakres opieki</h2>
-            <p className="text-foreground/60 text-base md:text-lg">Najważniejsze obszary leczenia dostępne w Przychodni Korona.</p>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">{t("Zakres opieki")}</h2>
+            <p className="text-foreground/60 text-base md:text-lg">{t("Najważniejsze obszary leczenia dostępne w Przychodni Korona.")}</p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={STAGGER} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
@@ -147,10 +151,10 @@ export default function Home() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 text-secondary">
                   <service.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-                <p className="text-foreground/70 leading-relaxed mb-8">{service.desc}</p>
-                <Link href="/services" className="text-secondary font-medium inline-flex items-center gap-1 hover:underline">
-                  Zobacz usługi <ArrowRight className="w-4 h-4" />
+                <h3 className="text-xl font-semibold mb-4">{t(service.title)}</h3>
+                <p className="text-foreground/70 leading-relaxed mb-8">{t(service.desc)}</p>
+                <Link href="/pricing" className="text-secondary font-medium inline-flex items-center gap-1 hover:underline">
+                  {t("Zobacz zakres i ceny")} <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
             ))}
@@ -162,9 +166,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="bg-primary/20 border border-primary/30 p-6 md:p-10 rounded-2xl md:rounded-3xl">
             <Shield className="w-10 h-10 text-secondary mb-5" />
-            <h3 className="text-2xl font-semibold mb-4 text-foreground">Komfort i bezpieczeństwo</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-foreground">{t("Komfort i bezpieczeństwo")}</h3>
             <p className="text-foreground/80 leading-relaxed text-base md:text-lg">
-              Stawiamy na spokojną atmosferę wizyty, nowoczesną diagnostykę i rzetelne omówienie planu leczenia. Na swoją kolej pacjenci czekają w dużej poczekalni zapewniającej wygodę i odpoczynek. Dla pacjentów przyjezdnych mamy zapewnione liczne miejsca parkingowe na terenie Przychodni.
+              {t("Stawiamy na spokojną atmosferę wizyty, nowoczesną diagnostykę i rzetelne omówienie planu leczenia. Na swoją kolej pacjenci czekają w dużej poczekalni zapewniającej wygodę i odpoczynek. Dla pacjentów przyjezdnych mamy zapewnione liczne miejsca parkingowe na terenie Przychodni.")}
             </p>
           </motion.div>
         </div>
@@ -173,7 +177,7 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-card border-y border-border/50">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="text-center mb-10 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">Kontakt i dojazd</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-6">{t("Kontakt i dojazd")}</h2>
             <div className="flex justify-center">
               <div className="h-1 w-20 bg-secondary rounded-full" />
             </div>
@@ -183,14 +187,14 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="flex items-start gap-4">
               <MapPin className="w-6 h-6 text-secondary shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-lg mb-2">Adres</h3>
+                <h3 className="font-semibold text-lg mb-2">{t("Adres")}</h3>
                 <p className="text-foreground/70 mb-4">
                   {PRACTICE.addressLines[0]}<br />
                   {PRACTICE.addressLines[1]}<br />
                   {PRACTICE.addressLines[2]}
                 </p>
                 <a href={PRACTICE.mapsUrl} target="_blank" rel="noreferrer" className="text-secondary font-medium hover:underline inline-flex items-center gap-1" data-testid="home-directions">
-                  Dojazd <ArrowRight className="w-4 h-4" />
+                  {t("Dojazd")} <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </motion.div>
@@ -198,12 +202,12 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="flex items-start gap-4">
               <Clock className="w-6 h-6 text-secondary shrink-0 mt-1" />
               <div className="w-full">
-                <h3 className="font-semibold text-lg mb-4">Godziny otwarcia</h3>
+                <h3 className="font-semibold text-lg mb-4">{t("Godziny otwarcia")}</h3>
                 <div className="space-y-2">
                   {PRACTICE.hours.map((row) => (
                     <div key={row.days} className="flex justify-between gap-4 border-b border-border/50 pb-2">
-                      <span className="text-foreground/70">{row.days}</span>
-                      <span className="font-medium text-right">{row.time}</span>
+                      <span className="text-foreground/70">{t(row.days)}</span>
+                      <OpeningHoursTime time={row.time} className="font-medium text-right leading-tight" />
                     </div>
                   ))}
                 </div>

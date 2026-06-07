@@ -1,26 +1,27 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, GraduationCap, Heart, Phone, Star, X } from "lucide-react";
 import { Footer, FADE_UP } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
 import { PageHero } from "@/components/PageHero";
+import { useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/DSC_3503.jpg";
-import agnieszkaPhoto from "@assets/Agniszka_Kasperska_Grzechowiak.jpg";
+import heroPhoto from "@assets/optimized-jpg/DSC_3503.jpg";
+import agnieszkaPhoto from "@assets/optimized-jpg/Agniszka_Kasperska_Grzechowiak.jpg";
 import annaStoparczykPhoto from "@assets/team-compressed/anna-stoparczyk.jpg";
-import bartekPhoto from "@assets/Bartek.jpg";
-import danutaPhoto from "@assets/Danuta.jpg";
+import bartekPhoto from "@assets/optimized-jpg/Bartek.jpg";
+import danutaPhoto from "@assets/optimized-jpg/Danuta.jpg";
 import dorotaPhoto from "@assets/team-compressed/dorota-bartkowiak.jpg";
-import ewaKPhoto from "@assets/Ewa K..jpg";
+import ewaKPhoto from "@assets/optimized-jpg/Ewa K..jpg";
 import ewaPolakPhoto from "@assets/team-compressed/ewa-polak.jpg";
-import ilonaPhoto from "@assets/Ilona.jpg";
-import kamilaPhoto from "@assets/Kamila.jpg";
+import ilonaPhoto from "@assets/optimized-jpg/Ilona.jpg";
+import kamilaPhoto from "@assets/optimized-jpg/Kamila.jpg";
 import karolinaPhoto from "@assets/team-compressed/karolina-toda.jpg";
-import magdaDoctorPhoto from "@assets/Magda 2.jpg";
-import magdaTeamPhoto from "@assets/Magda.jpg";
+import magdaDoctorPhoto from "@assets/optimized-jpg/Magda 2.jpg";
+import magdaTeamPhoto from "@assets/optimized-jpg/Magda.jpg";
 import paulinaPhoto from "@assets/team-compressed/paulina-gorna.jpg";
-import sylwiaPhoto from "@assets/Sylwia.jpg";
+import sylwiaPhoto from "@assets/optimized-jpg/Sylwia.jpg";
 import tomaszPhoto from "@assets/team-compressed/tomasz-rewers.jpg";
 
 type Person = {
@@ -49,15 +50,6 @@ const doctors: Person[] = [
     focus: ["Implantologia", "Chirurgia", "Protetyka"],
   },
   {
-    name: "Ewa Kołodziej",
-    role: "lek. dent.",
-    initials: "EK",
-    photo: ewaKPhoto,
-    bio: "Specjalizuje się głównie w leczeniu ortodontycznym dzieci i dorosłych, nowoczesnym leczeniu endodontycznym pod mikroskopem oraz stomatologią zachowawczą, zapewniając kompleksową opiekę i indywidualne podejście do każdego pacjenta.",
-    education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
-    focus: ["Ortodoncja", "Endodoncja mikroskopowa", "Stomatologia zachowawcza"],
-  },
-  {
     name: "Agnieszka Kasperska-Grzechowiak",
     role: "lek. dent.",
     initials: "AK",
@@ -65,6 +57,15 @@ const doctors: Person[] = [
     bio: "Specjalizuje się w leczeniu zachowawczym dzieci i dorosłych oraz protetyce ruchomej. Z powodzeniem przeprowadza leczenie dzieci z wykorzystaniem sedacji wziewnej, dbając o komfort, poczucie bezpieczeństwa i spokojną atmosferę podczas każdej wizyty.",
     education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
     focus: ["Stomatologia zachowawcza", "Leczenie w sedacji", "Protetyka ruchoma"],
+  },
+  {
+    name: "Sylwia Ogrodniczak",
+    role: "lek. dent.",
+    initials: "SO",
+    photo: sylwiaPhoto,
+    bio: "Specjalizuje się w stomatologii zachowawczej, endodoncji pod mikroskopem oraz protetyce ruchomej. W swojej praktyce skupia się na precyzyjnej diagnostyce i starannym leczeniu, dbając o komfort pacjenta oraz wysoką jakość i trwałość.",
+    education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
+    focus: ["Stomatologia zachowawcza", "Endodoncja mikroskopowa", "Protetyka ruchoma"],
   },
   {
     name: "Magdalena Szewczyk-Tuczyńska",
@@ -85,13 +86,13 @@ const doctors: Person[] = [
     focus: ["Implantologia", "Mikrochirurgia stomatologiczna", "Endodoncja mikroskopowa", "Protetyka"],
   },
   {
-    name: "Sylwia Ogrodniczak",
+    name: "Ewa Kołodziej",
     role: "lek. dent.",
-    initials: "SO",
-    photo: sylwiaPhoto,
-    bio: "Specjalizuje się w stomatologii zachowawczej, endodoncji pod mikroskopem oraz protetyce ruchomej. W swojej praktyce skupia się na precyzyjnej diagnostyce i starannym leczeniu, dbając o komfort pacjenta oraz wysoką jakość i trwałość.",
-    education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
-    focus: ["Stomatologia zachowawcza", "Endodoncja mikroskopowa", "Protetyka ruchoma"],
+    initials: "EK",
+    photo: ewaKPhoto,
+    bio: "Specjalizuje się głównie w leczeniu ortodontycznym dzieci i dorosłych, nowoczesnym leczeniu endodontycznym pod mikroskopem oraz stomatologią zachowawczą, zapewniając kompleksową opiekę i indywidualne podejście do każdego pacjenta.",
+    education: ["Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu"],
+    focus: ["Ortodoncja", "Endodoncja mikroskopowa", "Stomatologia zachowawcza"],
   },
 ];
 
@@ -129,7 +130,7 @@ const assistants: Person[] = [
   },
   {
     name: "Kamila Bieńkowska-Kaśków",
-    role: "mgr, higiena stomatologiczna",
+    role: "dypl. hig. stom.",
     initials: "KB",
     photo: kamilaPhoto,
     bio: "Edukuje pacjentów w zakresie prawidłowej higieny jamy ustnej i codziennej profilaktyki dopasowanej do indywidualnych potrzeb, pomagając w budowaniu zdrowych nawyków i utrzymaniu długotrwałych efektów leczenia. Wykonuje profesjonalną higienizację, dbając o zdrowie i estetykę uśmiechu pacjentów, a także wspiera pracę gabinetu podczas zabiegów stomatologicznych.",
@@ -233,6 +234,8 @@ function PersonPortrait({ person, large = false }: { person: Person; large?: boo
 }
 
 function PersonCard({ person, onClick }: { person: Person; onClick: () => void }) {
+  const { t } = useT();
+
   return (
     <motion.button
       variants={FADE_UP}
@@ -244,13 +247,15 @@ function PersonCard({ person, onClick }: { person: Person; onClick: () => void }
         <PersonPortrait person={person} />
       </div>
       <h3 className="text-lg font-semibold mb-1 text-foreground">{person.name}</h3>
-      <p className="text-secondary font-medium text-sm">{person.role}</p>
-      <p className="text-xs text-foreground/40 mt-2 group-hover:text-secondary/70 transition-colors">Zobacz profil →</p>
+      <p className="text-secondary font-medium text-sm">{t(person.role)}</p>
+      <p className="text-xs text-foreground/40 mt-2 group-hover:text-secondary/70 transition-colors">{t("Zobacz profil →")}</p>
     </motion.button>
   );
 }
 
 function ProfileDetails({ person }: { person: Person }) {
+  const { t } = useT();
+
   return (
     <div className="grid lg:grid-cols-[320px_1fr] gap-8 lg:gap-14 items-start">
       <div className="relative max-w-xs sm:max-w-sm w-full mx-auto pb-16">
@@ -259,7 +264,7 @@ function ProfileDetails({ person }: { person: Person }) {
         </div>
         <div className="absolute bottom-0 -right-2 -left-2 sm:-right-5 sm:-left-5 bg-card border border-border p-5 sm:p-6 rounded-2xl shadow-lg z-20 text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-foreground">{person.name}</h2>
-          <p className="text-foreground/70 mb-3">{person.role}</p>
+          <p className="text-foreground/70 mb-3">{t(person.role)}</p>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-semibold">
             <Star className="w-4 h-4 fill-secondary" />
             Przychodnia Korona
@@ -268,8 +273,8 @@ function ProfileDetails({ person }: { person: Person }) {
       </div>
 
       <div className="pt-2 lg:pt-4">
-        <h2 className="text-2xl font-semibold mb-4 text-foreground">Zakres pracy</h2>
-        <p className="text-base sm:text-lg text-foreground/75 leading-relaxed mb-8 sm:mb-10">{person.bio}</p>
+        <h2 className="text-2xl font-semibold mb-4 text-foreground">{t("Zakres pracy")}</h2>
+        <p className="text-base sm:text-lg text-foreground/75 leading-relaxed mb-8 sm:mb-10">{t(person.bio)}</p>
 
         <div className="grid md:grid-cols-2 gap-8">
           <div>
@@ -277,13 +282,13 @@ function ProfileDetails({ person }: { person: Person }) {
               <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center text-secondary">
                 <GraduationCap className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-semibold">Wykształcenie</h3>
+              <h3 className="text-xl font-semibold">{t("Wykształcenie")}</h3>
             </div>
             <ul className="space-y-3">
               {person.education.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-foreground/80">
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0" />
-                  {item}
+                  {t(item)}
                 </li>
               ))}
             </ul>
@@ -294,13 +299,13 @@ function ProfileDetails({ person }: { person: Person }) {
               <div className="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center text-secondary">
                 <Heart className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-semibold">Specjalizacje</h3>
+              <h3 className="text-xl font-semibold">{t("Specjalizacje")}</h3>
             </div>
             <ul className="space-y-3">
               {person.focus.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-foreground/80">
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0" />
-                  {item}
+                  {t(item)}
                 </li>
               ))}
             </ul>
@@ -312,7 +317,59 @@ function ProfileDetails({ person }: { person: Person }) {
 }
 
 export default function Team() {
+  const { t } = useT();
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
+  const profilePanelRef = useRef<HTMLDivElement | null>(null);
+  const profileCloseRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const closeProfile = () => setSelectedPerson(null);
+
+  useEffect(() => {
+    if (!selectedPerson) return;
+
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.requestAnimationFrame(() => profileCloseRef.current?.focus());
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeProfile();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusable = Array.from(
+        profilePanelRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+      previousFocusRef.current?.focus();
+      previousFocusRef.current = null;
+    };
+  }, [selectedPerson]);
 
   const renderSection = (
     title: string,
@@ -323,8 +380,8 @@ export default function Team() {
     <section className={`py-14 md:py-16 ${options?.surface === "card" ? "bg-card border-y border-border/50" : "bg-background"}`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="mb-8">
-          <h2 className="text-3xl font-semibold text-foreground mb-2">{title}</h2>
-          <p className="text-foreground/60">{description}</p>
+          <h2 className="text-3xl font-semibold text-foreground mb-2">{t(title)}</h2>
+          <p className="text-foreground/60">{t(description)}</p>
         </motion.div>
 
         <motion.div
@@ -348,16 +405,16 @@ export default function Team() {
 
       <main className="flex-grow">
         <PageHero
-          eyebrow="Zespół"
-          title="Lekarze i zespół Przychodni Korona"
-          description="Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil."
+          eyebrow={t("Zespół")}
+          title={t("Lekarze i zespół Przychodni Korona")}
+          description={t("Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil.")}
           image={heroPhoto}
-          alt="Zespół Przychodni Korona"
+          alt={t("Zespół Przychodni Korona")}
           mobileObjectPosition="62% center"
           desktopObjectPosition="center center"
           actions={[
             {
-              label: "Kontakt i rejestracja",
+              label: t("Kontakt i rejestracja"),
               href: PRACTICE.bookingUrl,
               trailingIcon: <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />,
               testId: "team-hero-contact",
@@ -405,7 +462,7 @@ export default function Team() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
-              onClick={() => setSelectedPerson(null)}
+              onClick={closeProfile}
             />
 
             <motion.div
@@ -417,18 +474,20 @@ export default function Team() {
               className="fixed inset-0 z-50 flex items-end sm:items-center justify-center pointer-events-none p-0 sm:p-6"
             >
               <div
+                ref={profilePanelRef}
                 className="pointer-events-auto relative w-full max-w-6xl max-h-[92svh] overflow-y-auto bg-background rounded-t-[1.75rem] sm:rounded-[1.75rem] shadow-2xl border border-border p-5 pt-7 sm:p-8 lg:p-10"
                 role="dialog"
                 aria-modal="true"
-                aria-label={`Profil: ${selectedPerson.name}`}
+                aria-label={`${t("Profil")}: ${selectedPerson.name}`}
               >
                 <div className="absolute left-1/2 top-3 h-1 w-12 -translate-x-1/2 rounded-full bg-border sm:hidden" />
                 <button
+                  ref={profileCloseRef}
                   type="button"
-                  onClick={() => setSelectedPerson(null)}
-                  className="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-black/35 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/55 transition-colors"
+                  onClick={closeProfile}
+                  className="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-black/35 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/55 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   data-testid="team-modal-close"
-                  aria-label="Zamknij profil"
+                  aria-label={t("Zamknij profil")}
                 >
                   <X className="w-5 h-5" />
                 </button>

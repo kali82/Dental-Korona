@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Facebook, Instagram, MapPin, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LANGUAGES, useLanguage } from "@/lib/i18n";
+import { LANGUAGES, useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 import { cn } from "@/lib/utils";
 
 import logo from "@assets/logo przychodnia bez tła mniejsza linia.png";
 
 const NAV_ITEMS = [
-  { href: "/services", label: "Usługi", testId: "nav-services" },
   { href: "/about", label: "O nas", testId: "nav-about" },
   { href: "/team", label: "Zespół", testId: "nav-team" },
   { href: "/pricing", label: "Cennik", testId: "nav-pricing" },
@@ -24,7 +23,7 @@ const MOBILE_NAV_ITEMS = [
 ] as const;
 
 function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useT();
 
   return (
     <div
@@ -33,8 +32,7 @@ function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
         compact ? "w-fit" : "",
       )}
       data-testid="language-switcher"
-      data-no-translate
-      aria-label="Wybierz język"
+      aria-label={t("Wybierz język")}
     >
       {LANGUAGES.map((item) => (
         <button
@@ -48,7 +46,7 @@ function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
               : "text-foreground/65 hover:bg-secondary/10 hover:text-secondary",
           )}
           aria-pressed={language === item.code}
-          aria-label={item.name}
+          aria-label={t(item.name)}
         >
           {item.label}
         </button>
@@ -60,6 +58,7 @@ function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
 export function Navigation() {
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useT();
 
   const isActive = (href: string) =>
     href === "/" ? location === href : location === href || location.startsWith(`${href}/`);
@@ -98,7 +97,7 @@ export function Navigation() {
               data-testid={item.testId}
               aria-current={isActive(item.href) ? "page" : undefined}
             >
-              {item.label}
+              {t(item.label)}
             </Link>
           ))}
         </nav>
@@ -136,7 +135,7 @@ export function Navigation() {
             className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-6 shadow-md hover:shadow-lg transition-all"
             data-testid="nav-book-online"
           >
-            <Link href={PRACTICE.bookingUrl}>Umów wizytę</Link>
+            <Link href={PRACTICE.bookingUrl}>{t("Umów wizytę")}</Link>
           </Button>
         </div>
 
@@ -144,7 +143,7 @@ export function Navigation() {
           type="button"
           className="xl:hidden inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
           data-testid="nav-mobile-menu"
-          aria-label={mobileOpen ? "Zamknij menu" : "Otwórz menu"}
+          aria-label={mobileOpen ? t("Zamknij menu") : t("Otwórz menu")}
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMobileOpen((open) => !open)}
@@ -158,20 +157,20 @@ export function Navigation() {
           <button
             type="button"
             className="fixed inset-0 top-16 z-[55] xl:hidden bg-foreground/10 backdrop-blur-[2px]"
-            aria-label="Zamknij menu"
+            aria-label={t("Zamknij menu")}
             onClick={closeMobileMenu}
           />
           <div id="mobile-navigation" className="fixed inset-x-3 top-[4.5rem] z-[60] xl:hidden max-h-[calc(100svh-5rem)] overflow-y-auto rounded-[1.75rem] border border-border/70 bg-background/95 shadow-2xl backdrop-blur-xl">
             <div className="px-5 py-5 flex flex-col gap-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-foreground/45">Menu</p>
+                  <p className="text-xs uppercase tracking-widest text-foreground/45">{t("Menu")}</p>
                   <p className="text-lg font-semibold text-foreground">Przychodnia Korona</p>
                 </div>
                 <button
                   type="button"
                   className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-muted text-foreground"
-                  aria-label="Zamknij menu"
+                  aria-label={t("Zamknij menu")}
                   onClick={closeMobileMenu}
                 >
                   <X className="w-5 h-5" />
@@ -195,7 +194,7 @@ export function Navigation() {
                   aria-current={isActive(item.href) ? "page" : undefined}
                   onClick={closeMobileMenu}
                 >
-                  {item.label}
+                  {t(item.label)}
                   <ArrowRight className={cn("w-3.5 h-3.5 transition-transform", isActive(item.href) ? "opacity-100" : "opacity-35 group-hover:translate-x-0.5")} />
                 </Link>
               ))}
@@ -208,7 +207,7 @@ export function Navigation() {
                   data-testid="nav-phone-mobile"
                 >
                   <Phone className="w-4 h-4" />
-                  Zadzwoń
+                  {t("Zadzwoń")}
                 </a>
                 <a
                   href={PRACTICE.mapsUrl}
@@ -218,7 +217,7 @@ export function Navigation() {
                   data-testid="nav-map-mobile"
                 >
                   <MapPin className="w-4 h-4 text-secondary" />
-                  Dojazd
+                  {t("Dojazd")}
                 </a>
               </div>
 
@@ -249,7 +248,7 @@ export function Navigation() {
                   data-testid="nav-book-online-mobile"
                 >
                   <Link href={PRACTICE.bookingUrl} onClick={closeMobileMenu}>
-                    Rejestracja
+                    {t("Rejestracja")}
                   </Link>
                 </Button>
               </div>

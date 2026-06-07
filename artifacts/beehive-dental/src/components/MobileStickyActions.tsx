@@ -1,11 +1,13 @@
 import { MessageCircle, Phone } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 import { cn } from "@/lib/utils";
 
 export function MobileStickyActions() {
   const [location] = useLocation();
   const contactActive = location === "/contact";
+  const { t } = useT();
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 md:hidden px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 bg-gradient-to-t from-background via-background/95 to-background/0 pointer-events-none">
@@ -16,7 +18,7 @@ export function MobileStickyActions() {
           data-testid="mobile-sticky-call"
         >
           <Phone className="w-4 h-4" />
-          Zadzwoń
+          {t("Zadzwoń")}
         </a>
         <Link
           href="/contact"
@@ -29,7 +31,7 @@ export function MobileStickyActions() {
           data-testid="mobile-sticky-contact"
         >
           <MessageCircle className="w-4 h-4" />
-          Kontakt
+          {t("Kontakt")}
         </Link>
       </div>
     </div>

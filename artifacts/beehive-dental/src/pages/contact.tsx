@@ -2,10 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
+import { OpeningHoursTime } from "@/components/OpeningHoursTime";
 import { PageHero } from "@/components/PageHero";
+import { useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
-import heroPhoto from "@assets/DJI_0308-HDR-scaled.jpg";
+import heroPhoto from "@assets/optimized-jpg/DJI_0308-HDR-scaled.jpg";
 
 const contactCards = [
   {
@@ -35,17 +37,19 @@ const contactCards = [
 ];
 
 export default function Contact() {
+  const { t } = useT();
+
   return (
     <div className="min-h-screen w-full bg-background flex flex-col font-sans">
       <Navigation />
 
       <main className="flex-grow">
         <PageHero
-          eyebrow="Kontakt"
+          eyebrow={t("Kontakt")}
           title="Przychodnia Korona"
-          description="Dane kontaktowe, godziny otwarcia i oficjalne profile społecznościowe przychodni."
+          description={t("Dane kontaktowe, godziny otwarcia i oficjalne profile społecznościowe przychodni.")}
           image={heroPhoto}
-          alt="Kontakt z Przychodnią Korona"
+          alt={t("Kontakt z Przychodnią Korona")}
           mobileObjectPosition="38% center"
           desktopObjectPosition="center center"
           actions={[
@@ -56,7 +60,7 @@ export default function Contact() {
               testId: "contact-hero-call",
             },
             {
-              label: "Dojazd",
+              label: t("Dojazd"),
               href: PRACTICE.mapsUrl,
               variant: "secondary",
               external: true,
@@ -84,7 +88,7 @@ export default function Contact() {
                   <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 md:mb-5 text-secondary">
                     <card.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
-                  <p className="text-sm uppercase tracking-widest text-foreground/40 mb-2">{card.label}</p>
+                  <p className="text-sm uppercase tracking-widest text-foreground/40 mb-2">{t(card.label)}</p>
                   <p className="text-lg md:text-xl font-semibold text-foreground leading-snug">{card.value}</p>
                 </motion.a>
               ))}
@@ -101,12 +105,12 @@ export default function Contact() {
                 <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-5 text-secondary">
                   <Clock className="w-6 h-6" />
                 </div>
-                <p className="text-sm uppercase tracking-widest text-foreground/40 mb-5">Godziny otwarcia</p>
+                <p className="text-sm uppercase tracking-widest text-foreground/40 mb-5">{t("Godziny otwarcia")}</p>
                 <div className="space-y-3">
                   {PRACTICE.hours.map((row) => (
                     <div key={row.days} className="flex items-center justify-between gap-4 border-b border-border/50 pb-3 last:border-0 last:pb-0">
-                      <span className="text-foreground/70">{row.days}</span>
-                      <span className="font-semibold text-foreground text-right">{row.time}</span>
+                      <span className="text-foreground/70">{t(row.days)}</span>
+                      <OpeningHoursTime time={row.time} className="font-semibold text-foreground text-right leading-tight" />
                     </div>
                   ))}
                 </div>
@@ -119,7 +123,7 @@ export default function Contact() {
                 variants={FADE_UP}
                 className="bg-card border border-border rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-sm"
               >
-                <p className="text-sm uppercase tracking-widest text-foreground/40 mb-5">Media społecznościowe</p>
+                <p className="text-sm uppercase tracking-widest text-foreground/40 mb-5">{t("Media społecznościowe")}</p>
                 <div className="space-y-4">
                   <a
                     href={PRACTICE.facebookUrl}

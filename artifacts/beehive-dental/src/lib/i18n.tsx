@@ -28,7 +28,24 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Kontakt": "Contact",
     "Start": "Home",
     "Menu": "Menu",
+    "Przychodnia": "Clinic",
     "Stomatologia": "Dentistry",
+    "Wybierz język": "Choose language",
+    "Zamknij menu": "Close menu",
+    "Otwórz menu": "Open menu",
+    "Zamknij zdjęcie": "Close photo",
+    "Poprzednie zdjęcie": "Previous photo",
+    "Następne zdjęcie": "Next photo",
+    "Zamknij profil": "Close profile",
+    "Profil": "Profile",
+    "Zobacz zakres i ceny": "View scope and prices",
+    "Kliknij, aby zadzwonić": "Click to call",
+    "Napisz e-mail": "Write an e-mail",
+    "Ceny są orientacyjne, a ostateczna wycena zależy od konsultacji i indywidualnego planu leczenia.": "Prices are indicative, and the final estimate depends on the consultation and individual treatment plan.",
+    "E-mail rejestracji": "Registration e-mail",
+    "404 - nie znaleziono strony": "404 - Page not found",
+    "Ta podstrona nie istnieje lub została usunięta.": "This page does not exist or has been removed.",
+    "Wróć na stronę główną": "Back to home page",
     "Przychodnia Korona Nowa Sól | Gabinet stomatologiczny": "Przychodnia Korona Nowa Sól | Dental clinic",
     "Przychodnia Korona w Nowej Soli: gabinet stomatologiczny, stomatologia zachowawcza, ortodoncja, protetyka, implantologia, chirurgia i diagnostyka RTG.": "Przychodnia Korona in Nowa Sól: dental clinic, conservative dentistry, orthodontics, prosthodontics, implantology, surgery and X-ray diagnostics.",
     "Stomatologia, ortodoncja i implantologia | Przychodnia Korona Nowa Sól": "Dentistry, orthodontics and implantology | Przychodnia Korona Nowa Sól",
@@ -67,6 +84,8 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Poniedziałek - piątek": "Monday - Friday",
     "Sobota": "Saturday",
     "Niedziela": "Sunday",
+    "w wybrane dni": "selected days",
+    "(konieczny kontakt tel.)": "(phone contact required)",
     "w wybrane dni (konieczny kontakt tel.)": "selected days (phone contact required)",
     "Nieczynne": "Closed",
     "Poniedziałek - piątek: 8:00 - 19:00": "Monday - Friday: 8:00 - 19:00",
@@ -168,7 +187,6 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Ustal termin": "Set a date",
     "Przygotuj informacje": "Prepare information",
     "Telefon komórkowy: 507 130 845.": "Mobile phone: 507 130 845.",
-    "E-mail rejestracji: przychodniakorona@interia.pl.": "Registration e-mail: przychodniakorona@interia.pl.",
     "Rejestracja pomoże dobrać dogodną datę, godzinę i rodzaj wizyty.": "Registration will help choose a convenient date, time and type of visit.",
     "Przygotuj dane pacjenta, cel wizyty i informację o dotychczasowym leczeniu.": "Prepare patient details, the purpose of the visit and information about previous treatment.",
     "Pierwsza wizyta": "First visit",
@@ -185,12 +203,47 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Telefon komórkowy": "Mobile phone",
     "Telefon stacjonarny": "Landline",
     "Media społecznościowe": "Social media",
+    "Przychodnia Korona w Nowej Soli": "Przychodnia Korona in Nowa Sól",
+    "Gabinet Przychodni Korona": "Przychodnia Korona surgery",
+    "Cennik Przychodni Korona": "Przychodnia Korona price list",
+    "Kontakt z Przychodnią Korona": "Contact with Przychodnia Korona",
     "Galeria Przychodni Korona": "Przychodnia Korona gallery",
+    "Otwórz zdjęcie": "Open photo",
     "Zobacz przestrzeń Przychodni Korona": "See the space of Przychodnia Korona",
     "Wybrane zdjęcia gabinetów, recepcji, zespołu i przestrzeni przeznaczonej do opieki nad pacjentami.": "Selected photos of surgeries, reception, team and patient care spaces.",
     "Wszystkie": "All",
-    "Przychodnia": "Clinic",
     "Zabiegi": "Treatments",
+    "Budynek Przychodni Korona z lotu ptaka": "Przychodnia Korona building from above",
+    "Przychodnia Korona przy ulicy Krasińskiego": "Przychodnia Korona on Krasińskiego Street",
+    "Recepcja i poczekalnia Przychodni Korona": "Reception and waiting room at Przychodnia Korona",
+    "Poczekalnia dla pacjentów": "Patient waiting room",
+    "Wnętrze przychodni": "Clinic interior",
+    "Stanowisko zabiegowe": "Treatment station",
+    "Nowoczesny gabinet stomatologiczny": "Modern dental surgery",
+    "Gabinet zabiegowy": "Treatment room",
+    "Wyposażenie gabinetu": "Surgery equipment",
+    "Narzędzia stomatologiczne": "Dental instruments",
+    "Mikroskop stomatologiczny": "Dental microscope",
+    "Mikroskop do leczenia endodontycznego": "Microscope for endodontic treatment",
+    "Unit stomatologiczny i diagnostyka": "Dental unit and diagnostics",
+    "Oświetlenie zabiegowe": "Treatment lighting",
+    "Sprzęt stomatologiczny": "Dental equipment",
+    "Diagnostyka cyfrowa": "Digital diagnostics",
+    "Panel sterowania unitów stomatologicznych": "Dental unit control panel",
+    "Zespół Przychodni Korona": "Przychodnia Korona team",
+    "Personel Przychodni Korona": "Przychodnia Korona staff",
+    "Zespół przed wejściem do przychodni": "Team in front of the clinic entrance",
+    "Zespół przy tablicy Przychodni Korona": "Team by the Przychodnia Korona sign",
+    "Część zespołu przed Przychodnią Korona": "Part of the team in front of Przychodnia Korona",
+    "Zespół gabinetu stomatologicznego": "Dental surgery team",
+    "Zespół przy tablicy rejestracji": "Team by the registration sign",
+    "Zespół w gabinecie": "Team in the surgery",
+    "Zespół przed wejściem": "Team in front of the entrance",
+    "Lekarze w gabinecie": "Doctors in the surgery",
+    "Zespół przy stanowisku zabiegowym": "Team by the treatment station",
+    "Zespół przy unicie stomatologicznym": "Team by the dental unit",
+    "Zespół w gabinecie stomatologicznym": "Team in the dental surgery",
+    "Zespół higienistek i asystentek": "Team of hygienists and assistants",
     "Chcesz umówić wizytę?": "Would you like to book a visit?",
     "Skontaktuj się z rejestracją Przychodni Korona w Nowej Soli.": "Contact registration at Przychodnia Korona in Nowa Sól.",
     "Lekarze i zespół Przychodni Korona": "Doctors and the Przychodnia Korona team",
@@ -207,7 +260,6 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Zakres pracy": "Scope of work",
     "Wykształcenie": "Education",
     "Specjalizacje": "Specializations",
-    "Zamknij profil": "Close profile",
     "lek. dent.": "dentist",
     "dypl. hig. stom.": "certified dental hygienist",
     "dypl. hig. stom. / tech. sterylizacji med.": "certified dental hygienist / medical sterilization technician",
@@ -357,7 +409,24 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Kontakt": "Kontakt",
     "Start": "Start",
     "Menu": "Menü",
+    "Przychodnia": "Praxis",
     "Stomatologia": "Zahnmedizin",
+    "Wybierz język": "Sprache wählen",
+    "Zamknij menu": "Menü schließen",
+    "Otwórz menu": "Menü öffnen",
+    "Zamknij zdjęcie": "Foto schließen",
+    "Poprzednie zdjęcie": "Vorheriges Foto",
+    "Następne zdjęcie": "Nächstes Foto",
+    "Zamknij profil": "Profil schließen",
+    "Profil": "Profil",
+    "Zobacz zakres i ceny": "Leistungsumfang und Preise ansehen",
+    "Kliknij, aby zadzwonić": "Zum Anrufen klicken",
+    "Napisz e-mail": "E-Mail schreiben",
+    "Ceny są orientacyjne, a ostateczna wycena zależy od konsultacji i indywidualnego planu leczenia.": "Die Preise sind Richtwerte; die endgültige Kostenschätzung hängt von der Beratung und dem individuellen Behandlungsplan ab.",
+    "E-mail rejestracji": "E-Mail der Anmeldung",
+    "404 - nie znaleziono strony": "404 - Seite nicht gefunden",
+    "Ta podstrona nie istnieje lub została usunięta.": "Diese Seite existiert nicht oder wurde entfernt.",
+    "Wróć na stronę główną": "Zur Startseite zurück",
     "Przychodnia Korona Nowa Sól | Gabinet stomatologiczny": "Przychodnia Korona Nowa Sól | Zahnarztpraxis",
     "Przychodnia Korona w Nowej Soli: gabinet stomatologiczny, stomatologia zachowawcza, ortodoncja, protetyka, implantologia, chirurgia i diagnostyka RTG.": "Przychodnia Korona in Nowa Sól: Zahnarztpraxis, konservierende Zahnmedizin, Kieferorthopädie, Prothetik, Implantologie, Chirurgie und Röntgendiagnostik.",
     "Stomatologia, ortodoncja i implantologia | Przychodnia Korona Nowa Sól": "Zahnmedizin, Kieferorthopädie und Implantologie | Przychodnia Korona Nowa Sól",
@@ -396,6 +465,8 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Poniedziałek - piątek": "Montag - Freitag",
     "Sobota": "Samstag",
     "Niedziela": "Sonntag",
+    "w wybrane dni": "an ausgewählten Tagen",
+    "(konieczny kontakt tel.)": "(telefonische Kontaktaufnahme erforderlich)",
     "w wybrane dni (konieczny kontakt tel.)": "an ausgewählten Tagen (telefonische Kontaktaufnahme erforderlich)",
     "Nieczynne": "Geschlossen",
     "Poniedziałek - piątek: 8:00 - 19:00": "Montag - Freitag: 8:00 - 19:00",
@@ -497,7 +568,6 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Ustal termin": "Termin festlegen",
     "Przygotuj informacje": "Informationen vorbereiten",
     "Telefon komórkowy: 507 130 845.": "Mobiltelefon: 507 130 845.",
-    "E-mail rejestracji: przychodniakorona@interia.pl.": "E-Mail der Anmeldung: przychodniakorona@interia.pl.",
     "Rejestracja pomoże dobrać dogodną datę, godzinę i rodzaj wizyty.": "Die Anmeldung hilft bei der Auswahl eines passenden Datums, einer Uhrzeit und der Art des Besuchs.",
     "Przygotuj dane pacjenta, cel wizyty i informację o dotychczasowym leczeniu.": "Bereiten Sie Patientendaten, den Zweck des Besuchs und Informationen zur bisherigen Behandlung vor.",
     "Pierwsza wizyta": "Erster Besuch",
@@ -514,12 +584,47 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Telefon komórkowy": "Mobiltelefon",
     "Telefon stacjonarny": "Festnetz",
     "Media społecznościowe": "Soziale Medien",
+    "Przychodnia Korona w Nowej Soli": "Przychodnia Korona in Nowa Sól",
+    "Gabinet Przychodni Korona": "Behandlungsraum der Przychodnia Korona",
+    "Cennik Przychodni Korona": "Preisliste der Przychodnia Korona",
+    "Kontakt z Przychodnią Korona": "Kontakt zur Przychodnia Korona",
     "Galeria Przychodni Korona": "Galerie der Przychodnia Korona",
+    "Otwórz zdjęcie": "Foto öffnen",
     "Zobacz przestrzeń Przychodni Korona": "Sehen Sie die Räume der Przychodnia Korona",
     "Wybrane zdjęcia gabinetów, recepcji, zespołu i przestrzeni przeznaczonej do opieki nad pacjentami.": "Ausgewählte Fotos der Behandlungsräume, Rezeption, des Teams und der Räume für die Patientenbetreuung.",
     "Wszystkie": "Alle",
-    "Przychodnia": "Praxis",
     "Zabiegi": "Behandlungen",
+    "Budynek Przychodni Korona z lotu ptaka": "Gebäude der Przychodnia Korona aus der Vogelperspektive",
+    "Przychodnia Korona przy ulicy Krasińskiego": "Przychodnia Korona an der Krasińskiego-Straße",
+    "Recepcja i poczekalnia Przychodni Korona": "Rezeption und Wartezimmer der Przychodnia Korona",
+    "Poczekalnia dla pacjentów": "Wartezimmer für Patienten",
+    "Wnętrze przychodni": "Innenraum der Praxis",
+    "Stanowisko zabiegowe": "Behandlungsplatz",
+    "Nowoczesny gabinet stomatologiczny": "Moderner zahnärztlicher Behandlungsraum",
+    "Gabinet zabiegowy": "Behandlungsraum",
+    "Wyposażenie gabinetu": "Ausstattung des Behandlungsraums",
+    "Narzędzia stomatologiczne": "Zahnmedizinische Instrumente",
+    "Mikroskop stomatologiczny": "Zahnmedizinisches Mikroskop",
+    "Mikroskop do leczenia endodontycznego": "Mikroskop für endodontische Behandlung",
+    "Unit stomatologiczny i diagnostyka": "Dentalunit und Diagnostik",
+    "Oświetlenie zabiegowe": "Behandlungsbeleuchtung",
+    "Sprzęt stomatologiczny": "Zahnmedizinische Ausstattung",
+    "Diagnostyka cyfrowa": "Digitale Diagnostik",
+    "Panel sterowania unitów stomatologicznych": "Bedienfeld der Dentalunits",
+    "Zespół Przychodni Korona": "Team der Przychodnia Korona",
+    "Personel Przychodni Korona": "Personal der Przychodnia Korona",
+    "Zespół przed wejściem do przychodni": "Team vor dem Praxiseingang",
+    "Zespół przy tablicy Przychodni Korona": "Team am Schild der Przychodnia Korona",
+    "Część zespołu przed Przychodnią Korona": "Teil des Teams vor der Przychodnia Korona",
+    "Zespół gabinetu stomatologicznego": "Team des zahnärztlichen Behandlungsraums",
+    "Zespół przy tablicy rejestracji": "Team am Anmeldungsschild",
+    "Zespół w gabinecie": "Team im Behandlungsraum",
+    "Zespół przed wejściem": "Team vor dem Eingang",
+    "Lekarze w gabinecie": "Ärzte im Behandlungsraum",
+    "Zespół przy stanowisku zabiegowym": "Team am Behandlungsplatz",
+    "Zespół przy unicie stomatologicznym": "Team an der Dentalunit",
+    "Zespół w gabinecie stomatologicznym": "Team im zahnärztlichen Behandlungsraum",
+    "Zespół higienistek i asystentek": "Team der Hygienikerinnen und Assistentinnen",
     "Chcesz umówić wizytę?": "Möchten Sie einen Termin vereinbaren?",
     "Skontaktuj się z rejestracją Przychodni Korona w Nowej Soli.": "Kontaktieren Sie die Anmeldung der Przychodnia Korona in Nowa Sól.",
     "Lekarze i zespół Przychodni Korona": "Ärzte und Team der Przychodnia Korona",
@@ -536,7 +641,6 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Zakres pracy": "Arbeitsbereich",
     "Wykształcenie": "Ausbildung",
     "Specjalizacje": "Spezialisierungen",
-    "Zamknij profil": "Profil schließen",
     "lek. dent.": "Zahnarzt",
     "dypl. hig. stom.": "dipl. Dentalhygienikerin",
     "dypl. hig. stom. / tech. sterylizacji med.": "dipl. Dentalhygienikerin / Medizintechnik Sterilisation",
@@ -678,7 +782,6 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
   },
 };
 
-const originalTextByNode = new WeakMap<Text, string>();
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function isLanguage(value: string | null): value is Language {
@@ -694,51 +797,6 @@ function getInitialLanguage(): Language {
 export function translateText(text: string, language: Language): string {
   if (language === "pl") return text;
   return TRANSLATIONS[language][text] ?? text;
-}
-
-function translateWithWhitespace(text: string, language: Language) {
-  const trimmed = text.trim();
-
-  if (!trimmed) return text;
-
-  const leading = text.match(/^\s*/)?.[0] ?? "";
-  const trailing = text.match(/\s*$/)?.[0] ?? "";
-
-  return `${leading}${translateText(trimmed, language)}${trailing}`;
-}
-
-function shouldSkipNode(node: Text) {
-  const parent = node.parentElement;
-  if (!parent) return true;
-  if (parent.closest("[data-no-translate]")) return true;
-
-  return ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA", "CODE"].includes(parent.tagName);
-}
-
-function applyPageTranslations(language: Language) {
-  if (typeof document === "undefined" || !document.body) return;
-
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  const nodes: Text[] = [];
-
-  while (walker.nextNode()) {
-    const node = walker.currentNode as Text;
-    if (!shouldSkipNode(node)) nodes.push(node);
-  }
-
-  for (const node of nodes) {
-    const originalText = originalTextByNode.get(node) ?? node.textContent ?? "";
-
-    if (!originalTextByNode.has(node)) {
-      originalTextByNode.set(node, originalText);
-    }
-
-    const translatedText = translateWithWhitespace(originalText, language);
-
-    if (node.textContent !== translatedText) {
-      node.textContent = translatedText;
-    }
-  }
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -768,27 +826,15 @@ export function useLanguage() {
   return value;
 }
 
-export function PageTranslationSync() {
-  const { language } = useLanguage();
+export function useT() {
+  const { language, setLanguage } = useLanguage();
 
-  useEffect(() => {
-    let frameId = 0;
-
-    const scheduleTranslation = () => {
-      window.cancelAnimationFrame(frameId);
-      frameId = window.requestAnimationFrame(() => applyPageTranslations(language));
-    };
-
-    scheduleTranslation();
-
-    const observer = new MutationObserver(scheduleTranslation);
-    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      observer.disconnect();
-    };
-  }, [language]);
-
-  return null;
+  return useMemo(
+    () => ({
+      language,
+      setLanguage,
+      t: (text: string) => translateText(text, language),
+    }),
+    [language, setLanguage],
+  );
 }
