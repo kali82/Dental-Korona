@@ -15,7 +15,6 @@ import waitingRoom from "@assets/optimized-jpg/DSC00526-scaled.jpg";
 import cabinetDetail from "@assets/optimized-jpg/DSC00528-1-scaled.jpg";
 import treatmentRoomPortrait from "@assets/optimized-jpg/DSC00529-scaled.jpg";
 import dentalTools from "@assets/optimized-jpg/DSC00541-scaled.jpg";
-import microscopeSide from "@assets/optimized-jpg/DSC00543 (1).jpg";
 import microscopeFront from "@assets/optimized-jpg/DSC00543.jpg";
 import treatmentUnit from "@assets/optimized-jpg/DSC00544.jpg";
 import treatmentRoomWide from "@assets/optimized-jpg/DSC00546.jpg";
@@ -39,6 +38,7 @@ import teamTreatment from "@assets/optimized-jpg/DSC_3863.jpg";
 import teamCabinet from "@assets/optimized-jpg/DSC_3882.jpg";
 import teamChair from "@assets/optimized-jpg/DSC_3902.jpg";
 import teamCabinetTwo from "@assets/optimized-jpg/DSC_3913.jpg";
+import teamBartekIlona from "@assets/optimized-jpg/Bartek_z_Ilona.jpg";
 
 type Category = "Wszystkie" | "Przychodnia" | "Zabiegi" | "Zespół";
 
@@ -72,10 +72,10 @@ const photoSources: GallerySourceItem[] = [
   { src: treatmentRoomPortrait, thumbFile: "DSC00529-scaled.jpg", alt: "Stanowisko zabiegowe", category: "Zabiegi", span: "tall" },
   { src: treatmentUnit, thumbFile: "DSC00544.jpg", alt: "Unit stomatologiczny i diagnostyka", category: "Zabiegi", span: "wide" },
   { src: teamConsult, thumbFile: "DSC_3469.jpg", alt: "Zespół w gabinecie", category: "Zespół" },
+  { src: teamBartekIlona, thumbFile: "Bartek_z_Ilona.jpg", alt: "Bartosz Królikowski i Ilona Radecka w gabinecie", category: "Zespół" },
   { src: chairCorner, thumbFile: "DSC00549.jpg", alt: "Gabinet zabiegowy", category: "Zabiegi", span: "tall" },
   { src: chairDetail, thumbFile: "DSC00550.jpg", alt: "Wyposażenie gabinetu", category: "Zabiegi", span: "wide" },
   { src: dentalTools, thumbFile: "DSC00541-scaled.jpg", alt: "Narzędzia stomatologiczne", category: "Zabiegi" },
-  { src: microscopeSide, thumbFile: "DSC00543 (1).jpg", alt: "Mikroskop stomatologiczny", category: "Zabiegi", span: "tall" },
   { src: microscopeFront, thumbFile: "DSC00543.jpg", alt: "Mikroskop do leczenia endodontycznego", category: "Zabiegi" },
   { src: lampDetail, thumbFile: "DSC00556.jpg", alt: "Oświetlenie zabiegowe", category: "Zabiegi", span: "wide" },
   { src: teamWindow, thumbFile: "DSC_3678.jpg", alt: "Zespół przed wejściem", category: "Zespół" },

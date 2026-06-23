@@ -8,20 +8,21 @@ import { useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
 import heroPhoto from "@assets/optimized-jpg/DSC_3503.jpg";
-import agnieszkaPhoto from "@assets/optimized-jpg/Agniszka_Kasperska_Grzechowiak.jpg";
+import agnieszkaPhoto from "@assets/team-compressed/agnieszka-kasperska-grzechowiak.jpg";
 import annaStoparczykPhoto from "@assets/team-compressed/anna-stoparczyk.jpg";
-import bartekPhoto from "@assets/optimized-jpg/Bartek.jpg";
-import danutaPhoto from "@assets/optimized-jpg/Danuta.jpg";
+import bartekPhoto from "@assets/team-compressed/bartek-krolikowski.jpg";
+import danutaPhoto from "@assets/team-compressed/danuta-uchal.jpg";
 import dorotaPhoto from "@assets/team-compressed/dorota-bartkowiak.jpg";
-import ewaKPhoto from "@assets/optimized-jpg/Ewa K..jpg";
+import ewaKPhoto from "@assets/team-compressed/ewa-kolodziej.jpg";
 import ewaPolakPhoto from "@assets/team-compressed/ewa-polak.jpg";
-import ilonaPhoto from "@assets/optimized-jpg/Ilona.jpg";
-import kamilaPhoto from "@assets/optimized-jpg/Kamila.jpg";
+import ilonaPhoto from "@assets/team-compressed/ilona-radecka.jpg";
+import kamilaPhoto from "@assets/team-compressed/kamila-bienkowska-kaskow.jpg";
 import karolinaPhoto from "@assets/team-compressed/karolina-toda.jpg";
-import magdaDoctorPhoto from "@assets/optimized-jpg/Magda 2.jpg";
-import magdaTeamPhoto from "@assets/optimized-jpg/Magda.jpg";
+import magdaDoctorPhoto from "@assets/team-compressed/magdalena-szewczyk-tuczynska.jpg";
+import magdaTeamPhoto from "@assets/team-compressed/magdalena-rewers.jpg";
+import martaPhoto from "@assets/team-compressed/marta-sznajder.jpg";
 import paulinaPhoto from "@assets/team-compressed/paulina-gorna.jpg";
-import sylwiaPhoto from "@assets/optimized-jpg/Sylwia.jpg";
+import sylwiaPhoto from "@assets/team-compressed/sylwia-ogrodniczak.jpg";
 import tomaszPhoto from "@assets/team-compressed/tomasz-rewers.jpg";
 
 type Person = {
@@ -141,6 +142,7 @@ const assistants: Person[] = [
     name: "Marta Sznajder",
     role: "dypl. hig. stom. / tech. sterylizacji med.",
     initials: "MSZ",
+    photo: martaPhoto,
     bio: "Asystuje przy zabiegach stomatologii zachowawczej, ortodoncji oraz endodoncji, dbając o sprawny i komfortowy przebieg leczenia. Jest odpowiedzialna za proces dekontaminacji i sterylizacji narzędzi, zapewniając najwyższe standardy bezpieczeństwa i higieny pracy w gabinecie.",
     education: ["Medyczne Studium Zawodowe w Zielonej Górze"],
     focus: ["Asysta stomatologiczna", "Profilaktyka i promocja zdrowia", "Dekontaminacja i sterylizacja"],
@@ -209,12 +211,18 @@ const administration: Person[] = [
 function PersonPortrait({ person, large = false }: { person: Person; large?: boolean }) {
   const frameClass = large
     ? "h-full min-h-[280px] sm:min-h-[330px] rounded-3xl"
-    : "w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md";
+    : "w-28 h-28 sm:w-32 sm:h-32 rounded-full border-4 border-white shadow-md ring-1 ring-border/40";
 
   if (person.photo) {
     return (
       <div className={`relative overflow-hidden bg-muted ${frameClass}`}>
-        <img src={person.photo} alt={person.name} className="h-full w-full object-cover object-top" loading="lazy" />
+        <img
+          src={person.photo}
+          alt={person.name}
+          className="h-full w-full object-cover object-top"
+          loading={large ? "eager" : "lazy"}
+          decoding="async"
+        />
       </div>
     );
   }

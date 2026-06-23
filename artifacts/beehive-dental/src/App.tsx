@@ -15,6 +15,7 @@ import Galeria from "@/pages/gallery";
 import Contact from "@/pages/contact";
 import Team from "@/pages/team";
 import Pricing from "@/pages/pricing";
+import RadiationInfo from "@/pages/radiation-info";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -45,11 +46,18 @@ const SEO_BY_PATH: Record<string, typeof DEFAULT_SEO> = {
       "lekarz dentysta Nowa Sól, stomatolog Nowa Sól, zespół Przychodnia Korona, higienizacja Nowa Sól",
   },
   "/pricing": {
-    title: "Cennik stomatologiczny | Przychodnia Korona Nowa Sól",
+    title: "Cennik w przygotowaniu | Przychodnia Korona Nowa Sól",
     description:
-      "Cennik usług stomatologicznych w Przychodni Korona w Nowej Soli: konsultacje, profilaktyka, ortodoncja, protetyka i implantologia.",
+      "Cennik Przychodni Korona w Nowej Soli jest w przygotowaniu. W sprawie wyceny leczenia prosimy o bezpośredni kontakt z rejestracją.",
     keywords:
       "cennik stomatolog Nowa Sól, cennik dentysta Nowa Sól, protetyka cena, implantologia cena, ortodoncja cena",
+  },
+  "/promieniowanie-informacja": {
+    title: "Promieniowanie informacja | Przychodnia Korona Nowa Sól",
+    description:
+      "Informacja o wpływie działalności RTG w Przychodni Korona na zdrowie ludzi i środowisko.",
+    keywords:
+      "promieniowanie informacja Przychodnia Korona, RTG Nowa Sól, diagnostyka RTG stomatologiczna",
   },
   "/new-patients": {
     title: "Dla pacjenta | Przychodnia Korona Nowa Sól",
@@ -79,6 +87,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   "/about": "O nas",
   "/team": "Zespół",
   "/pricing": "Cennik",
+  "/promieniowanie-informacja": "Promieniowanie - informacja",
   "/new-patients": "Dla pacjenta",
   "/gallery": "Galeria",
   "/contact": "Kontakt",
@@ -276,6 +285,7 @@ function Router() {
       <Route path="/team" component={Team} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/cennik" component={Pricing} />
+      <Route path="/promieniowanie-informacja" component={RadiationInfo} />
       <Route path="/gallery" component={Galeria} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />

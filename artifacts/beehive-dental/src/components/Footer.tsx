@@ -73,6 +73,7 @@ export function Footer() {
                   { label: "Zespół", href: "/team" },
                   { label: "Cennik", href: "/pricing" },
                   { label: "Dla pacjenta", href: "/new-patients" },
+                  { label: "Promieniowanie - informacja", href: "/promieniowanie-informacja" },
                   { label: "Galeria", href: "/gallery" },
                   { label: "Kontakt", href: "/contact" },
                 ].map((link) => (

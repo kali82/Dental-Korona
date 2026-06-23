@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle, Clock, FileText, Mail, MapPin, Phone, Shield, Stethoscope } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer, FADE_UP } from "@/components/Footer";
@@ -130,6 +131,17 @@ export default function NewPatients() {
                 </motion.div>
               );
             })}
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={FADE_UP} className="mt-8 flex justify-center">
+            <Link
+              href="/promieniowanie-informacja"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground/65 transition-colors hover:border-secondary/40 hover:text-secondary"
+              data-testid="newpatients-radiation-info"
+            >
+              <FileText className="h-4 w-4 text-secondary" />
+              {t("Promieniowanie - informacja")}
+            </Link>
           </motion.div>
         </div>
       </section>
