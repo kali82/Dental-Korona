@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { Activity, Shield, Smile, Sparkles } from "lucide-react";
+import { Activity, CircleDot, Shield, Smile, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const revealPresets = {
@@ -160,5 +160,37 @@ export function DentalDecorations({ variant = "section", className }: DentalDeco
         </motion.div>
       ))}
     </div>
+  );
+}
+
+export function ScrollMotifStrip({ className, reverse = false }: { className?: string; reverse?: boolean }) {
+  const reducedMotion = useReducedMotion();
+  const icons = [Smile, CircleDot, Sparkles, Shield, Activity];
+  const initialX = reverse ? 34 : -34;
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      initial={{ opacity: 0, x: reducedMotion ? 0 : initialX, y: reducedMotion ? 0 : 16 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: "-120px" }}
+      transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "pointer-events-none hidden md:flex items-center gap-3 rounded-full border border-secondary/20 bg-white/55 px-4 py-3 shadow-lg shadow-secondary/10 backdrop-blur-md",
+        className,
+      )}
+    >
+      <div className="h-8 w-16 rounded-[100%] border-b-2 border-dashed border-secondary/35" />
+      {icons.map((Icon, index) => (
+        <motion.span
+          key={index}
+          className="grid h-9 w-9 place-items-center rounded-full bg-primary/20 text-secondary"
+          animate={reducedMotion ? undefined : { y: [0, index % 2 === 0 ? -5 : 5, 0] }}
+          transition={reducedMotion ? undefined : { duration: 3.2 + index * 0.2, repeat: Infinity, ease: "easeInOut" as const }}
+        >
+          <Icon className="h-4 w-4" />
+        </motion.span>
+      ))}
+    </motion.div>
   );
 }
