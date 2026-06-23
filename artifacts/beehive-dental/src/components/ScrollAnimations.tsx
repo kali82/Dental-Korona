@@ -104,7 +104,7 @@ export function DentalDecorations({ variant = "section", className }: DentalDeco
   const hero = variant === "hero";
   const floatTransition = reducedMotion
     ? undefined
-    : { duration: hero ? 7 : 8, repeat: Infinity, repeatType: "mirror" as const, ease: "easeInOut" };
+    : { duration: hero ? 7 : 8, repeat: Infinity, repeatType: "mirror" as const, ease: "easeInOut" as const };
 
   const items = [
     {

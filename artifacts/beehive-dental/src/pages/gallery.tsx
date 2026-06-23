@@ -56,37 +56,44 @@ type GallerySourceItem = Omit<GalleryItem, "thumb"> & { thumbFile: string };
 const galleryThumb = (fileName: string) => `${import.meta.env.BASE_URL}gallery-thumbs/${fileName}`;
 
 const photoSources: GallerySourceItem[] = [
+  // Budynek z zewnątrz
   { src: aerialExterior, thumbFile: "cropped-DJI_0300-HDR-scaled-1.jpg", alt: "Budynek Przychodni Korona z lotu ptaka", category: "Przychodnia" },
-  { src: teamExterior, thumbFile: "DSC_3503.jpg", alt: "Zespół Przychodni Korona", category: "Zespół" },
-  { src: teamDuoBlack, thumbFile: "DSC_3620.jpg", alt: "Personel Przychodni Korona", category: "Zespół" },
   { src: aerialStreet, thumbFile: "DJI_0308-HDR-scaled.jpg", alt: "Przychodnia Korona przy ulicy Krasińskiego", category: "Przychodnia", span: "wide" },
+
+  // Większe zdjęcia zespołu
+  { src: teamExterior, thumbFile: "DSC_3503.jpg", alt: "Zespół Przychodni Korona", category: "Zespół" },
   { src: teamSignWide, thumbFile: "DSC_3556.jpg", alt: "Zespół przed wejściem do przychodni", category: "Zespół", span: "wide" },
-  { src: teamDuoSign, thumbFile: "DSC_3634.jpg", alt: "Zespół przy tablicy Przychodni Korona", category: "Zespół", span: "tall" },
-  { src: receptionHall, thumbFile: "DSC00462.jpg", alt: "Recepcja i poczekalnia Przychodni Korona", category: "Przychodnia", span: "wide" },
   { src: teamExteriorSmall, thumbFile: "DSC_3587.jpg", alt: "Część zespołu przed Przychodnią Korona", category: "Zespół" },
-  { src: teamDuoBlue, thumbFile: "DSC_3799.jpg", alt: "Zespół gabinetu stomatologicznego", category: "Zespół", span: "tall" },
-  { src: waitingRoom, thumbFile: "DSC00526-scaled.jpg", alt: "Poczekalnia dla pacjentów", category: "Przychodnia", span: "tall" },
-  { src: treatmentRoomWide, thumbFile: "DSC00546.jpg", alt: "Nowoczesny gabinet stomatologiczny", category: "Zabiegi", span: "wide" },
   { src: teamClose, thumbFile: "DSC_3602.jpg", alt: "Zespół przy tablicy rejestracji", category: "Zespół", span: "wide" },
-  { src: cabinetDetail, thumbFile: "DSC00528-1-scaled.jpg", alt: "Wnętrze przychodni", category: "Przychodnia" },
-  { src: treatmentRoomPortrait, thumbFile: "DSC00529-scaled.jpg", alt: "Stanowisko zabiegowe", category: "Zabiegi", span: "tall" },
-  { src: treatmentUnit, thumbFile: "DSC00544.jpg", alt: "Unit stomatologiczny i diagnostyka", category: "Zabiegi", span: "wide" },
+  { src: teamWindow, thumbFile: "DSC_3678.jpg", alt: "Zespół przed wejściem", category: "Zespół" },
+  { src: staffGroupBlue, thumbFile: "DSC00585.jpg", alt: "Zespół higienistek i asystentek", category: "Zespół", span: "wide", thumbPosition: "center 28%" },
+
+  // Dwójki lekarzy i asystentek
+  { src: teamDuoBlack, thumbFile: "DSC_3620.jpg", alt: "Personel Przychodni Korona", category: "Zespół" },
+  { src: teamDuoSign, thumbFile: "DSC_3634.jpg", alt: "Zespół przy tablicy Przychodni Korona", category: "Zespół", span: "tall" },
+  { src: teamDuoBlue, thumbFile: "DSC_3799.jpg", alt: "Zespół gabinetu stomatologicznego", category: "Zespół", span: "tall" },
   { src: teamConsult, thumbFile: "DSC_3469.jpg", alt: "Zespół w gabinecie", category: "Zespół" },
   { src: teamBartekIlona, thumbFile: "Bartek_z_Ilona.jpg", alt: "Bartosz Królikowski i Ilona Radecka w gabinecie", category: "Zespół" },
+  { src: teamTreatment, thumbFile: "DSC_3863.jpg", alt: "Lekarze w gabinecie", category: "Zespół" },
+  { src: teamCabinet, thumbFile: "DSC_3882.jpg", alt: "Zespół przy stanowisku zabiegowym", category: "Zespół", span: "wide" },
+  { src: teamChair, thumbFile: "DSC_3902.jpg", alt: "Zespół przy unicie stomatologicznym", category: "Zespół" },
+  { src: teamCabinetTwo, thumbFile: "DSC_3913.jpg", alt: "Zespół w gabinecie stomatologicznym", category: "Zespół" },
+
+  // Wnętrza, gabinety i sprzęt
+  { src: receptionHall, thumbFile: "DSC00462.jpg", alt: "Recepcja i poczekalnia Przychodni Korona", category: "Przychodnia", span: "wide" },
+  { src: waitingRoom, thumbFile: "DSC00526-scaled.jpg", alt: "Poczekalnia dla pacjentów", category: "Przychodnia", span: "tall" },
+  { src: cabinetDetail, thumbFile: "DSC00528-1-scaled.jpg", alt: "Wnętrze przychodni", category: "Przychodnia" },
+  { src: treatmentRoomWide, thumbFile: "DSC00546.jpg", alt: "Nowoczesny gabinet stomatologiczny", category: "Zabiegi", span: "wide" },
+  { src: treatmentRoomPortrait, thumbFile: "DSC00529-scaled.jpg", alt: "Stanowisko zabiegowe", category: "Zabiegi", span: "tall" },
+  { src: treatmentUnit, thumbFile: "DSC00544.jpg", alt: "Unit stomatologiczny i diagnostyka", category: "Zabiegi", span: "wide" },
   { src: chairCorner, thumbFile: "DSC00549.jpg", alt: "Gabinet zabiegowy", category: "Zabiegi", span: "tall" },
   { src: chairDetail, thumbFile: "DSC00550.jpg", alt: "Wyposażenie gabinetu", category: "Zabiegi", span: "wide" },
   { src: dentalTools, thumbFile: "DSC00541-scaled.jpg", alt: "Narzędzia stomatologiczne", category: "Zabiegi" },
   { src: microscopeFront, thumbFile: "DSC00543.jpg", alt: "Mikroskop do leczenia endodontycznego", category: "Zabiegi" },
   { src: lampDetail, thumbFile: "DSC00556.jpg", alt: "Oświetlenie zabiegowe", category: "Zabiegi", span: "wide" },
-  { src: teamWindow, thumbFile: "DSC_3678.jpg", alt: "Zespół przed wejściem", category: "Zespół" },
   { src: instrumentDetail, thumbFile: "DSC00559.jpg", alt: "Sprzęt stomatologiczny", category: "Zabiegi", span: "wide" },
   { src: scannerDetail, thumbFile: "DSC00739.jpg", alt: "Diagnostyka cyfrowa", category: "Zabiegi" },
   { src: dentalConsole, thumbFile: "DSC02139.jpg", alt: "Panel sterowania unitów stomatologicznych", category: "Zabiegi", span: "tall" },
-  { src: teamTreatment, thumbFile: "DSC_3863.jpg", alt: "Lekarze w gabinecie", category: "Zespół" },
-  { src: teamCabinet, thumbFile: "DSC_3882.jpg", alt: "Zespół przy stanowisku zabiegowym", category: "Zespół", span: "wide" },
-  { src: teamChair, thumbFile: "DSC_3902.jpg", alt: "Zespół przy unicie stomatologicznym", category: "Zespół" },
-  { src: teamCabinetTwo, thumbFile: "DSC_3913.jpg", alt: "Zespół w gabinecie stomatologicznym", category: "Zespół" },
-  { src: staffGroupBlue, thumbFile: "DSC00585.jpg", alt: "Zespół higienistek i asystentek", category: "Zespół", span: "wide", thumbPosition: "center 28%" },
 ];
 
 const CATEGORIES: Category[] = ["Wszystkie", "Przychodnia", "Zabiegi", "Zespół"];
