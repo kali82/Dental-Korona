@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { MobileStickyActions } from "@/components/MobileStickyActions";
+import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { LanguageProvider, translateText, useLanguage } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
@@ -303,6 +304,7 @@ function App() {
               <SeoMetadata />
               <ScrollToTop />
               <Router />
+              <ScrollToTopButton />
               <MobileStickyActions />
             </WouterRouter>
           </MotionConfig>
