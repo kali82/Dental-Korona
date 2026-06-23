@@ -1,3 +1,8 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Przychodnia Korona">
+  <rect width="180" height="180" rx="34" fill="#F8F4ED"/>
+  <path d="M37 67L61 35L82 75L90 48L98 75L119 35L143 67L128 110H52L37 67Z" fill="#C9A84C"/>
+  <path d="M45 74L62 51L82 88L90 61L98 88L118 51L135 74L124 104H56L45 74Z" fill="#D6AA37"/>
+  <path d="M51 116H129V128H51V116Z" fill="#C9A84C"/>
+  <path d="M58 132H122V143H58V132Z" fill="#252525"/>
+  <text x="90" y="104" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="#252525">K</text>
 </svg>

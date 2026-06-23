@@ -186,6 +186,12 @@
   body {
     @apply font-sans antialiased bg-background text-foreground selection:bg-primary/40 selection:text-foreground;
   }
+
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: calc(5.25rem + env(safe-area-inset-bottom));
+    }
+  }
   
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight font-medium;
