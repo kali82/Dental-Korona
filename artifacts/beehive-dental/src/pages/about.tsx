@@ -26,7 +26,7 @@ export default function About() {
       <PageHero
         eyebrow={t("O Przychodni Korona")}
         title={t("Doświadczenie i kompleksowa opieka w Nowej Soli")}
-        description={t("Przychodnia stomatologiczna działająca od 1982 roku, prowadzona z naciskiem na komfort, rzetelną diagnostykę i spokojną atmosferę leczenia.")}
+        description={t("Przychodnia KORONA działana rynku od 1982 roku, prowadzona z naciskiem na komfort, rzetelną diagnostykę i spokojną atmosferę leczenia.")}
         image={heroPhoto}
         alt={t("O Przychodni Korona")}
         height="large"
