@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["mobile-castomization"]
+    branches: ["main", "mobile-castomization"]
   workflow_dispatch:
 
 permissions:
