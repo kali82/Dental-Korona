@@ -26,7 +26,7 @@ export default function About() {
       <PageHero
         eyebrow={t("O Przychodni Korona")}
         title={t("Doświadczenie i kompleksowa opieka w Nowej Soli")}
-        description={t("Przychodnia KORONA działana rynku od 1982 roku, prowadzona z naciskiem na komfort, rzetelną diagnostykę i spokojną atmosferę leczenia.")}
+        description={t("Przychodnia stomatologiczna działająca od 1982 roku, prowadzona z naciskiem na komfort, rzetelną diagnostykę i spokojną atmosferę leczenia.")}
         image={heroPhoto}
         alt={t("O Przychodni Korona")}
         height="large"
@@ -58,7 +58,7 @@ export default function About() {
               </motion.h2>
               <motion.div variants={FADE_UP} className="space-y-5 md:space-y-6 text-base md:text-lg text-foreground/70 leading-relaxed">
                 <p>
-                  {t("NZOZ Korona działa na rynku od 1982 roku. Długoletnia praktyka pozwoliła przygotować szeroką ofertę zabiegów z zakresu stomatologii, w tym endodoncji, protetyki i implantologii.")}
+                  {t("Przychodnia Korona działa na rynku od 1982 roku. Długoletnia praktyka pozwoliła przygotować szeroką ofertę zabiegów z zakresu stomatologii, w tym endodoncji, protetyki i implantologii.")}
                 </p>
                 <p>
                   {t("Zespół przychodni zapewnia opiekę pacjentom w każdym wieku. Ważnym elementem pracy jest kameralna atmosfera i nowoczesne metody znieczulenia, które ograniczają stres związany z wizytą.")}
