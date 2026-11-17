@@ -1,5 +1,13 @@
 # Production baseline: 2026-11-17
 
+## Prepared thumbnail update
+
+`main` now includes a wider crop of Tomasz Rewers's thumbnail. The full-size
+profile photo is unchanged. The complete Linux-compatible package and checksum
+manifest are in [`releases/2026-11-17-r2/`](../releases/2026-11-17-r2/README.md).
+This revision is verified locally and awaits upload and live verification.
+The deployed release recorded below remains the last verified server version.
+
 ## Current deployed release
 
 The current website matches source commit
