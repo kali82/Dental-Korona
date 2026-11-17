@@ -90,13 +90,13 @@ export default function RadiationInfo() {
 
         <section className="py-16 md:py-24 bg-background">
           <div className="mx-auto max-w-5xl px-5 sm:px-6">
-            <div className="mb-8 rounded-2xl border border-secondary/20 bg-secondary/10 p-5 text-sm leading-relaxed text-foreground/70">
+            {/* <div className="mb-8 rounded-2xl border border-secondary/20 bg-secondary/10 p-5 text-sm leading-relaxed text-foreground/70">
               <div className="mb-3 flex items-center gap-2 font-semibold text-secondary">
                 <FileText className="h-4 w-4" />
                 {t("Informacja dla pacjentów")}
               </div>
               <p>{t("Treści prawne pozostają w brzmieniu opublikowanym na poprzedniej stronie przychodni.")}</p>
-            </div>
+            </div> */}
 
             <div className="space-y-6">
               <TextBlock title="Pełna informacja">

@@ -32,6 +32,7 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Przychodnia": "Clinic",
     "Stomatologia": "Dentistry",
     "Wybierz język": "Choose language",
+    "Komunikat o bezpieczeństwie danych": "Data security notice",
     "Zamknij menu": "Close menu",
     "Otwórz menu": "Open menu",
     "Zamknij zdjęcie": "Close photo",
@@ -260,7 +261,7 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Zespół higienistek i asystentek": "Team of hygienists and assistants",
     "Chcesz umówić wizytę?": "Would you like to book a visit?",
     "Skontaktuj się z rejestracją Przychodni Korona w Nowej Soli.": "Contact registration at Przychodnia Korona in Nowa Sól.",
-    "Bartosz Królikowski i Ilona Radecka w gabinecie": "Bartosz Królikowski and Ilona Radecka in the surgery",
+    "Bartosz Królikowski i Ilona Kuroń w gabinecie": "Bartosz Królikowski and Ilona Kuroń in the surgery",
     "Lekarze i zespół Przychodni Korona": "Doctors and the Przychodnia Korona team",
     "Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil.": "Meet the people who make up the clinic. Click a card to view a detailed profile.",
     "Lekarze": "Doctors",
@@ -433,6 +434,7 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Przychodnia": "Praxis",
     "Stomatologia": "Zahnmedizin",
     "Wybierz język": "Sprache wählen",
+    "Komunikat o bezpieczeństwie danych": "Hinweis zur Datensicherheit",
     "Zamknij menu": "Menü schließen",
     "Otwórz menu": "Menü öffnen",
     "Zamknij zdjęcie": "Foto schließen",
@@ -661,7 +663,7 @@ const TRANSLATIONS: Record<NonPolishLanguage, Record<string, string>> = {
     "Zespół higienistek i asystentek": "Team der Hygienikerinnen und Assistentinnen",
     "Chcesz umówić wizytę?": "Möchten Sie einen Termin vereinbaren?",
     "Skontaktuj się z rejestracją Przychodni Korona w Nowej Soli.": "Kontaktieren Sie die Anmeldung der Przychodnia Korona in Nowa Sól.",
-    "Bartosz Królikowski i Ilona Radecka w gabinecie": "Bartosz Królikowski und Ilona Radecka im Behandlungszimmer",
+    "Bartosz Królikowski i Ilona Kuroń w gabinecie": "Bartosz Królikowski und Ilona Kuroń im Behandlungszimmer",
     "Lekarze i zespół Przychodni Korona": "Ärzte und Team der Przychodnia Korona",
     "Poznaj osoby tworzące przychodnię. Kliknij kafelek, aby zobaczyć szczegółowy profil.": "Lernen Sie die Menschen kennen, die die Praxis bilden. Klicken Sie auf eine Karte, um ein detailliertes Profil zu sehen.",
     "Lekarze": "Zahnärzte",
@@ -830,8 +832,13 @@ function isLanguage(value: string | null): value is Language {
 
 function getInitialLanguage(): Language {
   if (typeof window === "undefined") return "pl";
-  const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-  return isLanguage(storedLanguage) ? storedLanguage : "pl";
+
+  try {
+    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    return isLanguage(storedLanguage) ? storedLanguage : "pl";
+  } catch {
+    return "pl";
+  }
 }
 
 export function translateText(text: string, language: Language): string {
@@ -848,7 +855,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+    } catch {
+      // The language still remains active for this mounted app instance.
+    }
   }, [language]);
 
   const value = useMemo(() => ({ language, setLanguage }), [language]);

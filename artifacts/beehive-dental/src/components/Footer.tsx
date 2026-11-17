@@ -3,10 +3,11 @@ import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OpeningHoursTime } from "@/components/OpeningHoursTime";
+import { useSecurityIncidentNotice } from "@/components/SecurityIncidentNotice";
 import { useT } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
-import logo from "@assets/logo przychodnia bez tła mniejsza linia.png";
+import logo from "@assets/logo-przychodnia-korona.png";
 
 export const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -15,6 +16,7 @@ export const FADE_UP: Variants = {
 
 export function Footer() {
   const { t } = useT();
+  const { openNotice } = useSecurityIncidentNotice();
 
   return (
     <>
@@ -148,6 +150,14 @@ export function Footer() {
         <div className="border-t border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/40">
             <p>&copy; Przychodnia Korona 2026</p>
+            <button
+              type="button"
+              onClick={openNotice}
+              className="rounded-sm text-white/60 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1410]"
+              data-testid="footer-security-notice"
+            >
+              {t("Komunikat o bezpieczeństwie danych")}
+            </button>
             <p>{PRACTICE.addressLines[0]}, {PRACTICE.addressLines[1]}</p>
           </div>
         </div>
