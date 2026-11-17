@@ -15,6 +15,11 @@ captured by the production reconciliation commit.
 - A fresh build of the working sources reproduced all 88 release files exactly.
   The extra file is `.htaccess`, verified against the local release only;
   the server's private configuration was not downloaded.
+- After merging and checking out `main`, a second build matched 82 files byte
+  for byte. Six text files differed only in CRLF/LF line endings introduced by
+  Git on Windows (`index.html`, `.htaccess`, `favicon.svg`, `robots.txt`,
+  `site.webmanifest`, `sitemap.xml`). All 88 files match in content; JavaScript,
+  CSS, and bitmap images still have identical hashes.
 - The supplied Downloads directory `public_html (1)` contains only a 42-byte
   file named `public_html`, pointing to
   `./domains/przychodniakorona.pl/public_html`. It is not a site backup.
