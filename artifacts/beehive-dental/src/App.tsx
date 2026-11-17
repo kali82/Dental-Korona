@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { MobileStickyActions } from "@/components/MobileStickyActions";
-import { SecurityIncidentNoticeProvider } from "@/components/SecurityIncidentNotice";
 import { LanguageProvider, translateText, useLanguage } from "@/lib/i18n";
 import { PRACTICE } from "@/lib/practice";
 
@@ -297,21 +296,19 @@ function Router() {
 function App() {
   return (
     <LanguageProvider>
-      <SecurityIncidentNoticeProvider>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <MotionConfig reducedMotion="user">
-              <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-                <SeoMetadata />
-                <ScrollToTop />
-                <Router />
-                <MobileStickyActions />
-              </WouterRouter>
-            </MotionConfig>
-            <Toaster />
-          </TooltipProvider>
-        </QueryClientProvider>
-      </SecurityIncidentNoticeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <MotionConfig reducedMotion="user">
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <SeoMetadata />
+              <ScrollToTop />
+              <Router />
+              <MobileStickyActions />
+            </WouterRouter>
+          </MotionConfig>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
     </LanguageProvider>
   );
 }
