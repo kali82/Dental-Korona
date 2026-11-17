@@ -53,3 +53,4 @@ Thumbs.db
 # Local Linux hosting release archives and unpacked builds
 /artifacts/beehive-dental/dental-korona-public_html-*/
 /artifacts/beehive-dental/dental-korona-public_html-*.zip
+/releases/**/dental-korona-public_html-*/

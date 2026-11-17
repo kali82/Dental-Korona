@@ -1,7 +1,10 @@
 ﻿{
     "site":  "https://przychodniakorona.pl/",
     "preparedOn":  "2026-11-17",
-    "status":  "prepared-not-live-verified",
+    "status":  "accepted-live-verified",
+    "verifiedOn":  "2026-11-17",
+    "publicFilesVerified":  88,
+    "verificationNote":  "All public file SHA-256 hashes match the live server. .htaccess was verified locally only.",
     "sourceCommit":  "1c68f6e1b60432e3bd0809b1834ae00b66898afe",
     "basePath":  "/",
     "archive":  "dental-korona-public_html-20261117-r2-linux.zip",
