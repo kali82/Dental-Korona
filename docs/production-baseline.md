@@ -1,5 +1,22 @@
 # Production baseline: 2026-11-17
 
+## Current deployed release
+
+The current website matches source commit
+`1bb8b64007835c62c3f61b6aef1e45c7d0c0ccbf` on `main`: the security notice has
+been removed and Tomasz Rewers has a new portrait and a separate thumbnail.
+
+The verified Linux-compatible ZIP is tracked in
+[`releases/2026-11-17/`](../releases/2026-11-17/README.md), together with the
+SHA-256 manifest. After the missing CSS was uploaded, all 88 public files
+matched this package byte for byte. The package has 89 entries including
+the non-public `.htaccess` file, verified against the local build only.
+
+The sections below preserve the earlier reconciliation evidence, before
+these two changes were made and deployed.
+
+## Earlier source baseline
+
 The source baseline for https://przychodniakorona.pl/ is
 `mobile-castomization` at `605a691` plus the previously uncommitted changes
 captured by the production reconciliation commit.
@@ -72,7 +89,9 @@ Upload the **contents** of `artifacts/beehive-dental/dist/public`, including
 `index.html`, `assets/`, and `.htaccess`, into the domain's `public_html`.
 The source `artifacts/beehive-dental/public` directory alone is not a release.
 
-Keep ZIP packages and unpacked releases out of Git. The `.gitignore` rules for
+Keep working ZIP packages and unpacked releases out of Git. Verified production
+archives requested for retention are tracked under `releases/`, together with
+their source commit and checksum manifest. The `.gitignore` rules for
 `dental-korona-public_html-*` also keep Tailwind from scanning old generated
 bundles, which otherwise changes the generated CSS even when source code is
 unchanged. Preserve the lockfile for repeatable builds.
