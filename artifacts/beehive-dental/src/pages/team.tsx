@@ -24,12 +24,14 @@ import martaPhoto from "@assets/team-compressed/marta-sznajder.jpg";
 import paulinaPhoto from "@assets/team-compressed/paulina-gorna.jpg";
 import sylwiaPhoto from "@assets/team-compressed/sylwia-ogrodniczak.jpg";
 import tomaszPhoto from "@assets/team-compressed/tomasz-rewers.jpg";
+import tomaszThumbnail from "@assets/team-compressed/tomasz-rewers-thumb.jpg";
 
 type Person = {
   name: string;
   role: string;
   initials: string;
   photo?: string;
+  thumbnail?: string;
   bio: string;
   education: string[];
   focus: string[];
@@ -46,6 +48,7 @@ const doctors: Person[] = [
     role: "lek. dent.",
     initials: "TR",
     photo: tomaszPhoto,
+    thumbnail: tomaszThumbnail,
     bio: "W Przychodni Korona zajmuje się głównie implantologią, chirurgią stomatologiczną oraz protetyką stałą. W leczeniu wykorzystuje zaawansowane metody diagnostyczne oraz sprawdzone rozwiązania terapeutyczne, dbając o najwyższą jakość wykonywanych zabiegów oraz komfort na każdym etapie leczenia.",
     education: ["Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu"],
     focus: ["Implantologia", "Chirurgia", "Protetyka"],
@@ -217,7 +220,7 @@ function PersonPortrait({ person, large = false }: { person: Person; large?: boo
     return (
       <div className={`relative overflow-hidden bg-muted ${frameClass}`}>
         <img
-          src={person.photo}
+          src={large ? person.photo : person.thumbnail ?? person.photo}
           alt={person.name}
           className="h-full w-full object-cover object-top"
           loading={large ? "eager" : "lazy"}
