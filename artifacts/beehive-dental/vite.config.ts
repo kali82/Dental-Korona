@@ -45,6 +45,13 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        // Hash-only asset names avoid spaces and non-ASCII characters that some
+        // shared Linux hosting file managers do not preserve when unpacking ZIPs.
+        assetFileNames: "assets/[hash][extname]",
+      },
+    },
   },
   server: {
     port,

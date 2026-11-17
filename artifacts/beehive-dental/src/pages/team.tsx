@@ -87,7 +87,7 @@ const doctors: Person[] = [
     focus: ["Implantologia", "Mikrochirurgia stomatologiczna", "Endodoncja mikroskopowa", "Protetyka"],
   },
   {
-    name: "Ewa Kołodziej",
+    name: "Ewa Kaliszewska",
     role: "lek. dent.",
     initials: "EK",
     photo: ewaKPhoto,
@@ -117,7 +117,7 @@ const assistants: Person[] = [
     focus: ["Profilaktyka i promocja zdrowia", "Asysta stomatologiczna", "Opieka pozabiegowa"],
   },
   {
-    name: "Ilona Radecka",
+    name: "Ilona Kuroń",
     role: "dypl. hig. stom. / tech. sterylizacji med.",
     initials: "IR",
     photo: ilonaPhoto,

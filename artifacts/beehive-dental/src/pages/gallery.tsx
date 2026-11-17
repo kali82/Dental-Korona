@@ -72,7 +72,7 @@ const photoSources: GallerySourceItem[] = [
   { src: treatmentRoomPortrait, thumbFile: "DSC00529-scaled.jpg", alt: "Stanowisko zabiegowe", category: "Zabiegi", span: "tall" },
   { src: treatmentUnit, thumbFile: "DSC00544.jpg", alt: "Unit stomatologiczny i diagnostyka", category: "Zabiegi", span: "wide" },
   { src: teamConsult, thumbFile: "DSC_3469.jpg", alt: "Zespół w gabinecie", category: "Zespół" },
-  { src: teamBartekIlona, thumbFile: "Bartek_z_Ilona.jpg", alt: "Bartosz Królikowski i Ilona Radecka w gabinecie", category: "Zespół" },
+  { src: teamBartekIlona, thumbFile: "Bartek_z_Ilona.jpg", alt: "Bartosz Królikowski i Ilona Kuroń w gabinecie", category: "Zespół" },
   { src: chairCorner, thumbFile: "DSC00549.jpg", alt: "Gabinet zabiegowy", category: "Zabiegi", span: "tall" },
   { src: chairDetail, thumbFile: "DSC00550.jpg", alt: "Wyposażenie gabinetu", category: "Zabiegi", span: "wide" },
   { src: dentalTools, thumbFile: "DSC00541-scaled.jpg", alt: "Narzędzia stomatologiczne", category: "Zabiegi" },
